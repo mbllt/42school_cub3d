@@ -1,22 +1,27 @@
 #include "cub3D.h"
 
-static void	get_size_y_map(t_vars *cub, char **map, int file_y)
+static int	get_size_y_map(t_vars *cub, char **map, int file_y)
 {
 	int	i;
 	int	map_y;
+	int	size_file;
 
+	size_file = file_y - 1;
 	map_y = 0;
 	while (--file_y)
 	{
 		i = 0;
-		if (map[file_y][i] == ' ')
+		while (map[file_y][i] == ' ')
 			i++;
-		if (map[file_y][i] == '1')
+		if (map[file_y][i])
 			map_y++;
+		else if (file_y == size_file && map[file_y][i] == 0)
+			return (0);
 		else
 			break;
 	}
 	cub->parsing.map_y = map_y;
+	return (1);
 }
 
 static void	get_size_x_map(t_vars *cub, char **map, int file_y)
@@ -28,7 +33,7 @@ static void	get_size_x_map(t_vars *cub, char **map, int file_y)
 	while (--file_y)
 	{
 		i = 0;
-		if (map[file_y][i] == ' ')
+		while (map[file_y][i] == ' ')
 			i++;
 		if (map[file_y][i] == '1')
 		{
@@ -59,8 +64,8 @@ static int	get_cardinal(t_vars *cub)
 			if ((is_cardinal(cub->parsing.world_map[i][j])) >= 0)
 			{
 				cub->parsing.cardinal = cub->parsing.world_map[i][j];
-				cub->parsing.py = i;
-				cub->parsing.px = j;
+				cub->parsing.py = i - 0.5; /* not sure for the - 0.5 */
+				cub->parsing.px = j - 0.5;
 				k++;
 			}
 			j++;
@@ -68,22 +73,30 @@ static int	get_cardinal(t_vars *cub)
 		i++;
 	}
 	if (k != 1)
-	{
-		write(1, "\nNumber of cardinal is invalid\n", 31);
 		return (0);
-	}
 	return (1);
 }
 
 int	ft_map(t_vars *cub, char **map, int file_y)
 {
-	get_size_y_map(cub, map, file_y);
+	if (!(get_size_y_map(cub, map, file_y)))
+	{
+		write(1, "\nError : map\n", 13);
+		return (0);
+	}
 	get_size_x_map(cub, map, file_y);
 	if (!(get_world_map(cub, map, cub->parsing.map_y, file_y - 1)))
 		return (0);
 	if (!(check_world_map(cub, cub->parsing.world_map)))
+	{
+		write(1, "\nError : map\n", 13);
 		return (0);
+	}
 	if (!(get_cardinal(cub)))
+	{
+		write(1, "\nError : map\n", 13);
 		return (0);
+	}
+	//printf("%f, %f\n", cub->parsing.px, cub->parsing.py);
 	return (1);
 }

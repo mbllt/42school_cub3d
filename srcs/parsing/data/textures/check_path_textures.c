@@ -1,13 +1,13 @@
 #include "cub3D.h"
 
-// typedef enum e_cardinal
-// {
-// 	NORTH,
-// 	SOUTH,
-// 	EAST,
-// 	WEST,
-// 	SPRITE,
-// }t_cardinal;
+typedef enum e_cardinal
+{
+	NORTH,
+	SOUTH,
+	EAST,
+	WEST,
+	SPRITE,
+}t_cardinal;
 
 static int	ft_cpyy(char **dest, char *src, int size, int i)
 {
@@ -53,15 +53,9 @@ static void	get_path(t_vars *cub, char *str, int cardinal)
 static int	check_get_path(t_vars *cub, char *str, int cardinal)
 {
 	if (cardinal >= 0 && cardinal <= 3 && str[2] != ' ')
-	{
-		write(1, "\nNo space after path textures\n", 30);
 		return (0);
-	}
 	if (cardinal == 4 && str[1] != ' ')
-	{
-		write(1, "\nNo space after path textures\n", 30);
 		return (0);
-	}
 	get_path(cub, str, cardinal);
 	return (1);
 }
@@ -78,6 +72,9 @@ int	check_path_textures(t_vars *cub, char *line)
 	if (cardinal == 1 && line[1] == ' ')
 		cardinal = 4;
 	if (!(check_get_path(cub, line, cardinal)))
+	{
+		write(1, "\nError : path textures\n", 23);
 		return (0);
+	}
 	return (1);
 }

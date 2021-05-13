@@ -14,25 +14,31 @@ static t_plan	*fill_in_plans(t_vars *cub, int size, int cardinal)
 
 	if (cardinal == NORTH)
 	{
-		str = find_walls_n(cub, size, cardinal);
-		printf("NORTH :%s\n", str);
+		str = find_walls_n(cub, size);
+		// for (int i = 0;i < size;i++)
+		// 	printf("NORTH :%f\n", str[i].d);
 	}
+	// printf("\n");
 	if (cardinal == SOUTH)
 	{
-		str = find_walls_s(cub, size, cardinal);
-		printf("SOUTH :%s\n", str);
+		str = find_walls_s(cub, size);
+		// for (int i = 0;i < size;i++)
+		// 	printf("SOUTH :%f\n", str[i].d);
 	}
+	// printf("\n");
 	if (cardinal == EAST)
 	{
-		str = find_walls_e(cub, size, cardinal);
-		printf("EAST :%s\n", str);
+		str = find_walls_e(cub, size);
+		// for (int i = 0;i < size;i++)
+		// 	printf("EAST :%f\n", str[i].d);
 	}
+	// printf("\n");
 	if (cardinal == WEST)
 	{
-		str = find_walls_w(cub, size, cardinal);
-		printf("WEST :%s\n", str);
+		str = find_walls_w(cub, size);
+		// for (int i = 0;i < size;i++)
+		// 	printf("WEST :%f\n", str[i].d);
 	}
-
 	return (str);
 }
 

@@ -22,10 +22,7 @@ static int	get_color(t_vars *cub, char **str)
 	char	**str_color;
 
 	if(!(check_nbr_coma(str[1])))
-	{
-		write(1, "\nToo many comas for colors\n", 27);
 		return (0);
-	}
 	str_color = NULL;
 	size = 0;
 	str_color = ft_split(str[1], ',', &size);
@@ -33,8 +30,13 @@ static int	get_color(t_vars *cub, char **str)
 		return (0);
 	if (size != 3)
 	{
-		write(1, "\nWrong number of argument for color\n", 36);
 		ft_double_free(str_color, size);
+		return (0);
+	}
+	if (!(check_if_not_digit(str_color[0])) \
+		|| !(check_if_not_digit(str_color[1])) \
+		|| !(check_if_not_digit(str_color[2])))
+	{
 		return (0);
 	}
 	get_x_y_z(cub, str_color, str);
@@ -56,21 +58,12 @@ static int	check_size_colors(t_vars *cub)
 int	check_colors(t_vars *cub, char **str, int size)
 {
 	if (str[0][1] != 0)
-	{
-		write(1, "\nWrong spelling in parameter color\n", 35);
 		return (0);
-	}
 	if (size != 2)
-	{
-		write(1, "\nWrong number of argument for color\n", 36);
 		return (0);
-	}
 	if (!(get_color(cub, str)))
 		return (0);
 	if (!(check_size_colors(cub)))
-	{
-		write(1, "\nColors must be digit and between 0 and 255\n", 44);
 		return (0);
-	}
 	return (1);
 }

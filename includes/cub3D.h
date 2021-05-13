@@ -8,6 +8,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <time.h>
+# include <pthread.h>
 
 #define BLACK	0x00000000
 #define TEAL	0x00008080
@@ -119,7 +120,7 @@ int				init_ray_casting(t_vars *cub);
 void			init_vars_rays(t_vars *cub);
 int				init_stock_rays(t_vars *cub, int width, int height);
 void			init_rays(t_vars *cub, int width, int height);
-int			init_plans(t_vars *cub);
+int				init_plans(t_vars *cub);
 void			init_matrix(t_vars *cub);
 int				init_matrix_z(t_vars *cub);
 void			my_mlx_pixel_put(t_vars *mlx, int x, int y, uintptr_t color);
@@ -132,7 +133,7 @@ void			rotation(t_vars *cub, t_vector *ray);
 void			get_texture(t_vars *cub);
 void			intersct(t_vars *cub, int i, int j);
 int				intersct_plan(t_vars *cub, t_plan plan, t_vector ray);
-int				intersct_dot(t_vars *cub, t_vector ray);
+void			intersct_dot(t_vars *cub, t_vector ray);
 void			display(t_vars *cub, int i, int j, int plan_nbr);
 t_dot_intersct	check_wall_N(t_vars *cub, t_vector ray);
 t_dot_intersct	check_wall_S(t_vars *cub, t_vector ray);
@@ -170,9 +171,9 @@ char			**ft_split(char *s, char c, int *size);
 char			*ft_substr2(char *s, int start);
 int				check_nbr_coma(char *str);
 void			init_parsing(t_vars *cub);
-t_plan			*find_walls_n(t_vars *cub, int size, int cardinal);
-t_plan			*find_walls_s(t_vars *cub, int size, int cardinal);
-t_plan			*find_walls_e(t_vars *cub, int size, int cardinal);
-t_plan			*find_walls_w(t_vars *cub, int size, int cardinal);
+t_plan			*find_walls_n(t_vars *cub, int size);
+t_plan			*find_walls_s(t_vars *cub, int size);
+t_plan			*find_walls_e(t_vars *cub, int size);
+t_plan			*find_walls_w(t_vars *cub, int size);
 
 #endif

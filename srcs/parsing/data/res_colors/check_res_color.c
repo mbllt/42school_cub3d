@@ -13,12 +13,18 @@ int	check_res_color(t_vars *cub, char *line)
 	if (str[0][0] == 'R')
 	{
 		if (!(check_get_res(cub, str, size)))
+		{
+			write(1, "\nError : resolution\n", 21);
 			return (0);
+		}
 	}
 	else if (str[0][0] == 'F' || str[0][0] == 'C')
 	{
 		if (!(check_colors(cub, str, size)))
+		{
+			write(1, "\nError : colors\n", 16);
 			return (0);
+		}
 	}
 	else
 	{

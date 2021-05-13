@@ -12,16 +12,24 @@ static t_dot_intersct	compare_distance(t_dot_intersct *dot)
 	i = -1;
 	while (++i < 4)
 	{
-		if (dot[i].t_distance > 0 && temp.cardinal == -1)
+		//printf("%d : %f\n", i, dot[i].t_distance);
+		if (dot[i].t_distance >= 0 && temp.cardinal == -1)
 		{
+			//printf("%d\n", dot[i].cardinal);
 			temp = dot[i];
+			//printf("%d\n", temp.cardinal);
+			// temp.intersct = dot[i].intersct;
+			// temp.t_distance = dot[i].t_distance;
+			// temp.cardinal = dot[i].cardinal;
 		}
-		if (dot[i].t_distance > 0 && dot[i].t_distance < temp.t_distance)
+		if (dot[i].t_distance >= 0 && dot[i].t_distance < temp.t_distance)
 		{
+			//printf("oyo\n");
 			temp_bis = dot[i];
 			return (temp_bis);
 		}
 	}
+	//printf("%d\n", temp.cardinal);
 	return (temp);
 }
 
@@ -45,19 +53,31 @@ static void	check_direction(t_vars *cub, t_vector ray, t_dot_intersct dot[])
 {
 	init_dot(dot);
 	if (ray.y < 0)
+	{
 		dot[0] = check_wall_N(cub, ray);
+		//printf("%d\n", dot[0].cardinal);
+	}
 	if (ray.y > 0)
+	{
 		dot[1] = check_wall_S(cub, ray);
+	}
 	if (ray.x > 0)
+	{
 		dot[2] = check_wall_E(cub, ray);
+	}
 	if (ray.x < 0)
+	{
 		dot[3] = check_wall_W(cub, ray);
+	}
 }
+
 
 static void	pixel_put(t_vars *cub, int i, int j, t_dot_intersct prio_wall)
 {
+	//printf("%f\n", prio_wall.intersct.z);
 	if (prio_wall.intersct.z < 1 && prio_wall.intersct.z >= 0)
 	{
+		//printf("yoy\n");
 		display(cub, i, j, prio_wall.cardinal);
 	}
 	else
@@ -82,8 +102,8 @@ int	browse_rays(t_vars *cub, int width, int height)
 		j = -1;
 		while (++j < height)
 		{
-			if (cub->ray_c.rota != 0)
-				rotation(cub, &cub->ray_c.stock_rays[i][j]);
+			// if (cub->ray_c.rota != 0)
+			// 	rotation(cub, &cub->ray_c.stock_rays[i][j]);
 			my_mlx_pixel_put(cub, i, j, BLACK);
 			check_direction(cub, cub->ray_c.stock_rays[i][j], dot);
 			prio_wall = compare_distance(dot);

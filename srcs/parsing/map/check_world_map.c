@@ -15,10 +15,7 @@ static int	check_value_in_map(t_vars *cub, char **world_map)
 				&& world_map[i][j] != '1' && world_map[i][j] != '0' \
 				&& world_map[i][j] != ' ' \
 				&& (is_cardinal(world_map[i][j])) == -1)
-			{
-				write(1, "\nWrong value in the map\n", 24);
 				return (0);
-			}
 			j++;
 		}
 		i++;
@@ -79,15 +76,9 @@ static int	check_zero_inside(t_vars *cub, char **world_map)
 				|| (is_cardinal(world_map[i][j])) == 1)
 			{
 				if (!(check_corner(cub, world_map, i, j)))
-				{
-					write(1, "\nMap not closed\n", 16);
 					return (0);
-				}
 				if (!(check_around(world_map, i, j)))
-				{
-					write(1, "\nSpace inside the map\n", 22);
 					return (0);
-				}
 			}
 			j++;
 		}
