@@ -64,8 +64,8 @@ static int	get_cardinal(t_vars *cub)
 			if ((is_cardinal(cub->parsing.world_map[i][j])) >= 0)
 			{
 				cub->parsing.cardinal = cub->parsing.world_map[i][j];
-				cub->parsing.py = i - 0.5; /* not sure for the - 0.5 */
 				cub->parsing.px = j - 0.5;
+				cub->parsing.py = i - 0.5; /* not sure for the - 0.5 */
 				k++;
 			}
 			j++;

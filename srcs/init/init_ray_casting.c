@@ -1,5 +1,13 @@
 #include "cub3D.h"
 
+static int	init_malloc_plans(t_vars *cub)
+{
+	cub->ray_c.plans = malloc(sizeof(t_plan) * 4);
+	if (!cub->ray_c.plans)
+		return (0);
+	return(1);
+}
+
 static void	init_key(t_vars *cub)
 {
 	cub->ray_c.key.right = 0;
@@ -37,6 +45,8 @@ int	init_ray_casting(t_vars *cub)
 	if (!(init_stock_rays(cub, cub->parsing.rx, cub->parsing.ry)))
 		return (0);
 	init_xyz(cub);
+	if (!(init_malloc_plans(cub)))
+		return (0);
 	if (!(init_matrix_z(cub)))
 		return (0);
 	init_matrix(cub);

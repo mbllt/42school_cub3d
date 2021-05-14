@@ -77,10 +77,7 @@ typedef	struct s_ray
 	float		distance;
 	t_vector	xyz;
 	uintptr_t	color;
-	t_plan		*plans_n;
-	t_plan		*plans_s;
-	t_plan		*plans_e;
-	t_plan		*plans_w;
+	t_plan		*plans;
 	float		rota;
 	float		**matrix_z;
 	t_key		key;
@@ -101,6 +98,7 @@ typedef struct s_parsing
 	int			map_x;
 	int			map_y;
 	char		**world_map;
+	t_vector	pos;
 	float		px;
 	float		py;
 	float		pz;
@@ -131,14 +129,7 @@ int				frame(t_vars *cub);
 int				browse_rays(t_vars *cub, int width, int height);
 void			rotation(t_vars *cub, t_vector *ray);
 void			get_texture(t_vars *cub);
-void			intersct(t_vars *cub, int i, int j);
-int				intersct_plan(t_vars *cub, t_plan plan, t_vector ray);
-void			intersct_dot(t_vars *cub, t_vector ray);
 void			display(t_vars *cub, int i, int j, int plan_nbr);
-t_dot_intersct	check_wall_N(t_vars *cub, t_vector ray);
-t_dot_intersct	check_wall_S(t_vars *cub, t_vector ray);
-t_dot_intersct	check_wall_E(t_vars *cub, t_vector ray);
-t_dot_intersct	check_wall_W(t_vars *cub, t_vector ray);
 int				cub_start(t_vars *cub, int argc, char **argv);
 int				parsing(t_vars *cub, char **argv);
 int				check_data(t_vars *cub, char *line, int ret);
@@ -175,5 +166,10 @@ t_plan			*find_walls_n(t_vars *cub, int size);
 t_plan			*find_walls_s(t_vars *cub, int size);
 t_plan			*find_walls_e(t_vars *cub, int size);
 t_plan			*find_walls_w(t_vars *cub, int size);
+t_dot_intersct	check_wall_n(t_vars *cub, t_vector ray);
+t_dot_intersct	check_wall_s(t_vars *cub, t_vector ray);
+t_dot_intersct	check_wall_e(t_vars *cub, t_vector ray);
+t_dot_intersct	check_wall_w(t_vars *cub, t_vector ray);
+
 
 #endif
