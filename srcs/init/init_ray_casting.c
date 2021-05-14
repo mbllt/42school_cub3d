@@ -2,7 +2,7 @@
 
 static int	init_malloc_plans(t_vars *cub)
 {
-	cub->ray_c.plans = malloc(sizeof(t_plan) * 4);
+	cub->ray_c.plans = malloc(sizeof(t_plan) * 6);
 	if (!cub->ray_c.plans)
 		return (0);
 	return(1);

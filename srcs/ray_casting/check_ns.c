@@ -18,6 +18,7 @@ static int	intersct_plan_ns(t_vars *cub, t_vector ray, t_plan plan)
 	cub->ray_c.distance /= diviseur;
 	if (cub->ray_c.distance < 0)
 		return (0);
+	//printf("%f\n", ray.z);
 	intersct_dot(cub, ray);
 	return (1);
 }
@@ -34,11 +35,10 @@ t_dot_intersct	check_wall_n(t_vars *cub, t_vector ray)
 		{
 			if (cub->ray_c.xyz.z < 1 && cub->ray_c.xyz.z >= 0)
 				return ((t_dot_intersct){cub->ray_c.xyz, cub->ray_c.distance, 0});
+			else if (cub->ray_c.xyz.z >= 1)
+				return ((t_dot_intersct){cub->ray_c.xyz, cub->ray_c.distance, 5});
 			else
-			{
-				//printf("%f\n", cub->ray_c.xyz.z);
-				return ((t_dot_intersct){cub->ray_c.xyz, cub->ray_c.distance, -1});
-			}
+				return ((t_dot_intersct){cub->ray_c.xyz, cub->ray_c.distance, 5});
 		}
 		i--;
 	}

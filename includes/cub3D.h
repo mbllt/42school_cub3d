@@ -9,6 +9,7 @@
 # include <stdlib.h>
 # include <time.h>
 # include <pthread.h>
+# include <limits.h>
 
 #define BLACK	0x00000000
 #define TEAL	0x00008080
@@ -17,6 +18,7 @@
 #define GREEN	0x0000FF00
 #define ORANGE	0x00FFA500
 #define PINK	0x00DB7093
+#define GREY	0x00808080
 
 typedef	struct s_direction
 {
@@ -170,6 +172,7 @@ t_dot_intersct	check_wall_n(t_vars *cub, t_vector ray);
 t_dot_intersct	check_wall_s(t_vars *cub, t_vector ray);
 t_dot_intersct	check_wall_e(t_vars *cub, t_vector ray);
 t_dot_intersct	check_wall_w(t_vars *cub, t_vector ray);
-
+t_dot_intersct	check_wall_f(t_vars *cub, t_vector ray);
+t_dot_intersct	check_wall_c(t_vars *cub, t_vector ray);
 
 #endif

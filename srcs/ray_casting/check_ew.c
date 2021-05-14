@@ -41,10 +41,7 @@ t_dot_intersct	check_wall_e(t_vars *cub, t_vector ray)
 			if (cub->ray_c.xyz.z < 1 && cub->ray_c.xyz.z >= 0)
 				return ((t_dot_intersct){cub->ray_c.xyz, cub->ray_c.distance, 2});
 			else
-			{
-				//printf("%f\n", cub->ray_c.xyz.z);
 				return ((t_dot_intersct){cub->ray_c.xyz, cub->ray_c.distance, -1});
-			}
 		}
 		i++;
 	}

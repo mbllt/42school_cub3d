@@ -40,9 +40,12 @@ int	init_plans(t_vars *cub)
 	// return (1);
 	cub->parsing.px = 0;
 	cub->parsing.py = 0;
+	cub->parsing.pz = 0.5;
 	cub->ray_c.plans[0] = (t_plan){0, 1, 0, 3};
 	cub->ray_c.plans[1] = (t_plan){0, 1, 0, -2};
 	cub->ray_c.plans[2] = (t_plan){1, 0, 0, -2};
 	cub->ray_c.plans[3] = (t_plan){1, 0, 0, 2};
+	cub->ray_c.plans[4] = (t_plan){0, 0, 1, 0};
+	cub->ray_c.plans[5] = (t_plan){0, 0, 1, -1};
 	return (1);
 }
