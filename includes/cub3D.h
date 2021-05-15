@@ -54,10 +54,14 @@ typedef struct s_key
 {
 	int	right;
 	int	left;
+	int	forward;
+	int	backward;
 	int	down;
 	int	up;
-	int	rot_right;
-	int	rot_left;
+	int	rot_x_right;
+	int	rot_x_left;
+	int	rot_z_right;
+	int	rot_z_left;
 	int	exit;
 }t_key;
 
@@ -75,14 +79,19 @@ typedef	struct s_ray
 	int			endian;
 	t_vector	rays;
 	t_vector	**stock_rays;
-	t_vector	**stock_matrix;
 	float		distance;
 	t_vector	xyz;
 	uintptr_t	color;
 	t_plan		**plans;
-	float		rota;
+	float		rota_x;
+	float		rota_z;
+	float		**matrix_x;
 	float		**matrix_z;
 	t_key		key;
+	int			fps;
+	int			seconde;
+	char		*cos;
+	char		*sin;
 }				t_ray;
 
 typedef struct s_parsing
@@ -109,8 +118,6 @@ typedef struct s_parsing
 
 typedef struct s_vars
 {
-	int			fps;
-	int			seconde;
 	t_ray		ray_c;
 	t_parsing	parsing;
 }t_vars;
@@ -121,7 +128,7 @@ void			init_vars_rays(t_vars *cub);
 int				init_stock_rays(t_vars *cub, int width, int height);
 void			init_rays(t_vars *cub, int width, int height);
 int				init_plans(t_vars *cub);
-void			init_matrix(t_vars *cub);
+int				init_matrix_x(t_vars *cub);
 int				init_matrix_z(t_vars *cub);
 void			my_mlx_pixel_put(t_vars *mlx, int x, int y, uintptr_t color);
 int				ft_exit(t_vars *cub);
@@ -129,7 +136,8 @@ int				key_press(int key, t_vars *cub);
 int				key_release(int key, t_vars *cub);
 int				frame(t_vars *cub);
 int				browse_rays(t_vars *cub, int width, int height);
-void			rotation(t_vars *cub, t_vector *ray);
+void			rotation_x(t_vars *cub, t_vector *ray);
+void			rotation_z(t_vars *cub, t_vector *ray);
 void			get_texture(t_vars *cub);
 void			display(t_vars *cub, int i, int j, int plan_nbr);
 int				cub_start(t_vars *cub, int argc, char **argv);
@@ -174,4 +182,6 @@ t_dot_intersct	check_wall_e(t_vars *cub, t_vector ray);
 t_dot_intersct	check_wall_w(t_vars *cub, t_vector ray);
 t_dot_intersct	check_wall_f(t_vars *cub, t_vector ray);
 t_dot_intersct	check_wall_c(t_vars *cub, t_vector ray);
+void		intersct_dot(t_vars *cub, t_vector ray);
+
 #endif

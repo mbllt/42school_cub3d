@@ -1,4 +1,4 @@
-R 600 500
+R 400 300
 NO ../path_to_the_north_texture
 SO ../path_to_the_south_texture
 EA ../path_to_the_east_texture
@@ -10,6 +10,7 @@ C 225,30,0
 
 1111111
 1100001
+1001001
 1000001
-10N0001
+1N00011
 1111111

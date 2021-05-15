@@ -2,7 +2,25 @@
 
 int	frame(t_vars *cub)
 {
+	//cub->ray_c.seconde = time(NULL);
+	if (cub->ray_c.seconde == time(NULL))
+		cub->ray_c.fps++;
+	else
+	{
+		//printf("fps : %d\n", cub->ray_c.fps);
+		cub->ray_c.fps = 0;
+	}
 	//printf("%d\n", cub->ray_c.key.right);
+	if (cub->ray_c.key.up == 1)
+	{
+		//printf("right            HERE\n");
+		cub->parsing.pz += 0.07;
+	}
+	if (cub->ray_c.key.down == 1)
+	{
+		//printf("left            HERE\n");
+		cub->parsing.pz -= 0.07;
+	}
 	if (cub->ray_c.key.right == 1)
 	{
 		//printf("right            HERE\n");
@@ -13,27 +31,40 @@ int	frame(t_vars *cub)
 		//printf("left            HERE\n");
 		cub->parsing.px -= 0.07;
 	}
-	if (cub->ray_c.key.down == 1)
+	if (cub->ray_c.key.backward == 1)
 	{
 		//printf("down            HERE\n");
 		cub->parsing.py += 0.07;
 	}
-	if (cub->ray_c.key.up == 1)
+	if (cub->ray_c.key.forward == 1)
 	{
 		//printf("up            HERE\n");
 		cub->parsing.py -= 0.07;
 	}
-	if (cub->ray_c.key.rot_right == 1)
+	if (cub->ray_c.key.rot_x_right == 1)
 	{
 		//printf("rot right            HERE\n");
-		cub->ray_c.rota = 0.03;
-		init_matrix(cub);
+		cub->ray_c.rota_x = 0.03;
+		init_matrix_x(cub);
 	}
-	if (cub->ray_c.key.rot_left == 1)
+	if (cub->ray_c.key.rot_x_left == 1)
 	{
 		//printf("rot left            HERE\n");
-		cub->ray_c.rota = -0.03;
-		init_matrix(cub);
+		cub->ray_c.rota_x = -0.03;
+		init_matrix_x(cub);
+	}
+
+	if (cub->ray_c.key.rot_z_right == 1)
+	{
+		//printf("rot right            HERE\n");
+		cub->ray_c.rota_z = 0.03;
+		init_matrix_z(cub);
+	}
+	if (cub->ray_c.key.rot_z_left == 1)
+	{
+		//printf("rot left            HERE\n");
+		cub->ray_c.rota_z = -0.03;
+		init_matrix_z(cub);
 	}
 	if (cub->ray_c.key.exit == 1)
 	{

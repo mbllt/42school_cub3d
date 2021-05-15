@@ -20,8 +20,8 @@ int	cub_start(t_vars *cub, int argc, char **argv)
 		return(0);
 	cub->ray_c.addr = mlx_get_data_addr(cub->ray_c.img, &cub->ray_c.bits_per_pixel, &cub->ray_c.line_length, &cub->ray_c.endian);
 	mlx_loop_hook(cub->ray_c.mlx, frame, cub);
-	cub->seconde = time(NULL);
-	cub->fps = 0;
+	cub->ray_c.seconde = time(NULL);
+	//cub->ray_c.fps = 0;
 	mlx_hook(cub->ray_c.win, 2, 1L<<0, key_press, cub);
 	mlx_hook(cub->ray_c.win, 3, 1L<<1, key_release, cub);
 	mlx_loop(cub->ray_c.mlx);
