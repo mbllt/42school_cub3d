@@ -107,22 +107,22 @@ int	key_release(int key, t_vars *cub)
 	if (key == KEYLEFT)
 	{
 		cub->ray_c.key.rot_z_left = 0;
-		cub->ray_c.rota_z = 0;
+		//cub->ray_c.rota_z = 0;
 	}
 	if (key == KEYRIGHT)
 	{
 		cub->ray_c.key.rot_z_right = 0;
-		cub->ray_c.rota_z = 0;
+		//cub->ray_c.rota_z = 0;
 	}
 	if (key == KEYUP)
 	{
 		cub->ray_c.key.rot_x_left = 0;
-		cub->ray_c.rota_x = 0;
+		//cub->ray_c.rota_x = 0;
 	}
 	if (key == KEYDOWN)
 	{
 		cub->ray_c.key.rot_x_right = 0;
-		cub->ray_c.rota_x = 0;
+		//cub->ray_c.rota_x = 0;
 	}
 	// if (!(browse_rays(cub, cub->parsing.rx, cub->parsing.ry)))
 	// 	return (0);

@@ -69,7 +69,7 @@ int	browse_rays(t_vars *cub, int width, int height)
 	int				j;
 	t_dot_intersct	dot[6];
 	t_dot_intersct	prio_wall;
-	//t_vector		ray_temp;
+	t_vector		ray_temp;
 
 	init_dot(dot);
 	i = -1;
@@ -78,22 +78,9 @@ int	browse_rays(t_vars *cub, int width, int height)
 		j = -1;
 		while (++j < height)
 		{
-			//ray_temp = cub->ray_c.stock_rays[i][j];
-			//printf("avant : %f\n", ray_temp.y);
-			if (/*cub->ray_c.rota != 3.1 && */cub->ray_c.rota_x != 0)
-			{
-				//printf("here\n");
-				rotation_x(cub, &cub->ray_c.stock_rays[i][j]);
-			}
-			// //printf("avant : %f\n", ray_temp.y);
-			if (/*cub->ray_c.rota != 3.1 && */cub->ray_c.rota_z != 0)
-			{
-				//printf("here\n");
-				rotation_z(cub, &cub->ray_c.stock_rays[i][j]);
-			}
-			// printf("apres : %f\n", ray_temp.y);
-			//my_mlx_pixel_put(cub, i, j, GREY);
-			check_direction(cub, dot, cub->ray_c.stock_rays[i][j]);
+			ray_temp = cub->ray_c.stock_rays[i][j];
+			move(cub, &cub->ray_c.stock_rays[i][j], &ray_temp);
+			check_direction(cub, dot, ray_temp);
 			prio_wall = compare_distance(dot);
 			display(cub, i, j, prio_wall.cardinal);
 		}

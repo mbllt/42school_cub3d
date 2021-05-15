@@ -6,7 +6,7 @@
 #    By: mballet <mballet@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/14 14:39:52 by mballet           #+#    #+#              #
-#    Updated: 2021/05/14 19:52:57 by mballet          ###   ########lyon.fr    #
+#    Updated: 2021/05/15 19:03:38 by mballet          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,7 @@ SRCS				=	srcs/main.c \
 						srcs/ray_casting/check_ns.c \
 						srcs/ray_casting/check_ew.c \
 						srcs/ray_casting/check_fc.c \
+						srcs/ray_casting/move.c \
 						srcs/gnl/get_next_line.c \
 						srcs/gnl/get_next_line_utils.c \
 						srcs/parsing/parsing.c \

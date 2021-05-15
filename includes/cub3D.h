@@ -136,8 +136,8 @@ int				key_press(int key, t_vars *cub);
 int				key_release(int key, t_vars *cub);
 int				frame(t_vars *cub);
 int				browse_rays(t_vars *cub, int width, int height);
-void			rotation_x(t_vars *cub, t_vector *ray);
-void			rotation_z(t_vars *cub, t_vector *ray);
+t_vector		rotation_x(t_vars *cub, t_vector ray);
+t_vector		rotation_z(t_vars *cub, t_vector ray);
 void			get_texture(t_vars *cub);
 void			display(t_vars *cub, int i, int j, int plan_nbr);
 int				cub_start(t_vars *cub, int argc, char **argv);
@@ -182,6 +182,7 @@ t_dot_intersct	check_wall_e(t_vars *cub, t_vector ray);
 t_dot_intersct	check_wall_w(t_vars *cub, t_vector ray);
 t_dot_intersct	check_wall_f(t_vars *cub, t_vector ray);
 t_dot_intersct	check_wall_c(t_vars *cub, t_vector ray);
-void		intersct_dot(t_vars *cub, t_vector ray);
+void			intersct_dot(t_vars *cub, t_vector ray);
+void			move(t_vars *cub, t_vector *ray, t_vector *ray_temp);
 
 #endif
