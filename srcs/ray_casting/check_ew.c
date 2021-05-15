@@ -29,19 +29,28 @@ static int	intersct_plan_ew(t_vars *cub, t_vector ray, t_plan plan)
 t_dot_intersct	check_wall_e(t_vars *cub, t_vector ray)
 {
 	int	i;
+	int	x;
+	int	y;
 
 	i = (int)cub->parsing.px;
-	i = 1;
-	while (i < cub->parsing.map_y)
+	//i = 1;
+	while (i < cub->parsing.map_x)
 	{
 		//printf("yppy\n");
-		if ((intersct_plan_ew(cub, ray, cub->ray_c.plans[2])) == 1)
+		if ((intersct_plan_ew(cub, ray, cub->ray_c.plans[2][i])) == 1)
 		{
+			x = i;
+			y = (int)cub->ray_c.xyz.y;
 			//printf("yppy\n");
-			if (cub->ray_c.xyz.z < 1 && cub->ray_c.xyz.z >= 0)
+			if (cub->ray_c.xyz.z < 1 && cub->ray_c.xyz.z >= 0 \
+				&& x >= 0 && x < cub->parsing.map_x \
+				&& y >= 0 && y < cub->parsing.map_y \
+				&& cub->parsing.world_map[y][x] == '1')
 				return ((t_dot_intersct){cub->ray_c.xyz, cub->ray_c.distance, 2});
-			else
+			else if (cub->ray_c.xyz.z >= 1 || cub->ray_c.xyz.z < 0)
+			{
 				return ((t_dot_intersct){cub->ray_c.xyz, cub->ray_c.distance, -1});
+			}
 		}
 		i++;
 	}
@@ -51,17 +60,26 @@ t_dot_intersct	check_wall_e(t_vars *cub, t_vector ray)
 t_dot_intersct	check_wall_w(t_vars *cub, t_vector ray)
 {
 	int	i;
+	int	x;
+	int	y;
 
-	i = (int)cub->parsing.px;
-	i = 0;
+	i = (int)cub->parsing.px + 1;
+	//i = 0;
 	while (i >= 0)
 	{
-		if ((intersct_plan_ew(cub, ray, cub->ray_c.plans[3])) == 1)
+		if ((intersct_plan_ew(cub, ray, cub->ray_c.plans[3][i])) == 1)
 		{
-			if (cub->ray_c.xyz.z < 1 && cub->ray_c.xyz.z >= 0)
+			x = i;
+			y = (int)cub->ray_c.xyz.y;
+			if (cub->ray_c.xyz.z < 1 && cub->ray_c.xyz.z >= 0 \
+				&& x >= 0 && x < cub->parsing.map_x - 1 \
+				&& y >= 0 && y < cub->parsing.map_y - 1 \
+				&& cub->parsing.world_map[y][x] == '1')
 				return ((t_dot_intersct){cub->ray_c.xyz, cub->ray_c.distance, 3});
-			else
+			else if (cub->ray_c.xyz.z >= 1 || cub->ray_c.xyz.z < 0)
+			{
 				return ((t_dot_intersct){cub->ray_c.xyz, cub->ray_c.distance, -1});
+			}
 		}
 		i--;
 	}

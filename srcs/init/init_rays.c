@@ -17,9 +17,9 @@ void	init_rays(t_vars *cub, int width, int height)
 			cub->ray_c.stock_rays[i][j].x = ((float)i - width * 0.5) * cub->ray_c.ratio_horizon;
 			cub->ray_c.stock_rays[i][j].y = -1;
 			cub->ray_c.stock_rays[i][j].z = (height * 0.5 - (float)j) * cub->ray_c.ratio_vertical;
-			cub->ray_c.rota = 1.5;
-			init_matrix(cub);
-			rotation(cub, &cub->ray_c.stock_rays[i][j]);
+			// cub->ray_c.rota = 3.1;
+			// init_matrix(cub);
+			// rotation(cub, &cub->ray_c.stock_rays[i][j]);
 			j++;
 		}
 		i++;

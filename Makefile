@@ -6,7 +6,7 @@
 #    By: mballet <mballet@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/14 14:39:52 by mballet           #+#    #+#              #
-#    Updated: 2021/05/14 15:31:54 by mballet          ###   ########lyon.fr    #
+#    Updated: 2021/05/14 19:52:57 by mballet          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -67,10 +67,10 @@ RM					=	/bin/rm -f
 all:		$(EXE)
 
 $(EXE):		$(MLX) $(OBJS)
-				@$(CC) -o $@ $^
+				@$(CC) $(SANFLAGS) -o $@ $^
 
 %.o :		%.c $(HEADERS)
-				@$(CC) $(CFLAGS) -o $@ -c $<
+				@$(CC) $(SANFLAGS) $(CFLAGS) -o $@ -c $<
 
 $(MLX):
 				@$(MAKE) -C$(FILEMLX) -s

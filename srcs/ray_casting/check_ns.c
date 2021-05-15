@@ -26,19 +26,38 @@ static int	intersct_plan_ns(t_vars *cub, t_vector ray, t_plan plan)
 t_dot_intersct	check_wall_n(t_vars *cub, t_vector ray)
 {
 	int	i;
+	int	x;
+	int	y;
 
-	i = (int)cub->parsing.py;
-	i = 0;
+	i = cub->parsing.py + 1;
+	//i = 0;
 	while(i >= 0)
 	{
-		if ((intersct_plan_ns(cub, ray, cub->ray_c.plans[0])) == 1)
+		if ((intersct_plan_ns(cub, ray, cub->ray_c.plans[0][i])) == 1)
 		{
-			if (cub->ray_c.xyz.z < 1 && cub->ray_c.xyz.z >= 0)
+			x = (int)cub->ray_c.xyz.x;
+			y = i;
+			//for (int m = 0;m < cub->parsing.map_x;m++)
+				//printf("%s\n", cub->parsing.world_map[m]);
+			// if (x >= 0 && x < cub->parsing.map_x -1 \
+			// 	&& y >= 0 && y < cub->parsing.map_y -1)
+			// 	printf("world_map[%d] :%s\n", x, cub->parsing.world_map[x]);
+			//if (cub->parsing.world_map[3][1] == '1')
+				//printf("x :%d && y :%d\n", x, y);
+			// if (cub->ray_c.xyz.z < 1 && cub->ray_c.xyz.z >= 0)
+			// 	printf("z :%f\n", cub->ray_c.xyz.z);
+			if (cub->ray_c.xyz.z < 1 && cub->ray_c.xyz.z >= 0 \
+				&& x >= 0 && x < cub->parsing.map_x -1 \
+				&& y >= 0 && y < cub->parsing.map_y -1 \
+				&& cub->parsing.world_map[y][x] == '1')
+			{
+				//printf("x :%d && y :%d\n", x, y);
 				return ((t_dot_intersct){cub->ray_c.xyz, cub->ray_c.distance, 0});
-			else if (cub->ray_c.xyz.z >= 1)
-				return ((t_dot_intersct){cub->ray_c.xyz, cub->ray_c.distance, 5});
-			else
-				return ((t_dot_intersct){cub->ray_c.xyz, cub->ray_c.distance, 5});
+			}
+			else if (cub->ray_c.xyz.z >= 1 || cub->ray_c.xyz.z < 0)
+			{
+				return ((t_dot_intersct){cub->ray_c.xyz, cub->ray_c.distance, -1});
+			}
 		}
 		i--;
 	}
@@ -48,17 +67,26 @@ t_dot_intersct	check_wall_n(t_vars *cub, t_vector ray)
 t_dot_intersct	check_wall_s(t_vars *cub, t_vector ray)
 {
 	int	i;
+	int	x;
+	int	y;
 
 	i = (int)cub->parsing.py;
-	i = 1;
-	while (i < cub->parsing.map_x)
+	//i = 1;
+	while (i < cub->parsing.map_y)
 	{
-		if ((intersct_plan_ns(cub, ray, cub->ray_c.plans[1])) == 1)
+		if ((intersct_plan_ns(cub, ray, cub->ray_c.plans[1][i])) == 1)
 		{
-			if (cub->ray_c.xyz.z < 1 && cub->ray_c.xyz.z >= 0)
+			x = (int)cub->ray_c.xyz.x;
+			y = i;
+			if (cub->ray_c.xyz.z < 1 && cub->ray_c.xyz.z >= 0 \
+				&& x >= 0 && x < cub->parsing.map_x - 1 \
+				&& y >= 0 && y < cub->parsing.map_y - 1 \
+				&& cub->parsing.world_map[y][x] == '1')
 				return ((t_dot_intersct){cub->ray_c.xyz, cub->ray_c.distance, 1});
-			else
+			else if (cub->ray_c.xyz.z >= 1 || cub->ray_c.xyz.z < 0)
+			{
 				return ((t_dot_intersct){cub->ray_c.xyz, cub->ray_c.distance, -1});
+			}
 		}
 		i++;
 	}

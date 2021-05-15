@@ -79,7 +79,7 @@ typedef	struct s_ray
 	float		distance;
 	t_vector	xyz;
 	uintptr_t	color;
-	t_plan		*plans;
+	t_plan		**plans;
 	float		rota;
 	float		**matrix_z;
 	t_key		key;
@@ -174,5 +174,4 @@ t_dot_intersct	check_wall_e(t_vars *cub, t_vector ray);
 t_dot_intersct	check_wall_w(t_vars *cub, t_vector ray);
 t_dot_intersct	check_wall_f(t_vars *cub, t_vector ray);
 t_dot_intersct	check_wall_c(t_vars *cub, t_vector ray);
-
 #endif
