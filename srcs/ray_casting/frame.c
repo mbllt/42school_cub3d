@@ -41,12 +41,14 @@ int	frame(t_vars *cub)
 		ft_exit(cub);
 		return (0);
 	}
-	//mlx_sync(MLX_SYNC_WIN_CMD_COMPLETED, cub->ray_c.win);
-	//mlx_sync(MLX_SYNC_IMAGE_WRITABLE, cub->ray_c.mlx);
+	mlx_sync(MLX_SYNC_WIN_CMD_COMPLETED, cub->ray_c.win);
+	mlx_sync(MLX_SYNC_IMAGE_WRITABLE, cub->ray_c.img);
+	mlx_do_sync(cub->ray_c.mlx);
 	if (!(browse_rays(cub, cub->parsing.rx, cub->parsing.ry)))
 		return (-1);
-	mlx_put_image_to_window(cub->ray_c.mlx, cub->ray_c.win, cub->ray_c.img, 0, 0);
-	//mlx_sync(MLX_SYNC_WIN_FLUSH_CMD, cub->ray_c.win);
+	mlx_put_image_to_window(cub->ray_c.mlx, cub->ray_c.win, \
+							cub->ray_c.img, 0, 0);
+	mlx_sync(MLX_SYNC_WIN_FLUSH_CMD, cub->ray_c.win);
 	return (1);
 }
 

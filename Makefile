@@ -6,64 +6,63 @@
 #    By: mballet <mballet@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/14 14:39:52 by mballet           #+#    #+#              #
-#    Updated: 2021/05/16 19:23:16 by mballet          ###   ########lyon.fr    #
+#    Updated: 2021/05/16 19:26:40 by mballet          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
-EXE					=	cub3D
+EXE				=	cub3D
 
-SRCS				=	srcs/main.c \
-						srcs/utils.c \
-						srcs/init/init_parsing.c \
-						srcs/init/init_ray_casting.c \
-						srcs/init/init_ray_c_rays.c \
-						srcs/init/init_ray_c_matrix.c \
-						srcs/init/init_plans.c \
-						srcs/init/init_rays.c \
-						srcs/ray_casting/frame.c \
-						srcs/ray_casting/rotation.c \
-						srcs/ray_casting/browse_rays.c \
-						srcs/ray_casting/display.c \
-						srcs/ray_casting/check_ns.c \
-						srcs/ray_casting/check_ew.c \
-						srcs/ray_casting/check_fc.c \
-						srcs/ray_casting/keypress.c \
-						srcs/gnl/get_next_line.c \
-						srcs/gnl/get_next_line_utils.c \
-						srcs/parsing/parsing.c \
-						srcs/parsing/utils.c \
-						srcs/parsing/utils2.c \
-						srcs/parsing/utils3.c \
-						srcs/parsing/utils4.c \
-						srcs/parsing/data/check_data.c \
-						srcs/parsing/data/res_colors/check_res_color.c \
-						srcs/parsing/data/res_colors/resolution.c \
-						srcs/parsing/data/res_colors/colors.c \
-						srcs/parsing/data/textures/check_path_textures.c \
-						srcs/parsing/data/textures/get_path_nsew.c \
-						srcs/parsing/data/textures/get_textures.c \
-						srcs/parsing/map/ft_map.c \
-						srcs/parsing/map/check_world_map.c \
-						srcs/parsing/map/get_world_map.c \
-						
+SRCS			=	srcs/main.c \
+					srcs/utils.c \
+					srcs/init/init_parsing.c \
+					srcs/init/init_ray_casting.c \
+					srcs/init/init_ray_c_rays.c \
+					srcs/init/init_ray_c_matrix.c \
+					srcs/init/init_plans.c \
+					srcs/init/init_rays.c \
+					srcs/ray_casting/frame.c \
+					srcs/ray_casting/rotation.c \
+					srcs/ray_casting/browse_rays.c \
+					srcs/ray_casting/display.c \
+					srcs/ray_casting/check_ns.c \
+					srcs/ray_casting/check_ew.c \
+					srcs/ray_casting/check_fc.c \
+					srcs/ray_casting/keypress.c \
+					srcs/gnl/get_next_line.c \
+					srcs/gnl/get_next_line_utils.c \
+					srcs/parsing/parsing.c \
+					srcs/parsing/utils.c \
+					srcs/parsing/utils2.c \
+					srcs/parsing/utils3.c \
+					srcs/parsing/utils4.c \
+					srcs/parsing/data/check_data.c \
+					srcs/parsing/data/res_colors/check_res_color.c \
+					srcs/parsing/data/res_colors/resolution.c \
+					srcs/parsing/data/res_colors/colors.c \
+					srcs/parsing/data/textures/check_path_textures.c \
+					srcs/parsing/data/textures/get_path_nsew.c \
+					srcs/parsing/data/textures/get_textures.c \
+					srcs/parsing/map/ft_map.c \
+					srcs/parsing/map/check_world_map.c \
+					srcs/parsing/map/get_world_map.c \
 
-OBJS				=	$(SRCS:.c=.o)
+OBJS			=	$(SRCS:.c=.o)
 
-HEADERS				=	includes/cub3D.h \
-						mlx/mlx.h \
-						includes/get_next_line.h \
+HEADERS			=	includes/cub3D.h \
+					mlx/mlx.h \
+					includes/get_next_line.h \
 
-CC					=	gcc
+CC				=	gcc
 
-CFLAGS				=	-g -Wall -Wextra -Werror -Iincludes/ -Imlx/
+CFLAGS			=	-g -Wall -Wextra -Werror -Iincludes/ -Imlx/
 
-SANFLAGS			=	-g3 -fsanitize=address
+SANFLAGS		=	-g3 -fsanitize=address
 
-FILEMLX				=	mlx/minilibx_mms_20200219
+FILEMLX			=	mlx/minilibx_mms_20200219
 
-MLX					=	libmlx.dylib
+MLX				=	libmlx.dylib
 
-RM					=	/bin/rm -f
+RM				=	/bin/rm -f
 
 all:		$(EXE)
 
