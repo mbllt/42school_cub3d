@@ -96,6 +96,8 @@ int	parsing(t_vars *cub, char **argv)
 	close(fd);
 	if (!(ft_map(cub, file, file_y - 1)))
 		return (0);
+	// if (!(get_textures(cub)))
+	// 	return (0);
 	// printf("Rx:		%d && Ry :%d\n", cub->parsing.rx, cub->parsing.ry);
 	// printf("NO:		%s\n", cub->parsing.no);
 	// printf("SO:		%s\n", cub->parsing.so);

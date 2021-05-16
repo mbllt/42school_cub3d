@@ -1,71 +1,41 @@
 #include "cub3D.h"
 
+int	ft_exit(t_vars *cub)
+{
+	int	i;
+
+	i = -1;
+	mlx_destroy_window(cub->ray_c.mlx, cub->ray_c.win);
+	while (++i < cub->parsing.rx)
+	{
+		if (cub->ray_c.stock_rays[i])
+			free(cub->ray_c.stock_rays[i]);
+	}
+	if (cub->ray_c.stock_rays)
+			free(cub->ray_c.stock_rays);
+	i = -1;
+	while (++i < 3)
+	{
+		if (cub->ray_c.matrix_z[i])
+			free(cub->ray_c.matrix_z[i]);
+	}
+	free(cub->ray_c.matrix_z);
+	//exit(0);
+	return (0);
+}
+
 int	frame(t_vars *cub)
 {
-	//cub->ray_c.seconde = time(NULL);
-	if (cub->ray_c.seconde == time(NULL))
-		cub->ray_c.fps++;
-	else
-	{
-		//printf("fps : %d\n", cub->ray_c.fps);
-		cub->ray_c.fps = 0;
-	}
-	//printf("%d\n", cub->ray_c.key.right);
-	if (cub->ray_c.key.up == 1)
-	{
-		//printf("right            HERE\n");
-		cub->parsing.pz += 0.07;
-	}
-	if (cub->ray_c.key.down == 1)
-	{
-		//printf("left            HERE\n");
-		cub->parsing.pz -= 0.07;
-	}
-	// if (cub->ray_c.key.right == 1)
+	// //cub->ray_c.seconde = time(NULL);
+	// if (cub->ray_c.seconde == time(NULL))
+	// 	cub->ray_c.fps++;
+	// else
 	// {
-	// 	//printf("right            HERE\n");
-	// 	cub->parsing.px = 0.07;
+	// 	//printf("fps : %d\n", cub->ray_c.fps);
+	// 	cub->ray_c.fps = 0;
 	// }
-	// if (cub->ray_c.key.left == 1)
-	// {
-	// 	//printf("left            HERE\n");
-	// 	cub->parsing.px = -0.07;
-	// }
-	// if (cub->ray_c.key.backward == 1)
-	// {
-	// 	//printf("down            HERE\n");
-	// 	cub->parsing.py = 0.07;
-	// }
-	// if (cub->ray_c.key.forward == 1)
-	// {
-	// 	//printf("up            HERE\n");
-	// 	cub->parsing.py = -0.07;
-	// }
-	if (cub->ray_c.key.rot_x_right == 1)
-	{
-		//printf("rot right            HERE\n");
-		cub->ray_c.rota_x += 0.1;
-		init_matrix_x(cub);
-	}
-	if (cub->ray_c.key.rot_x_left == 1)
-	{
-		//printf("rot left            HERE\n");
-		cub->ray_c.rota_x -= 0.1;
-		init_matrix_x(cub);
-	}
-
-	if (cub->ray_c.key.rot_z_right == 1)
-	{
-		//printf("rot right            HERE\n");
-		cub->ray_c.rota_z += 0.1;
-		init_matrix_z(cub);
-	}
-	if (cub->ray_c.key.rot_z_left == 1)
-	{
-		//printf("rot left            HERE\n");
-		cub->ray_c.rota_z -= 0.1;
-		init_matrix_z(cub);
-	}
+	move(cub);
+	rotate(cub);
 	if (cub->ray_c.key.exit == 1)
 	{
 		ft_exit(cub);
@@ -79,3 +49,4 @@ int	frame(t_vars *cub)
 	//mlx_sync(MLX_SYNC_WIN_FLUSH_CMD, cub->ray_c.win);
 	return (1);
 }
+

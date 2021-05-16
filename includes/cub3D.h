@@ -65,6 +65,18 @@ typedef struct s_key
 	int	exit;
 }t_key;
 
+typedef struct s_text
+{
+	int		*width;
+	int		*height;
+	void	*mlx;
+	void	*img;
+	void	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}t_text;
+
 typedef	struct s_ray
 {
 	float		fov;
@@ -92,6 +104,7 @@ typedef	struct s_ray
 	int			seconde;
 	char		*cos;
 	char		*sin;
+	char		*pixel_color;
 }				t_ray;
 
 typedef struct s_parsing
@@ -114,6 +127,7 @@ typedef struct s_parsing
 	float		py;
 	float		pz;
 	char		cardinal;
+	t_text		*textures;
 }t_parsing;
 
 typedef struct s_vars
@@ -122,7 +136,7 @@ typedef struct s_vars
 	t_parsing	parsing;
 }t_vars;
 
-void			init_parsing(t_vars *cub);
+int				init_parsing(t_vars *cub);
 int				init_ray_casting(t_vars *cub);
 void			init_vars_rays(t_vars *cub);
 int				init_stock_rays(t_vars *cub, int width, int height);
@@ -171,7 +185,6 @@ int				is_res_or_colors(char *line);
 char			**ft_split(char *s, char c, int *size);
 char			*ft_substr2(char *s, int start);
 int				check_nbr_coma(char *str);
-void			init_parsing(t_vars *cub);
 t_plan			*find_walls_n(t_vars *cub, int size);
 t_plan			*find_walls_s(t_vars *cub, int size);
 t_plan			*find_walls_e(t_vars *cub, int size);
@@ -183,6 +196,8 @@ t_dot_intersct	check_wall_w(t_vars *cub, t_vector ray);
 t_dot_intersct	check_wall_f(t_vars *cub, t_vector ray);
 t_dot_intersct	check_wall_c(t_vars *cub, t_vector ray);
 void			intersct_dot(t_vars *cub, t_vector ray);
-void			move(t_vars *cub, t_vector *ray, t_vector *ray_temp);
+void			move(t_vars *cub);
+void			rotate(t_vars *cub);
+int				get_textures(t_vars *cub);
 
 #endif

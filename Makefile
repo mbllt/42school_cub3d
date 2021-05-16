@@ -6,7 +6,7 @@
 #    By: mballet <mballet@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/14 14:39:52 by mballet           #+#    #+#              #
-#    Updated: 2021/05/15 19:03:38 by mballet          ###   ########lyon.fr    #
+#    Updated: 2021/05/16 19:23:16 by mballet          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,13 +22,12 @@ SRCS				=	srcs/main.c \
 						srcs/init/init_rays.c \
 						srcs/ray_casting/frame.c \
 						srcs/ray_casting/rotation.c \
-						srcs/ray_casting/mlx.c \
 						srcs/ray_casting/browse_rays.c \
 						srcs/ray_casting/display.c \
 						srcs/ray_casting/check_ns.c \
 						srcs/ray_casting/check_ew.c \
 						srcs/ray_casting/check_fc.c \
-						srcs/ray_casting/move.c \
+						srcs/ray_casting/keypress.c \
 						srcs/gnl/get_next_line.c \
 						srcs/gnl/get_next_line_utils.c \
 						srcs/parsing/parsing.c \
@@ -42,6 +41,7 @@ SRCS				=	srcs/main.c \
 						srcs/parsing/data/res_colors/colors.c \
 						srcs/parsing/data/textures/check_path_textures.c \
 						srcs/parsing/data/textures/get_path_nsew.c \
+						srcs/parsing/data/textures/get_textures.c \
 						srcs/parsing/map/ft_map.c \
 						srcs/parsing/map/check_world_map.c \
 						srcs/parsing/map/get_world_map.c \
@@ -68,10 +68,10 @@ RM					=	/bin/rm -f
 all:		$(EXE)
 
 $(EXE):		$(MLX) $(OBJS)
-				@$(CC) $(SANFLAGS) -o $@ $^
+				@$(CC) -o $@ $^
 
 %.o :		%.c $(HEADERS)
-				@$(CC) $(SANFLAGS) $(CFLAGS) -o $@ -c $<
+				@$(CC) $(CFLAGS) -o $@ -c $<
 
 $(MLX):
 				@$(MAKE) -C$(FILEMLX) -s

@@ -33,8 +33,6 @@ t_vector	rotation_z(t_vars *cub, t_vector ray)
 	temp = ray;
 	bis.x = 0;
 	bis.x += cub->ray_c.matrix_z[0][0] * temp.x;
-	//printf("%f\n", cub->ray_c.matrix_z[1][1]);
-	//printf("%f\n", cos(0.3));
 	bis.x += cub->ray_c.matrix_z[0][1] * temp.y;
 	bis.x += cub->ray_c.matrix_z[0][2] * temp.z;
 	bis.y = 0;

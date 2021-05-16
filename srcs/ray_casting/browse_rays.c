@@ -79,9 +79,11 @@ int	browse_rays(t_vars *cub, int width, int height)
 		while (++j < height)
 		{
 			ray_temp = cub->ray_c.stock_rays[i][j];
-			move(cub, &cub->ray_c.stock_rays[i][j], &ray_temp);
+			ray_temp = rotation_x(cub, cub->ray_c.stock_rays[i][j]);
+			ray_temp = rotation_z(cub, ray_temp);
 			check_direction(cub, dot, ray_temp);
 			prio_wall = compare_distance(dot);
+			//if
 			display(cub, i, j, prio_wall.cardinal);
 		}
 	}

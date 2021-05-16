@@ -100,5 +100,6 @@ int	init_ray_casting(t_vars *cub)
 	cub->ray_c.seconde = 0;
 	// if (!init_cos_sin(cub))
 	// 	return (0);
+	cub->ray_c.pixel_color = NULL;
 	return (1);
 }

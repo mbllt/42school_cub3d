@@ -1,9 +1,9 @@
-R 400 300
-NO ../path_to_the_north_texture
-SO ../path_to_the_south_texture
-EA ../path_to_the_east_texture
-WE ../path_to_the_west_texture
-S ../path_to_the_sprite_texture
+R 640 360
+NO textures/redbrick.xpm
+SO textures/wood.xpm
+EA textures/redbrick.xpm
+WE textures/wood.xpm
+S  textures/wood.xpm
 
 F 254,100,0
 C 225,30,0
