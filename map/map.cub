@@ -5,8 +5,9 @@ EA textures/redbrick.xpm
 WE textures/wood.xpm
 S  textures/wood.xpm
 
-F 254,100,0
-C 225,30,0
+
+F 30,250,50
+C 30,30,250
 
 111111111
 110000001

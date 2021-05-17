@@ -67,11 +67,11 @@ typedef struct s_key
 
 typedef struct s_text
 {
-	int		*width;
-	int		*height;
+	int		width;
+	int		height;
 	void	*mlx;
 	void	*img;
-	void	*addr;
+	unsigned int	*addr;
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
@@ -85,7 +85,7 @@ typedef	struct s_ray
 	void		*mlx;
 	void		*win;
 	void		*img;
-	char		*addr;
+	unsigned int	*addr;
 	int			bits_per_pixel;
 	int			line_length;
 	int			endian;
@@ -105,6 +105,7 @@ typedef	struct s_ray
 	char		*cos;
 	char		*sin;
 	char		*pixel_color;
+	t_vector	ray_temp;
 }				t_ray;
 
 typedef struct s_parsing
@@ -118,6 +119,8 @@ typedef struct s_parsing
 	char		*s;
 	t_vector	f;
 	t_vector	c;
+	unsigned int	ff;
+	unsigned int	cc;
 	int			nbr_param;
 	int			map_x;
 	int			map_y;
@@ -127,7 +130,7 @@ typedef struct s_parsing
 	float		py;
 	float		pz;
 	char		cardinal;
-	t_text		*textures;
+	t_text		textures[5];
 }t_parsing;
 
 typedef struct s_vars
@@ -144,7 +147,7 @@ void			init_rays(t_vars *cub, int width, int height);
 int				init_plans(t_vars *cub);
 int				init_matrix_x(t_vars *cub);
 int				init_matrix_z(t_vars *cub);
-void			my_mlx_pixel_put(t_vars *mlx, int x, int y, uintptr_t color);
+void			my_mlx_pixel_put(t_vars *mlx, int x, int y, unsigned int color);
 int				ft_exit(t_vars *cub);
 int				key_press(int key, t_vars *cub);
 int				key_release(int key, t_vars *cub);
@@ -153,7 +156,7 @@ int				browse_rays(t_vars *cub, int width, int height);
 t_vector		rotation_x(t_vars *cub, t_vector ray);
 t_vector		rotation_z(t_vars *cub, t_vector ray);
 void			get_texture(t_vars *cub);
-void			display(t_vars *cub, int i, int j, int plan_nbr);
+void			display(t_vars *cub, int i, int j, t_dot_intersct prio_wall);
 int				cub_start(t_vars *cub, int argc, char **argv);
 int				parsing(t_vars *cub, char **argv);
 int				check_data(t_vars *cub, char *line, int ret);
@@ -198,6 +201,7 @@ t_dot_intersct	check_wall_c(t_vars *cub, t_vector ray);
 void			intersct_dot(t_vars *cub, t_vector ray);
 void			move(t_vars *cub);
 void			rotate(t_vars *cub);
-int				get_textures(t_vars *cub);
+int				get_textures(t_vars *cub, t_text *textures);
+unsigned int	create_trgb(int t, int r, int g, int b);
 
 #endif

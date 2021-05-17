@@ -62,8 +62,16 @@ int	check_colors(t_vars *cub, char **str, int size)
 	if (size != 2)
 		return (0);
 	if (!(get_color(cub, str)))
+	{
 		return (0);
+	}
 	if (!(check_size_colors(cub)))
+	{
 		return (0);
+	}
+	if (str[0][0] == 'F')
+		cub->parsing.ff = create_trgb(0, cub->parsing.f.x, cub->parsing.f.y, cub->parsing.f.z);
+	if (str[0][0] == 'C')
+		cub->parsing.cc = create_trgb(0, cub->parsing.c.x, cub->parsing.c.y, cub->parsing.c.z);
 	return (1);
 }

@@ -9,16 +9,19 @@ static size_t	nbr_str(const char *s, char c)
 	size = 0;
 	if (s[i] == 0)
 		return (0);
-	if (s[i] != ' ' && s[i + 1] == ' ')
-		size++;
 	while (s[i])
 	{
-		if (s[i] == c && i - 1 > 0 && s[i - 1] != c)
+		if (s[i] == c && i - 1 >= 0 && s[i - 1] != c)
+		{
+			//printf("%c\n", s[i]);
 			size++;
+		}
 		i++;
 	}
 	if (s[i - 1] != c)
+	{
 		size++;
+	}
 	return (size);
 }
 

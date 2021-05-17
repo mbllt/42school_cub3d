@@ -101,5 +101,6 @@ int	init_ray_casting(t_vars *cub)
 	// if (!init_cos_sin(cub))
 	// 	return (0);
 	cub->ray_c.pixel_color = NULL;
+	cub->ray_c.ray_temp = (t_vector){0,0,0};
 	return (1);
 }
