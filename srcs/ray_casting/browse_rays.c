@@ -18,7 +18,6 @@ static t_dot_intersct	compare_distance(t_dot_intersct *dot)
 	i = -1;
 	while (++i < 6)
 	{
-		//printf("%f\n", dot[4].t_distance);
 		if (dot[i].t_distance >= 0 && (temp.t_distance == -1 || dot[i].t_distance < temp.t_distance))
 		{
 			temp = dot[i];

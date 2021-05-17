@@ -42,20 +42,14 @@ t_dot_intersct	check_wall_e(t_vars *cub, t_vector ray)
 	int	y;
 
 	i = (int)cub->parsing.px;
-	//i = 1;
 	while (i < cub->parsing.map_x)
 	{
-		//printf("yppy\n");
 		if ((intersct_plan_ew(cub, ray, i)) == 1)
 		{
 			x = i;
-			y = (int)cub->ray_c.xyz.y + 1; /* not sure + 1 */
-			//printf("yppy\n");
+			y = (int)cub->ray_c.xyz.y;
 			if (cub->ray_c.xyz.z < 1 && cub->ray_c.xyz.z >= 0 \
 				&& (is_wall_e(cub, x, y)) == 1)
-				// && x >= 0 && x < cub->parsing.map_x \
-				// && y >= 0 && y < cub->parsing.map_y \
-				// && cub->parsing.world_map[y][x] == '1')
 				return ((t_dot_intersct){cub->ray_c.xyz, cub->ray_c.distance, 2});
 			else if (cub->ray_c.xyz.z >= 1 || cub->ray_c.xyz.z < 0)
 			{
@@ -95,23 +89,16 @@ t_dot_intersct	check_wall_w(t_vars *cub, t_vector ray)
 	int	x;
 	int	y;
 
-	i = (int)cub->parsing.px + 1;
-	//i = 0;
+	i = (int)cub->parsing.px;
 	while (i >= 0)
 	{
 		if ((intersct_plan_ew(cub, ray, i)) == 1)
 		{
 			x = i - 1;
-			y = (int)cub->ray_c.xyz.y + 1;
+			y = (int)cub->ray_c.xyz.y;
 			if (cub->ray_c.xyz.z < 1 && cub->ray_c.xyz.z >= 0 \
 				&& (is_wall_w(cub, x, y)) == 1)
-				// && x >= 0 && x < cub->parsing.map_x - 1 \
-				// && y >= 0 && y < cub->parsing.map_y - 1 \
-				// && cub->parsing.world_map[y][x] == '1')
 			{
-				//if (x == 0)
-				//	printf("yyp\n");
-				//printf("colonne west :%d cub->ray_c.plans[3].d : %f\n", x, cub->ray_c.plans[3]->d);
 				return ((t_dot_intersct){cub->ray_c.xyz, cub->ray_c.distance, 3});
 			}
 			else if (cub->ray_c.xyz.z >= 1 || cub->ray_c.xyz.z < 0)
@@ -123,51 +110,3 @@ t_dot_intersct	check_wall_w(t_vars *cub, t_vector ray)
 	}
 	return ((t_dot_intersct){(t_vector){0, 0, 0}, -1, -1});
 }
-
-// t_dot_intersct	check_wall_e(t_vars *cub, t_vector ray)
-// {
-// 	int	i;
-
-// 	i = (int)cub->parsing.px - 1;
-// 	i = 1;
-// 	while (i <= cub->parsing.map_y)
-// 	{
-// 		if (!(intersct_plan_ew(cub, ray, cub->ray_c.plans[i])))
-// 		{
-// 			if (cub->ray_c.xyz.z >= 0 && cub->ray_c.xyz.z < 1)
-// 			{
-// 				if (cub->parsing.world_map[(int)cub->ray_c.xyz.x] \
-// 					[(int)cub->ray_c.xyz.y] == '1') \
-// 							return ((t_dot_intersct){cub->ray_c.xyz, cub->ray_c.distance, 2});
-// 				else
-// 					return ((t_dot_intersct){cub->ray_c.xyz, cub->ray_c.distance, -1});
-// 			}
-// 		}
-// 		i++;
-// 	}
-// 	return ((t_dot_intersct){(t_vector){0,0,0}, 0, -1});
-// }
-
-// t_dot_intersct	check_wall_w(t_vars *cub, t_vector ray)
-// {
-// 	int	i;
-
-// 	i = (int)cub->parsing.px + 1;
-// 	i = 0;
-// 	while (i >= 0)
-// 	{
-// 		if (!(intersct_plan_ew(cub, ray, cub->ray_c.plans[i])))
-// 		{
-// 			if (cub->ray_c.xyz.z >= 0 && cub->ray_c.xyz.z < 1)
-// 			{
-// 				if (cub->parsing.world_map[(int)cub->ray_c.xyz.x] \
-// 					[(int)cub->ray_c.xyz.y] == '1')
-// 							return ((t_dot_intersct){cub->ray_c.xyz, cub->ray_c.distance, 3});
-// 				else
-// 					return ((t_dot_intersct){cub->ray_c.xyz, cub->ray_c.distance, -1});
-// 			}
-// 		i--;
-// 		}
-// 	}
-// 	return ((t_dot_intersct){(t_vector){0,0,0}, 0, -1});
-// }
