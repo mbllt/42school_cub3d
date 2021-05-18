@@ -20,7 +20,8 @@ int	ft_exit(t_vars *cub)
 			free(cub->ray_c.matrix_z[i]);
 	}
 	free(cub->ray_c.matrix_z);
-	//exit(0);
+	/* free everything */
+	exit(0);
 	return (0);
 }
 
@@ -34,8 +35,7 @@ int	frame(t_vars *cub)
 	// 	//printf("fps : %d\n", cub->ray_c.fps);
 	// 	cub->ray_c.fps = 0;
 	// }
-	// if (!(get_textures(cub)))
-	// 	return (0);                    /* bonus pour avoir un style boite de nuit */
+
 	move(cub);
 	rotate(cub);
 	if (cub->ray_c.key.exit == 1)
@@ -43,7 +43,7 @@ int	frame(t_vars *cub)
 		ft_exit(cub);
 		return (0);
 	}
-	if (!(browse_rays(cub, cub->parsing.rx, cub->parsing.ry)))
+	if (!(graphical_loop(cub, cub->parsing.rx, cub->parsing.ry)))
 		return (-1);
 	mlx_sync(MLX_SYNC_WIN_CMD_COMPLETED, cub->ray_c.win);
 	mlx_sync(MLX_SYNC_IMAGE_WRITABLE, cub->ray_c.img);

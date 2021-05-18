@@ -41,7 +41,7 @@ int	key_press(int key, t_vars *cub)
 	if (key == 53)
 		cub->ray_c.key.exit = 1;
 	//printf("%d\n", key);
-	// if (!(browse_rays(cub, cub->parsing.rx, cub->parsing.ry)))
+	// if (!(graphical_loop(cub, cub->parsing.rx, cub->parsing.ry)))
 	// 	return (0);
 	return (1);
 }
@@ -72,7 +72,7 @@ int	key_release(int key, t_vars *cub)
 		cub->ray_c.key.rot_x_left = 0;
 	if (key == KEYDOWN)
 		cub->ray_c.key.rot_x_right = 0;
-	// if (!(browse_rays(cub, cub->parsing.rx, cub->parsing.ry)))
+	// if (!(graphical_loop(cub, cub->parsing.rx, cub->parsing.ry)))
 	// 	return (0);
 	return (1);
 }

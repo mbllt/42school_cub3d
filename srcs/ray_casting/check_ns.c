@@ -1,14 +1,15 @@
 #include "cub3D.h"
 
-static int	intersct_plan_ns(t_vars *cub, t_vector ray, int i)
+static int	intersct_plan_ns(t_vars *cub, t_vector ray, int i, t_dot_intersct *intersct)
 {
 	if (ray.y == 0)
 		return (0);
-	cub->ray_c.distance = - cub->parsing.py + i;
-	cub->ray_c.distance /= ray.y;
-	if (cub->ray_c.distance < 0)
+	(*intersct).t_distance = - cub->parsing.py + i;
+	(*intersct).t_distance /= ray.y;
+	if ((*intersct).t_distance < 0)
 		return (0);
-	intersct_dot(cub, ray);
+	intersct_dot(cub, ray, intersct);
+	//printf("%f, %f, %f\n", intersct.dot.x, intersct.dot.y, intersct.dot.z);
 	return (1);
 }
 
@@ -35,7 +36,7 @@ static int	is_wall_n(t_vars *cub, int x, int y)
 	return (0);
 }
 
-t_dot_intersct	check_wall_n(t_vars *cub, t_vector ray)
+t_dot_intersct	check_wall_n(t_vars *cub, t_vector ray, t_dot_intersct *intersct)
 {
 	int	i;
 	int	x;
@@ -44,18 +45,20 @@ t_dot_intersct	check_wall_n(t_vars *cub, t_vector ray)
 	i = (int)cub->parsing.py;
 	while(i >= 0)
 	{
-		if ((intersct_plan_ns(cub, ray, i)) == 1)
+		if ((intersct_plan_ns(cub, ray, i, intersct)) == 1)
 		{
-			x = (int)cub->ray_c.xyz.x;
+			x = (int)(*intersct).dot.x;
 			y = i - 1;
-			if (cub->ray_c.xyz.z < 1 && cub->ray_c.xyz.z >= 0 \
+			//printf("%f\n", (*intersct).dot.z);
+			if ((*intersct).dot.z < 1 && (*intersct).dot.z >= 0 \
 				&& (is_wall_n(cub, x, y)) == 1)
 			{
-				return ((t_dot_intersct){cub->ray_c.xyz, cub->ray_c.distance, 0});
+				//printf("%d, %d\n", x, y);
+				return ((t_dot_intersct){(*intersct).dot, (*intersct).t_distance, 0});
 			}
-			else if (cub->ray_c.xyz.z >= 1 || cub->ray_c.xyz.z < 0)
+			else if ((*intersct).dot.z >= 1 || (*intersct).dot.z < 0)
 			{
-				return ((t_dot_intersct){cub->ray_c.xyz, cub->ray_c.distance, -1});
+				return ((t_dot_intersct){(*intersct).dot, (*intersct).t_distance, -1});
 			}
 		}
 		i--;
@@ -86,7 +89,7 @@ static int	is_wall_s(t_vars *cub, int x, int y)
 	return (0);
 }
 
-t_dot_intersct	check_wall_s(t_vars *cub, t_vector ray)
+t_dot_intersct	check_wall_s(t_vars *cub, t_vector ray, t_dot_intersct *intersct)
 {
 	int	i;
 	int	x;
@@ -95,18 +98,18 @@ t_dot_intersct	check_wall_s(t_vars *cub, t_vector ray)
 	i = (int)cub->parsing.py;
 	while (i < cub->parsing.map_y)
 	{
-		if ((intersct_plan_ns(cub, ray, i)) == 1)
+		if ((intersct_plan_ns(cub, ray, i, intersct)) == 1)
 		{
-			x = (int)cub->ray_c.xyz.x;
+			x = (int)(*intersct).dot.x;
 			y = i;
-			if (cub->ray_c.xyz.z < 1 && cub->ray_c.xyz.z >= 0 \
+			if ((*intersct).dot.z < 1 && (*intersct).dot.z >= 0 \
 				&& (is_wall_s(cub, x, y)) == 1)
 			{
-				return ((t_dot_intersct){cub->ray_c.xyz, cub->ray_c.distance, 1});
+				return ((t_dot_intersct){(*intersct).dot, (*intersct).t_distance, 1});
 			}
-			else if (cub->ray_c.xyz.z >= 1 || cub->ray_c.xyz.z < 0)
+			else if ((*intersct).dot.z >= 1 || (*intersct).dot.z < 0)
 			{
-				return ((t_dot_intersct){cub->ray_c.xyz, cub->ray_c.distance, -1});
+				return ((t_dot_intersct){(*intersct).dot, (*intersct).t_distance, -1});
 			}
 		}
 		i++;

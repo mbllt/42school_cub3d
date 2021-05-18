@@ -37,7 +37,7 @@ typedef struct s_vector
 
 typedef struct s_dot_intersct
 {
-	t_vector	intersct;
+	t_vector	dot;
 	float		t_distance;
 	int			cardinal;
 }t_dot_intersct;
@@ -77,6 +77,11 @@ typedef struct s_text
 	int		endian;
 }t_text;
 
+typedef struct s_multi
+{
+	;
+}t_multi;
+
 typedef	struct s_ray
 {
 	float		fov;
@@ -85,7 +90,8 @@ typedef	struct s_ray
 	void		*mlx;
 	void		*win;
 	void		*img;
-	unsigned int	*addr;
+	//unsigned int	*addr;
+	char		*addr;
 	int			bits_per_pixel;
 	int			line_length;
 	int			endian;
@@ -106,6 +112,7 @@ typedef	struct s_ray
 	char		*sin;
 	char		*pixel_color;
 	t_vector	ray_temp;
+	t_multi		threading[4];
 }				t_ray;
 
 typedef struct s_parsing
@@ -147,17 +154,18 @@ void			init_rays(t_vars *cub, int width, int height);
 int				init_plans(t_vars *cub);
 int				init_matrix_x(t_vars *cub);
 int				init_matrix_z(t_vars *cub);
-void			my_mlx_pixel_put(t_vars *mlx, int x, int y, unsigned int color);
+// void			my_mlx_pixel_put(t_vars *mlx, int x, int y, unsigned int color);
+void			my_mlx_pixel_put(t_vars *mlx, int x, int y, uintptr_t color);
 int				ft_exit(t_vars *cub);
 int				key_press(int key, t_vars *cub);
 int				key_release(int key, t_vars *cub);
 int				frame(t_vars *cub);
-int				browse_rays(t_vars *cub, int width, int height);
+int				graphical_loop(t_vars *cub, int width, int height);
 t_vector		rotation_x(t_vars *cub, t_vector ray);
 t_vector		rotation_z(t_vars *cub, t_vector ray);
-void			get_texture(t_vars *cub);
 void			display(t_vars *cub, int i, int j, t_dot_intersct prio_wall);
-int				cub_start(t_vars *cub, int argc, char **argv);
+//void			display(t_vars *cub, int i, int j, int orienta_wall);
+int				cub_loop(t_vars *cub, int argc, char **argv);
 int				parsing(t_vars *cub, char **argv);
 int				check_data(t_vars *cub, char *line, int ret);
 char			*ft_realloc(char *str, size_t size);
@@ -192,13 +200,13 @@ t_plan			*find_walls_n(t_vars *cub, int size);
 t_plan			*find_walls_s(t_vars *cub, int size);
 t_plan			*find_walls_e(t_vars *cub, int size);
 t_plan			*find_walls_w(t_vars *cub, int size);
-t_dot_intersct	check_wall_n(t_vars *cub, t_vector ray);
-t_dot_intersct	check_wall_s(t_vars *cub, t_vector ray);
-t_dot_intersct	check_wall_e(t_vars *cub, t_vector ray);
-t_dot_intersct	check_wall_w(t_vars *cub, t_vector ray);
-t_dot_intersct	check_wall_f(t_vars *cub, t_vector ray);
-t_dot_intersct	check_wall_c(t_vars *cub, t_vector ray);
-void			intersct_dot(t_vars *cub, t_vector ray);
+t_dot_intersct	check_wall_n(t_vars *cub, t_vector ray, t_dot_intersct *intersct);
+t_dot_intersct	check_wall_s(t_vars *cub, t_vector ray, t_dot_intersct *intersct);
+t_dot_intersct	check_wall_e(t_vars *cub, t_vector ray, t_dot_intersct *intersct);
+t_dot_intersct	check_wall_w(t_vars *cub, t_vector ray, t_dot_intersct *intersct);
+t_dot_intersct	check_wall_f(t_vars *cub, t_vector ray, t_dot_intersct *intersct);
+t_dot_intersct	check_wall_c(t_vars *cub, t_vector ray, t_dot_intersct *intersct);
+void			intersct_dot(t_vars *cub, t_vector ray, t_dot_intersct *intersct);
 void			move(t_vars *cub);
 void			rotate(t_vars *cub);
 int				get_textures(t_vars *cub, t_text *textures);

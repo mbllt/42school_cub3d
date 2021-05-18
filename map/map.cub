@@ -1,10 +1,9 @@
-R 640 360
+R 740 600
 NO textures/eagle.xpm
 SO textures/eagle.xpm
 EA textures/eagle.xpm
 WE textures/eagle.xpm
 S  textures/wood.xpm
-
 
 F 40,250,50
 C 30,100,250

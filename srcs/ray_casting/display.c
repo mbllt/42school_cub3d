@@ -6,12 +6,19 @@ typedef enum e_dir
 	SOUTH,
 	EAST,
 	WEST,
+	F,
+	C,
 }t_dir;
 
-void	my_mlx_pixel_put(t_vars *mlx, int x, int y, unsigned int color)
+void	my_mlx_pixel_put(t_vars *mlx, int x, int y, uintptr_t color)
 {
-	if (x >= 0 && y >= 0 && x < mlx->parsing.rx && y < mlx->parsing.ry)
-		mlx->ray_c.addr[y * mlx->parsing.rx + x] = color;
+	char	*dst;
+	int		temp;
+
+	temp = y * mlx->ray_c.line_length + x
+			* (mlx->ray_c.bits_per_pixel * 0.125);
+	dst = mlx->ray_c.addr + temp;
+	*(uintptr_t*)dst = color;
 }
 
 static unsigned int	get_pixel(t_text texture, int x, int y)
@@ -28,22 +35,22 @@ static void	get_xy_noso(t_dot_intersct prio_wall, t_text text, int *x, int *y)
 {
 	float	decimal;
 
-	decimal = prio_wall.intersct.x - (int)prio_wall.intersct.x;
+	decimal = prio_wall.dot.x - (int)prio_wall.dot.x;
 	if (prio_wall.cardinal == SOUTH)
 		decimal = 1 - decimal;
 	(*x) = text.width * decimal;
-	(*y) = text.height * (1 - prio_wall.intersct.z);
+	(*y) = text.height * (1 - prio_wall.dot.z);
 }
 
 static void	get_xy_eawe(t_dot_intersct prio_wall, t_text text, int *x, int *y)
 {
 	float	decimal;
 
-	decimal = prio_wall.intersct.y - (int)prio_wall.intersct.y;
+	decimal = prio_wall.dot.y - (int)prio_wall.dot.y;
 	if (prio_wall.cardinal == EAST)
 		decimal = 1 - decimal;
 	(*x) = text.width * decimal;
-	(*y) = text.height * (1 - prio_wall.intersct.z);
+	(*y) = text.height * (1 - prio_wall.dot.z);
 }
 
 void	display(t_vars *cub, int i, int j, t_dot_intersct prio_wall)
@@ -82,9 +89,6 @@ void	display(t_vars *cub, int i, int j, t_dot_intersct prio_wall)
 		my_mlx_pixel_put(cub, i, j, cub->parsing.ff);
 	else if (prio_wall.cardinal == 5)
 		my_mlx_pixel_put(cub, i, j, cub->parsing.cc);
-	// else
-	// {
-	// 	//printf("yoy\n");
-	// 	my_mlx_pixel_put(cub, i, j, (unsigned char*)"255,255,255");
-	// }
+	else
+		my_mlx_pixel_put(cub, i, j, (unsigned int)"255,255,255");
 }

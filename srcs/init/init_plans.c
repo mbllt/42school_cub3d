@@ -50,6 +50,18 @@ int	init_plans(t_vars *cub)
 		return (0);
 	cub->ray_c.plans[4][0] = (t_plan){0, 0, 1, 0};
 	cub->ray_c.plans[5][0] = (t_plan){0, 0, 1, -1};
-	return (1);
+	// for (int i = 0;i < 2;i++)
+ 	// {
+ 	// 	for (int j = 0;j < cub->parsing.map_y;j++)
+ 	// 		printf("%f\n", cub->ray_c.plans[i][j].d);
+ 	// 	printf("\n");
+ 	// }
+ 	// printf("\n");
+ 	// for (int i = 2;i < 4;i++)
+ 	// {
+ 	// 	for (int j = 0;j < cub->parsing.map_x;j++)
+ 	// 		printf("%f\n", cub->ray_c.plans[i][j].d);
+ 	// 	printf("\n");
+	// }
 	return (1);
 }

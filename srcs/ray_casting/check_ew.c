@@ -1,14 +1,14 @@
 #include "cub3D.h"
 
-static int	intersct_plan_ew(t_vars *cub, t_vector ray, int i)
+static int	intersct_plan_ew(t_vars *cub, t_vector ray, int i, t_dot_intersct *intersct)
 {
 	if (ray.x == 0)
 		return (0);
-	cub->ray_c.distance = i - cub->parsing.px;
-	cub->ray_c.distance /= ray.x;
-	if (cub->ray_c.distance < 0)
+	(*intersct).t_distance = i - cub->parsing.px;
+	(*intersct).t_distance /= ray.x;
+	if ((*intersct).t_distance < 0)
 		return (0);
-	intersct_dot(cub, ray);
+	intersct_dot(cub, ray, intersct);
 	return (1);
 }
 
@@ -35,7 +35,7 @@ static int	is_wall_e(t_vars *cub, int x, int y)
 	return (0);
 }
 
-t_dot_intersct	check_wall_e(t_vars *cub, t_vector ray)
+t_dot_intersct	check_wall_e(t_vars *cub, t_vector ray, t_dot_intersct *intersct)
 {
 	int	i;
 	int	x;
@@ -44,16 +44,16 @@ t_dot_intersct	check_wall_e(t_vars *cub, t_vector ray)
 	i = (int)cub->parsing.px;
 	while (i < cub->parsing.map_x)
 	{
-		if ((intersct_plan_ew(cub, ray, i)) == 1)
+		if ((intersct_plan_ew(cub, ray, i, intersct)) == 1)
 		{
 			x = i;
-			y = (int)cub->ray_c.xyz.y;
-			if (cub->ray_c.xyz.z < 1 && cub->ray_c.xyz.z >= 0 \
+			y = (int)(*intersct).dot.y;
+			if ((*intersct).dot.z < 1 && (*intersct).dot.z >= 0 \
 				&& (is_wall_e(cub, x, y)) == 1)
-				return ((t_dot_intersct){cub->ray_c.xyz, cub->ray_c.distance, 2});
-			else if (cub->ray_c.xyz.z >= 1 || cub->ray_c.xyz.z < 0)
+				return ((t_dot_intersct){(*intersct).dot, (*intersct).t_distance, 2});
+			else if ((*intersct).dot.z >= 1 || (*intersct).dot.z < 0)
 			{
-				return ((t_dot_intersct){cub->ray_c.xyz, cub->ray_c.distance, -1});
+				return ((t_dot_intersct){(*intersct).dot, (*intersct).t_distance, -1});
 			}
 		}
 		i++;
@@ -83,7 +83,7 @@ static int	is_wall_w(t_vars *cub, int x, int y)
 	}
 	return (0);
 }
-t_dot_intersct	check_wall_w(t_vars *cub, t_vector ray)
+t_dot_intersct	check_wall_w(t_vars *cub, t_vector ray, t_dot_intersct *intersct)
 {
 	int	i;
 	int	x;
@@ -92,18 +92,18 @@ t_dot_intersct	check_wall_w(t_vars *cub, t_vector ray)
 	i = (int)cub->parsing.px;
 	while (i >= 0)
 	{
-		if ((intersct_plan_ew(cub, ray, i)) == 1)
+		if ((intersct_plan_ew(cub, ray, i, intersct)) == 1)
 		{
 			x = i - 1;
-			y = (int)cub->ray_c.xyz.y;
-			if (cub->ray_c.xyz.z < 1 && cub->ray_c.xyz.z >= 0 \
+			y = (int)(*intersct).dot.y;
+			if ((*intersct).dot.z < 1 && (*intersct).dot.z >= 0 \
 				&& (is_wall_w(cub, x, y)) == 1)
 			{
-				return ((t_dot_intersct){cub->ray_c.xyz, cub->ray_c.distance, 3});
+				return ((t_dot_intersct){(*intersct).dot, (*intersct).t_distance, 3});
 			}
-			else if (cub->ray_c.xyz.z >= 1 || cub->ray_c.xyz.z < 0)
+			else if ((*intersct).dot.z >= 1 || (*intersct).dot.z < 0)
 			{
-				return ((t_dot_intersct){cub->ray_c.xyz, cub->ray_c.distance, -1});
+				return ((t_dot_intersct){(*intersct).dot, (*intersct).t_distance, -1});
 			}
 		}
 		i--;
