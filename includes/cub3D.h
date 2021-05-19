@@ -20,6 +20,16 @@
 #define PINK	0x00DB7093
 #define GREY	0x00808080
 
+typedef enum e_dir
+{
+	NORTH,
+	SOUTH,
+	EAST,
+	WEST,
+	F,
+	C,
+}t_dir;
+
 typedef	struct s_direction
 {
 	float	t_north;
@@ -158,7 +168,7 @@ int				init_plans(t_vars *cub);
 int				init_matrix_x(t_vars *cub);
 int				init_matrix_z(t_vars *cub);
 // void			my_mlx_pixel_put(t_vars *mlx, int x, int y, unsigned int color);
-void			my_mlx_pixel_put(t_vars *mlx, int x, int y, uintptr_t color);
+void			my_mlx_pixel_put(t_vars *mlx, int x, int y, unsigned int color);
 int				ft_exit(t_vars *cub);
 int				key_press(int key, t_vars *cub);
 int				key_release(int key, t_vars *cub);

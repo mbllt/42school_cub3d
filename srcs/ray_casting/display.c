@@ -1,16 +1,16 @@
 #include "cub3D.h"
 
-typedef enum e_dir
-{
-	NORTH,
-	SOUTH,
-	EAST,
-	WEST,
-	F,
-	C,
-}t_dir;
+// typedef enum e_dir
+// {
+// 	NORTH,
+// 	SOUTH,
+// 	EAST,
+// 	WEST,
+// 	F,
+// 	C,
+// }t_dir;
 
-void	my_mlx_pixel_put(t_vars *mlx, int x, int y, uintptr_t color)
+void	my_mlx_pixel_put(t_vars *mlx, int x, int y, unsigned int color)
 {
 	char	*dst;
 	int		temp;
@@ -18,7 +18,7 @@ void	my_mlx_pixel_put(t_vars *mlx, int x, int y, uintptr_t color)
 	temp = y * mlx->ray_c.line_length + x
 			* (mlx->ray_c.bits_per_pixel * 0.125);
 	dst = mlx->ray_c.addr + temp;
-	*(uintptr_t*)dst = color;
+	*(unsigned int*)dst = color;
 }
 
 static unsigned int	get_pixel(t_text texture, int x, int y)
@@ -61,36 +61,37 @@ void	display(t_vars *cub, int i, int j, t_dot_intersct prio_wall)
 
 	x = 0;
 	y = 0;
-	// if (i == 300 || i == 450 || i == 600)
-	// 	printf("%d\n", i);
-	if (prio_wall.cardinal == 0)
+	if (prio_wall.cardinal == NORTH)
 	{
 		get_xy_noso(prio_wall, cub->parsing.textures[0], &x, &y);
 		pixel = get_pixel(cub->parsing.textures[0], x, y);
 		my_mlx_pixel_put(cub, i, j, (unsigned int)pixel);
 	}
-	else if (prio_wall.cardinal == 1)
+	else if (prio_wall.cardinal == SOUTH)
 	{
 		get_xy_noso(prio_wall, cub->parsing.textures[1], &x, &y);
 		pixel = get_pixel(cub->parsing.textures[1], x, y);
 		my_mlx_pixel_put(cub, i, j, (unsigned int)pixel);
 	}
-	else if (prio_wall.cardinal == 2)
+	else if (prio_wall.cardinal == EAST)
 	{
 		get_xy_eawe(prio_wall, cub->parsing.textures[2], &x, &y);
 		pixel = get_pixel(cub->parsing.textures[2], x, y);
 		my_mlx_pixel_put(cub, i, j, (unsigned int)pixel);
 	}
-	else if (prio_wall.cardinal == 3)
+	else if (prio_wall.cardinal == WEST)
 	{
 		get_xy_eawe(prio_wall, cub->parsing.textures[3], &x, &y);
 		pixel = get_pixel(cub->parsing.textures[3], x, y);
 		my_mlx_pixel_put(cub, i, j, (unsigned int)pixel);
 	}
-	else if (prio_wall.cardinal == 4)
+	else if (prio_wall.cardinal == F)
 		my_mlx_pixel_put(cub, i, j, cub->parsing.ff);
-	else if (prio_wall.cardinal == 5)
+	else if (prio_wall.cardinal == C)
 		my_mlx_pixel_put(cub, i, j, cub->parsing.cc);
 	else
+	{
+		// printf("%d, %d\n", i, j);
 		my_mlx_pixel_put(cub, i, j, (unsigned int)"255,255,255");
+	}
 }

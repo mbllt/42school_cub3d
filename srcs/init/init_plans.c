@@ -1,12 +1,12 @@
 #include "cub3D.h"
 
-typedef enum e_dir
-{
-	NORTH,
-	SOUTH,
-	EAST,
-	WEST,
-}t_dir;
+// typedef enum e_dir
+// {
+// 	NORTH,
+// 	SOUTH,
+// 	EAST,
+// 	WEST,
+// }t_dir;
 
 static int	fill_in_plans(t_plan **plans, int cardinal, int size)
 {

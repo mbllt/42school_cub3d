@@ -1,13 +1,13 @@
 #include "cub3D.h"
 
-typedef enum e_cardinal
-{
-	NORTH,
-	SOUTH,
-	EAST,
-	WEST,
-	SPRITE,
-}t_cardinal;
+// typedef enum e_cardinal
+// {
+// 	NORTH,
+// 	SOUTH,
+// 	EAST,
+// 	WEST,
+// 	SPRITE,
+// }t_cardinal;
 
 static int	ft_cpyy(char **dest, char *src, int size, int i)
 {
@@ -46,7 +46,7 @@ static void	get_path(t_vars *cub, char *str, int cardinal)
 		ft_cpyy(&cub->parsing.ea, str, size, i);
 	if (cardinal == WEST)
 		ft_cpyy(&cub->parsing.we, str, size, i);
-	if (cardinal == SPRITE)
+	if (cardinal == 4)
 		ft_cpyy(&cub->parsing.s, str, size, i);
 }
 
