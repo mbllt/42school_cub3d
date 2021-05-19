@@ -87,10 +87,14 @@ typedef struct s_text
 	int		endian;
 }t_text;
 
-typedef struct s_multi
+typedef struct s_sprite
 {
-	;
-}t_multi;
+	t_vector		pos;
+	t_vector		dot;
+	float			distance;
+	t_dot_intersct	prio;
+
+}t_sprite;
 
 typedef	struct s_ray
 {
@@ -120,6 +124,8 @@ typedef	struct s_ray
 	char		*cos;
 	char		*sin;
 	char		*pixel_color;
+	int			nbr_sprite;
+	t_sprite	*sprite;
 }				t_ray;
 
 typedef struct s_parsing
@@ -167,18 +173,15 @@ void			init_rays(t_vars *cub, int width, int height);
 int				init_plans(t_vars *cub);
 int				init_matrix_x(t_vars *cub);
 int				init_matrix_z(t_vars *cub);
-// void			my_mlx_pixel_put(t_vars *mlx, int x, int y, unsigned int color);
 void			my_mlx_pixel_put(t_vars *mlx, int x, int y, unsigned int color);
 int				ft_exit(t_vars *cub);
 int				key_press(int key, t_vars *cub);
 int				key_release(int key, t_vars *cub);
 int				frame(t_vars *cub);
-//int				graphical_loop(t_vars *cub, int width, int height);;
 void			*graphical_loop(void *thread_data);
 t_vector		rotation_x(t_vars *cub, t_vector ray);
 t_vector		rotation_z(t_vars *cub, t_vector ray);
 void			display(t_vars *cub, int i, int j, t_dot_intersct prio_wall);
-//void			display(t_vars *cub, int i, int j, int orienta_wall);
 int				cub_loop(t_vars *cub, int argc, char **argv);
 int				parsing(t_vars *cub, char **argv);
 int				check_data(t_vars *cub, char *line, int ret);
@@ -225,5 +228,7 @@ void			move(t_vars *cub);
 void			rotate(t_vars *cub);
 int				get_textures(t_vars *cub, t_text *textures);
 unsigned int	create_trgb(int t, int r, int g, int b);
+int				init_sprite(t_vars *cub, char **world_map);
+t_dot_intersct	sprite(t_vars *cub, t_vector ray, t_dot_intersct *intersct);
 
 #endif

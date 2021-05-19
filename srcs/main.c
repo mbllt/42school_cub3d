@@ -13,14 +13,12 @@ int	cub_loop(t_vars *cub, int argc, char **argv)
 	cub->ray_c.img = mlx_new_image(cub->ray_c.mlx, cub->parsing.rx, cub->parsing.ry);
 	if (!cub->ray_c.img)
 		return(0);
-	// cub->ray_c.addr = (unsigned int *)mlx_get_data_addr(cub->ray_c.img, &cub->ray_c.bits_per_pixel, &cub->ray_c.line_length, &cub->ray_c.endian);
 		cub->ray_c.addr = mlx_get_data_addr(cub->ray_c.img, &cub->ray_c.bits_per_pixel, &cub->ray_c.line_length, &cub->ray_c.endian);
 
 	mlx_loop_hook(cub->ray_c.mlx, frame, cub);
 	mlx_hook(cub->ray_c.win, 2, 1L<<0, key_press, cub);
 	mlx_hook(cub->ray_c.win, 3, 1L<<1, key_release, cub);
 	cub->ray_c.seconde = time(NULL);
-	//cub->ray_c.fps = 0;
 	mlx_loop(cub->ray_c.mlx);
 	return (1);
 }

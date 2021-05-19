@@ -1,21 +1,5 @@
 #include "cub3D.h"
 
-// static int	init_cos_sin(t_vars *cub)
-// {
-// 	int	i;
-
-// 	cub->ray_c.cos = malloc(sizeof(float) * 360);
-// 	if (!cub->ray_c.cos)
-// 		return (0);
-// 	cub->ray_c.sin = malloc(sizeof(float) * 360);
-// 	if (!cub->ray_c.sin)
-// 		return (0);
-// 	i = -1;
-// 	while (++i <= 360)
-// 		cub->ray_c.cos[i] = cos(0.03);
-// 	return (1);
-// }
-
 static int	init_malloc_plans(t_vars *cub)
 {
 	int	i;
@@ -109,5 +93,9 @@ int	init_ray_casting(t_vars *cub)
 	cub->ray_c.pixel_color = NULL;
 	if (!(init_ray_casting2(cub)))
 		return(0);
+	cub->ray_c.nbr_sprite = 0;
+	cub->ray_c.sprite = NULL;
+	// if (!(init_sprite(cub, cub->parsing.world_map)))
+	// 	return (0);
 	return (1);
 }

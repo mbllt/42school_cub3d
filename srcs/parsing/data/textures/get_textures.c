@@ -17,7 +17,6 @@ int	get_textures(t_vars *cub, t_text *textures)
 
 	textures[0].img = mlx_xpm_file_to_image(cub->ray_c.mlx, cub->parsing.no, \
 						&textures[0].width, &textures[0].height);
-	
 	textures[1].img = mlx_xpm_file_to_image(cub->ray_c.mlx, cub->parsing.so, \
 						&textures[1].width, &textures[1].height);
 	textures[2].img = mlx_xpm_file_to_image(cub->ray_c.mlx, cub->parsing.ea, \

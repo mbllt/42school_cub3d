@@ -49,11 +49,9 @@ t_dot_intersct	check_wall_n(t_vars *cub, t_vector ray, t_dot_intersct *intersct)
 		{
 			x = (int)(*intersct).dot.x;
 			y = i - 1;
-			//printf("%f\n", (*intersct).dot.z);
 			if ((*intersct).dot.z < 1 && (*intersct).dot.z >= 0 \
 				&& (is_wall_n(cub, x, y)) == 1)
 			{
-				//printf("%d, %d\n", x, y);
 				return ((t_dot_intersct){(*intersct).dot, (*intersct).t_distance, 0});
 			}
 			else if ((*intersct).dot.z >= 1 || (*intersct).dot.z < 0)
