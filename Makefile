@@ -6,7 +6,7 @@
 #    By: mballet <mballet@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/14 14:39:52 by mballet           #+#    #+#              #
-#    Updated: 2021/05/19 19:31:07 by mballet          ###   ########lyon.fr    #
+#    Updated: 2021/05/19 20:39:33 by mballet          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,7 @@ SRCS			=	srcs/main.c \
 					srcs/init/init_ray_c_matrix.c \
 					srcs/init/init_plans.c \
 					srcs/init/init_rays.c \
+					srcs/init/init_sprite.c \
 					srcs/ray_casting/frame.c \
 					srcs/ray_casting/rotation.c \
 					srcs/ray_casting/graphical_loop.c \
@@ -28,6 +29,7 @@ SRCS			=	srcs/main.c \
 					srcs/ray_casting/check_ew.c \
 					srcs/ray_casting/check_fc.c \
 					srcs/ray_casting/keypress.c \
+					srcs/ray_casting/sprite.c \
 					srcs/gnl/get_next_line.c \
 					srcs/gnl/get_next_line_utils.c \
 					srcs/parsing/parsing.c \
