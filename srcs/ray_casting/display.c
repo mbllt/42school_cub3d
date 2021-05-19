@@ -61,6 +61,8 @@ void	display(t_vars *cub, int i, int j, t_dot_intersct prio_wall)
 
 	x = 0;
 	y = 0;
+	// if (i == 300 || i == 450 || i == 600)
+	// 	printf("%d\n", i);
 	if (prio_wall.cardinal == 0)
 	{
 		get_xy_noso(prio_wall, cub->parsing.textures[0], &x, &y);

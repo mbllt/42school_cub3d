@@ -90,7 +90,6 @@ typedef	struct s_ray
 	void		*mlx;
 	void		*win;
 	void		*img;
-	//unsigned int	*addr;
 	char		*addr;
 	int			bits_per_pixel;
 	int			line_length;
@@ -111,8 +110,6 @@ typedef	struct s_ray
 	char		*cos;
 	char		*sin;
 	char		*pixel_color;
-	t_vector	ray_temp;
-	t_multi		threading[4];
 }				t_ray;
 
 typedef struct s_parsing
@@ -146,6 +143,12 @@ typedef struct s_vars
 	t_parsing	parsing;
 }t_vars;
 
+typedef struct s_thread
+{
+	t_vars	cub;
+	int		thread_num;
+}t_thread;
+
 int				init_parsing(t_vars *cub);
 int				init_ray_casting(t_vars *cub);
 void			init_vars_rays(t_vars *cub);
@@ -160,7 +163,8 @@ int				ft_exit(t_vars *cub);
 int				key_press(int key, t_vars *cub);
 int				key_release(int key, t_vars *cub);
 int				frame(t_vars *cub);
-int				graphical_loop(t_vars *cub, int width, int height);
+//int				graphical_loop(t_vars *cub, int width, int height);;
+void			*graphical_loop(void *thread_data);
 t_vector		rotation_x(t_vars *cub, t_vector ray);
 t_vector		rotation_z(t_vars *cub, t_vector ray);
 void			display(t_vars *cub, int i, int j, t_dot_intersct prio_wall);
