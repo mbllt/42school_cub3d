@@ -1,33 +1,9 @@
 #include "cub3D.h"
 
-static void	create_plans(t_vars *cub, t_plan *plan)
+static int	intersct_sprite(t_vars *cub, t_vector ray, t_plan plan, \
+							t_dot_intersct *intersct)
 {
-	cub->ray_c.sprite->v.x = cub->ray_c.sprite->pos.x - cub->parsing.px;
-	cub->ray_c.sprite->v.y = cub->ray_c.sprite->pos.y - cub->parsing.py;
-	cub->ray_c.sprite->v.z = 0;
-	(*plan).a = cub->ray_c.sprite->v.x;
-	(*plan).b = cub->ray_c.sprite->v.y;
-	(*plan).c = cub->ray_c.sprite->v.z;
-	(*plan).d = - (cub->ray_c.sprite->v.x * cub->ray_c.sprite->pos.x) \
-				- (cub->ray_c.sprite->v.y * cub->ray_c.sprite->pos.y);
-}
-
-static int	create_plans_sprite(t_vars *cub, t_plan **plan)
-{
-	int	i;
-
-	(*plan) = malloc(sizeof(t_plan) * cub->ray_c.nbr_sprite);
-	if (!(*plan))
-		return (0);
-	i = -1;
-	while (++i < cub->ray_c.nbr_sprite)
-		create_plans(cub, &(*plan)[i]);
-	return (1);
-}
-
-static int	intersct_sprite(t_vars *cub, t_vector ray, t_plan plan, t_dot_intersct *intersct)
-{
-	float	division;
+	float		division;
 
 	division = (plan.a * ray.x) + (plan.b * ray.y);
 	if (division == 0)
@@ -41,21 +17,61 @@ static int	intersct_sprite(t_vars *cub, t_vector ray, t_plan plan, t_dot_intersc
 	return (1);
 }
 
+static int	get_r(t_vars *cub, t_dot_intersct *intersct, float *r, t_vector v)
+{
+	t_vector	u;
+	t_vector	v2;
+
+	u.x = intersct->dot.x - cub->ray_c.sprite_p->x;
+	u.y = intersct->dot.y - cub->ray_c.sprite_p->y;
+	u.z = 0;
+	v2.x = v.y;
+	v2.y = - v.x;
+	v2.z = 0;
+	normalisation_v(&v2);
+	*r = (u.x * v2.x) + (u.y * v2.y) + (u.z * v2.z) + 0.5;
+	return (1);
+}
+
+static int	is_sprite(t_vars *cub, t_dot_intersct *intersct)
+{
+	int	x;
+	int	y;
+
+	x = (int)intersct->dot.x;
+	y = (int)intersct->dot.y;
+	if (x >= 0 && x < cub->parsing.map_x \
+		&& y >= 0 && y < cub->parsing.map_y \
+		&& cub->parsing.world_map[y][x] == '2')
+	{
+		return (1);
+	}
+	return (0);
+}
+
 int	sprite(t_vars *cub, t_vector ray, t_dot_intersct *intersct)
 {
-	t_plan			*plan;
-	t_dot_intersct	*temp;
-	int				i;
+	int			i;
+	float		r;
 
-	(void)intersct;
-	if (!(create_plans_sprite(cub, &plan)))
-		return (0);
-	i = -1;
-	temp = malloc(sizeof(t_dot_intersct) * cub->ray_c.nbr_sprite);
-	if (!temp)
-		return (0);
-	while (++i < cub->ray_c.nbr_sprite)
-		if (!(intersct_sprite(cub, ray, plan[i], &temp[i])))
-			continue;
+	i = 0;
+	while (i < cub->ray_c.nbr_sprite)
+	{
+		if ((intersct_sprite(cub, ray, cub->ray_c.plans_sprite[i], intersct)) \
+			== 1 && get_r(cub, intersct, &r, cub->ray_c.v) == 1)
+		{
+			if (r >= 0 && r < 1 && is_sprite(cub, intersct) == 1)
+			{
+				intersct->cardinal = 6;
+				break;
+			}
+			else if (r < 0 || r >= 1)
+			{
+				intersct->cardinal = -1;
+				break;
+			}
+		}
+		i++;
+	}
 	return (1);
 }

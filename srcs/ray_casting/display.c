@@ -89,6 +89,8 @@ void	display(t_vars *cub, int i, int j, t_dot_intersct prio_wall)
 		my_mlx_pixel_put(cub, i, j, cub->parsing.ff);
 	else if (prio_wall.cardinal == C)
 		my_mlx_pixel_put(cub, i, j, cub->parsing.cc);
+	else if (prio_wall.cardinal == SPRITE)
+		my_mlx_pixel_put(cub, i, j, (unsigned int)"255,0,0");
 	else
 	{
 		// printf("%d, %d\n", i, j);

@@ -25,7 +25,7 @@ int	ft_exit(t_vars *cub)
 	return (0);
 }
 
-static int	multithread(t_vars *cub)
+int	multithread(t_vars *cub)
 {
 	pthread_t	threads[4];
 	t_thread	thread_data[4];
@@ -47,15 +47,6 @@ static int	multithread(t_vars *cub)
 
 int	frame(t_vars *cub)
 {
-	// //cub->ray_c.seconde = time(NULL);
-	// if (cub->ray_c.seconde == time(NULL))
-	// 	cub->ray_c.fps++;
-	// else
-	// {
-	// 	//printf("fps : %d\n", cub->ray_c.fps);
-	// 	cub->ray_c.fps = 0;
-	// }
-
 	move(cub);
 	rotate(cub);
 	if (cub->ray_c.key.exit == 1)
@@ -63,8 +54,8 @@ int	frame(t_vars *cub)
 		ft_exit(cub);
 		return (0);
 	}
-	// if (!(graphical_loop(cub, cub->parsing.rx, cub->parsing.ry)))
-	// 	return (-1);
+	if (!(create_plans_sprite(cub, &cub->ray_c.plans_sprite, &cub->ray_c.v)))
+		return (0);
 	mlx_sync(MLX_SYNC_WIN_CMD_COMPLETED, cub->ray_c.win);
 	mlx_sync(MLX_SYNC_IMAGE_WRITABLE, cub->ray_c.img);
 	mlx_do_sync(cub->ray_c.mlx);

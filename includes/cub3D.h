@@ -28,6 +28,7 @@ typedef enum e_dir
 	WEST,
 	F,
 	C,
+	SPRITE,
 }t_dir;
 
 typedef	struct s_direction
@@ -87,15 +88,6 @@ typedef struct s_text
 	int		endian;
 }t_text;
 
-typedef struct s_sprite
-{
-	t_vector		pos;
-	t_vector		dot;
-	float			distance;
-	t_dot_intersct	prio;
-	t_vector		v;
-}t_sprite;
-
 typedef	struct s_ray
 {
 	float		fov;
@@ -125,7 +117,9 @@ typedef	struct s_ray
 	char		*sin;
 	char		*pixel_color;
 	int			nbr_sprite;
-	t_sprite	*sprite;
+	t_vector	*sprite_p;
+	t_vector	v;
+	t_plan		*plans_sprite;
 }				t_ray;
 
 typedef struct s_parsing
@@ -235,5 +229,8 @@ t_dot_intersct	check_sprite_s(t_vars *cub, t_vector ray, t_dot_intersct *intersc
 t_dot_intersct	check_sprite_e(t_vars *cub, t_vector ray, t_dot_intersct *intersct);
 t_dot_intersct	check_sprite_w(t_vars *cub, t_vector ray, t_dot_intersct *intersct);
 void			normalisation_v(t_vector *v);
+float			norm_v(t_vector *v);
+int				multithread(t_vars *cub);
+int				create_plans_sprite(t_vars *cub, t_plan **plan, t_vector *v);
 
 #endif

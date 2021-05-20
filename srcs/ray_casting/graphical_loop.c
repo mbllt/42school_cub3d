@@ -16,7 +16,7 @@ static t_dot_intersct	compare_distance(t_dot_intersct *intersct)
 	temp.t_distance = -1;
 	temp.cardinal = 5;
 	i = -1;
-	while (++i < 6)
+	while (++i < 7)
 	{
 		if (intersct[i].t_distance >= 0 && intersct[i].cardinal != -1  && (temp.t_distance == -1 || intersct[i].t_distance < temp.t_distance))
 		{
@@ -31,7 +31,7 @@ static void	init_intersct(t_dot_intersct intersct[])
 	int i;
 
 	i = 0;
-	while (i < 6)
+	while (i < 7)
 	{
 		intersct[i].dot = (t_vector){0, 0, 0};
 		intersct[i].t_distance = -1;
