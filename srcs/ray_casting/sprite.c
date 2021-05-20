@@ -1,6 +1,6 @@
 #include "cub3D.h"
 
-static void	create_plans(t_vars *cub, t_plan *plan, t_vector ray)
+static void	create_plans(t_vars *cub, t_plan *plan)
 {
 	cub->ray_c.sprite->v.x = cub->ray_c.sprite->pos.x - cub->parsing.px;
 	cub->ray_c.sprite->v.y = cub->ray_c.sprite->pos.y - cub->parsing.py;
@@ -12,7 +12,7 @@ static void	create_plans(t_vars *cub, t_plan *plan, t_vector ray)
 				- (cub->ray_c.sprite->v.y * cub->ray_c.sprite->pos.y);
 }
 
-static int	create_plans_sprite(t_vars *cub, t_plan **plan, t_vector ray)
+static int	create_plans_sprite(t_vars *cub, t_plan **plan)
 {
 	int	i;
 
@@ -21,7 +21,7 @@ static int	create_plans_sprite(t_vars *cub, t_plan **plan, t_vector ray)
 		return (0);
 	i = -1;
 	while (++i < cub->ray_c.nbr_sprite)
-		create_plans(cub, &(*plan)[i], ray);
+		create_plans(cub, &(*plan)[i]);
 	return (1);
 }
 
@@ -41,14 +41,14 @@ static int	intersct_sprite(t_vars *cub, t_vector ray, t_plan plan, t_dot_intersc
 	return (1);
 }
 
-
 int	sprite(t_vars *cub, t_vector ray, t_dot_intersct *intersct)
 {
 	t_plan			*plan;
 	t_dot_intersct	*temp;
 	int				i;
 
-	if (!(create_plans_sprite(cub, &plan, ray)))
+	(void)intersct;
+	if (!(create_plans_sprite(cub, &plan)))
 		return (0);
 	i = -1;
 	temp = malloc(sizeof(t_dot_intersct) * cub->ray_c.nbr_sprite);

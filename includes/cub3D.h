@@ -234,5 +234,6 @@ t_dot_intersct	check_sprite_n(t_vars *cub, t_vector ray, t_dot_intersct *intersc
 t_dot_intersct	check_sprite_s(t_vars *cub, t_vector ray, t_dot_intersct *intersct);
 t_dot_intersct	check_sprite_e(t_vars *cub, t_vector ray, t_dot_intersct *intersct);
 t_dot_intersct	check_sprite_w(t_vars *cub, t_vector ray, t_dot_intersct *intersct);
+void			normalisation_v(t_vector *v);
 
 #endif
