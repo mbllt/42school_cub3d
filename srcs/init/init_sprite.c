@@ -7,7 +7,7 @@ static t_sprite	*ft_realloc_sprite(t_sprite *sprite, int size_src, int size_dst)
 
 	if (!(sprite))
 		return (NULL);
-	if (!(temp = malloc(sizeof(t_sprite *) * size_dst)))
+	if (!(temp = malloc(sizeof(t_sprite) * size_dst)))
 		return (NULL);
 	i = 0;
 	while (i < size_src)
@@ -26,7 +26,7 @@ int	init_sprite(t_vars *cub, char **world_map)
 	int	y;
 	int	i;
 
-	i = 0;
+	i = 1;
 	y = -1;
 	while (++y < cub->parsing.map_y)
 	{
@@ -35,15 +35,17 @@ int	init_sprite(t_vars *cub, char **world_map)
 		{
 			if (world_map[y][x] == '2')
 			{
-				if (++i == 1)
-					cub->ray_c.sprite = malloc(sizeof(t_sprite *) * i);
+				if (i == 1)
+					cub->ray_c.sprite = malloc(sizeof(t_sprite) * i);
+				if (!cub->ray_c.sprite)
+					return (0);
 				else
 					cub->ray_c.sprite = ft_realloc_sprite(cub->ray_c.sprite, i - 1, i);
 				if (!cub->ray_c.sprite)
 					return (0);
-				cub->ray_c.sprite[i - 1].pos.y = y;
-				cub->ray_c.sprite[i - 1].pos.x = x;
-				cub->ray_c.sprite[i - 1].pos.z = 0.5;
+				cub->ray_c.sprite[i - 1].pos.y = y + 0.5;
+				cub->ray_c.sprite[i - 1].pos.x = x + 0.5;
+				i++;
 			}
 		}
 	}

@@ -93,7 +93,7 @@ typedef struct s_sprite
 	t_vector		dot;
 	float			distance;
 	t_dot_intersct	prio;
-
+	t_vector		v;
 }t_sprite;
 
 typedef	struct s_ray
@@ -229,6 +229,10 @@ void			rotate(t_vars *cub);
 int				get_textures(t_vars *cub, t_text *textures);
 unsigned int	create_trgb(int t, int r, int g, int b);
 int				init_sprite(t_vars *cub, char **world_map);
-t_dot_intersct	sprite(t_vars *cub, t_vector ray, t_dot_intersct *intersct);
+int				sprite(t_vars *cub, t_vector ray, t_dot_intersct *intersct);
+t_dot_intersct	check_sprite_n(t_vars *cub, t_vector ray, t_dot_intersct *intersct);
+t_dot_intersct	check_sprite_s(t_vars *cub, t_vector ray, t_dot_intersct *intersct);
+t_dot_intersct	check_sprite_e(t_vars *cub, t_vector ray, t_dot_intersct *intersct);
+t_dot_intersct	check_sprite_w(t_vars *cub, t_vector ray, t_dot_intersct *intersct);
 
 #endif

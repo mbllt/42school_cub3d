@@ -95,7 +95,7 @@ int	init_ray_casting(t_vars *cub)
 		return(0);
 	cub->ray_c.nbr_sprite = 0;
 	cub->ray_c.sprite = NULL;
-	// if (!(init_sprite(cub, cub->parsing.world_map)))
-	// 	return (0);
+	if (!(init_sprite(cub, cub->parsing.world_map)))
+		return (0);
 	return (1);
 }

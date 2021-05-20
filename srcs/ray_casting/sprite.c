@@ -1,21 +1,18 @@
 #include "cub3D.h"
 
-static void	create_plans(t_vars *cub, t_plan *plan)
+static void	create_plans(t_vars *cub, t_plan *plan, t_vector ray)
 {
-	t_vector	normal;
-
-	normal.x = (cub->ray_c.sprite->pos.x + 0.5) - cub->parsing.px;
-	normal.y = (cub->ray_c.sprite->pos.y + 0.5) - cub->parsing.py;
-	normal.z = 0;
-	(*plan).a = normal.x;
-	(*plan).b = normal.y;
-	(*plan).c = normal.z;
-	(*plan).d = - (normal.x * (cub->ray_c.sprite->pos.x + 0.5)) \
-				- (normal.y * (cub->ray_c.sprite->pos.y + 0.5)) \
-				- (normal.z * cub->ray_c.sprite->pos.z);
+	cub->ray_c.sprite->v.x = cub->ray_c.sprite->pos.x - cub->parsing.px;
+	cub->ray_c.sprite->v.y = cub->ray_c.sprite->pos.y - cub->parsing.py;
+	cub->ray_c.sprite->v.z = 0;
+	(*plan).a = cub->ray_c.sprite->v.x;
+	(*plan).b = cub->ray_c.sprite->v.y;
+	(*plan).c = cub->ray_c.sprite->v.z;
+	(*plan).d = - (cub->ray_c.sprite->v.x * cub->ray_c.sprite->pos.x) \
+				- (cub->ray_c.sprite->v.y * cub->ray_c.sprite->pos.y);
 }
 
-static int	create_plans_sprite(t_vars *cub, t_plan **plan)
+static int	create_plans_sprite(t_vars *cub, t_plan **plan, t_vector ray)
 {
 	int	i;
 
@@ -24,40 +21,41 @@ static int	create_plans_sprite(t_vars *cub, t_plan **plan)
 		return (0);
 	i = -1;
 	while (++i < cub->ray_c.nbr_sprite)
-		create_plans(cub, plan[i]);
+		create_plans(cub, &(*plan)[i], ray);
 	return (1);
 }
 
-// static t_dot_intersct	compare_t(t_dot_intersct *intersct)
-// {}
+static int	intersct_sprite(t_vars *cub, t_vector ray, t_plan plan, t_dot_intersct *intersct)
+{
+	float	division;
 
-t_dot_intersct	sprite(t_vars *cub, t_vector ray, t_dot_intersct *intersct)
+	division = (plan.a * ray.x) + (plan.b * ray.y);
+	if (division == 0)
+		return (0);
+	(*intersct).t_distance = - ((plan.a * cub->parsing.px) \
+							+ (plan.b * cub->parsing.py) + plan.d);
+	(*intersct).t_distance /= division;
+	if ((*intersct).t_distance < 0)
+		return (0);
+	intersct_dot(cub, ray, intersct);
+	return (1);
+}
+
+
+int	sprite(t_vars *cub, t_vector ray, t_dot_intersct *intersct)
 {
 	t_plan			*plan;
-	//t_dot_intersct	temp[4];
-	//t_dot_intersct	prio;
+	t_dot_intersct	*temp;
+	int				i;
 
-	(void)intersct;
-	(void)ray;
-	if (!(create_plans_sprite(cub, &plan)))
-		return ((t_dot_intersct){(t_vector){0,0,0},0,0});
-	//printf("%f\n", plan[0].d);
-	// if (ray.y < 0)
-	// {	
-	// 	intersct[0] = check_sprite(cub, ray, &intersct[0]);
-	// }
-	// if (ray.y > 0)
-	// {
-	// 	intersct[1] = chech_sprite(cub, ray, &intersct[1]);
-	// }
-	// if (ray.x > 0)
-	// {
-	// 	intersct[2] = chech_sprite(cub, ray, &intersct[2]);
-	// }
-	// if (ray.x < 0)
-	// {
-	// 	intersct[3] = chech_sprite(cub, ray, &intersct[3]);
-	// }
-	// prio = compare_t(intersct);
-	return ((t_dot_intersct){(t_vector){0,0,0},0,0});
+	if (!(create_plans_sprite(cub, &plan, ray)))
+		return (0);
+	i = -1;
+	temp = malloc(sizeof(t_dot_intersct) * cub->ray_c.nbr_sprite);
+	if (!temp)
+		return (0);
+	while (++i < cub->ray_c.nbr_sprite)
+		if (!(intersct_sprite(cub, ray, plan[i], &temp[i])))
+			continue;
+	return (1);
 }
