@@ -51,6 +51,7 @@ typedef struct s_dot_intersct
 	t_vector	dot;
 	float		t_distance;
 	int			cardinal;
+	t_vector	ray;
 }t_dot_intersct;
 
 typedef struct s_plan
@@ -175,7 +176,7 @@ int				frame(t_vars *cub);
 void			*graphical_loop(void *thread_data);
 t_vector		rotation_x(t_vars *cub, t_vector ray);
 t_vector		rotation_z(t_vars *cub, t_vector ray);
-void			display(t_vars *cub, int i, int j, t_dot_intersct prio_wall);
+void			display(t_vars *cub, int i, int j, t_dot_intersct prio_wall, float *r);
 int				cub_loop(t_vars *cub, int argc, char **argv);
 int				parsing(t_vars *cub, char **argv);
 int				check_data(t_vars *cub, char *line, int ret);
@@ -223,14 +224,15 @@ void			rotate(t_vars *cub);
 int				get_textures(t_vars *cub, t_text *textures);
 unsigned int	create_trgb(int t, int r, int g, int b);
 int				init_sprite(t_vars *cub, char **world_map);
-int				sprite(t_vars *cub, t_vector ray, t_dot_intersct *intersct);
+int				sprite(t_vars *cub, t_vector ray, t_dot_intersct *intersct, float *r);
 t_dot_intersct	check_sprite_n(t_vars *cub, t_vector ray, t_dot_intersct *intersct);
 t_dot_intersct	check_sprite_s(t_vars *cub, t_vector ray, t_dot_intersct *intersct);
 t_dot_intersct	check_sprite_e(t_vars *cub, t_vector ray, t_dot_intersct *intersct);
 t_dot_intersct	check_sprite_w(t_vars *cub, t_vector ray, t_dot_intersct *intersct);
-void			normalisation_v(t_vector *v);
-float			norm_v(t_vector *v);
+t_vector		normalisation_v(t_vector v);
+float			norm_v(t_vector v);
 int				multithread(t_vars *cub);
 int				create_plans_sprite(t_vars *cub, t_plan **plan, t_vector *v);
+unsigned int	get_pixel(t_text texture, int x, int y);
 
 #endif

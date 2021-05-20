@@ -23,15 +23,14 @@ int	get_textures(t_vars *cub, t_text *textures)
 						&textures[2].width, &textures[2].height);
 	textures[3].img = mlx_xpm_file_to_image(cub->ray_c.mlx, cub->parsing.we, \
 						&textures[3].width, &textures[3].height);
-	textures[4].img = mlx_xpm_file_to_image(cub->ray_c.mlx, cub->parsing.we, \
+	textures[4].img = mlx_xpm_file_to_image(cub->ray_c.mlx, cub->parsing.s, \
 						&textures[4].width, &textures[4].height);
 	i = -1;
 	while (++i < 5)
 	{
 		if (!(textures[i].img))
 		{
-			//printf("%d\n", i);
-			write(1, "Error : textures\n", 18);
+			write(1, "\nError : textures\n", 19);
 			return (0);
 		}
 	}

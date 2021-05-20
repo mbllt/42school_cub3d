@@ -52,16 +52,16 @@ t_dot_intersct	check_wall_n(t_vars *cub, t_vector ray, t_dot_intersct *intersct)
 			if ((*intersct).dot.z < 1 && (*intersct).dot.z >= 0 \
 				&& (is_wall_n(cub, x, y)) == 1)
 			{
-				return ((t_dot_intersct){(*intersct).dot, (*intersct).t_distance, 0});
+				return ((t_dot_intersct){(*intersct).dot, (*intersct).t_distance, 0, ray});
 			}
 			else if ((*intersct).dot.z >= 1 || (*intersct).dot.z < 0)
 			{
-				return ((t_dot_intersct){(*intersct).dot, (*intersct).t_distance, -1});
+				return ((t_dot_intersct){(*intersct).dot, (*intersct).t_distance, -1, ray});
 			}
 		}
 		i--;
 	}
-	return ((t_dot_intersct){(t_vector){0, 0, 0}, -1, -1});
+	return ((t_dot_intersct){(t_vector){0, 0, 0}, -1, -1, ray});
 }
 
 static int	is_wall_s(t_vars *cub, int x, int y)
@@ -103,14 +103,14 @@ t_dot_intersct	check_wall_s(t_vars *cub, t_vector ray, t_dot_intersct *intersct)
 			if ((*intersct).dot.z < 1 && (*intersct).dot.z >= 0 \
 				&& (is_wall_s(cub, x, y)) == 1)
 			{
-				return ((t_dot_intersct){(*intersct).dot, (*intersct).t_distance, 1});
+				return ((t_dot_intersct){(*intersct).dot, (*intersct).t_distance, 1, ray});
 			}
 			else if ((*intersct).dot.z >= 1 || (*intersct).dot.z < 0)
 			{
-				return ((t_dot_intersct){(*intersct).dot, (*intersct).t_distance, -1});
+				return ((t_dot_intersct){(*intersct).dot, (*intersct).t_distance, -1, ray});
 			}
 		}
 		i++;
 	}
-	return ((t_dot_intersct){(t_vector){0, 0, 0}, -1, -1});
+	return ((t_dot_intersct){(t_vector){0, 0, 0}, -1, -1, ray});
 }

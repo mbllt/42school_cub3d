@@ -6,7 +6,7 @@
 #    By: mballet <mballet@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/14 14:39:52 by mballet           #+#    #+#              #
-#    Updated: 2021/05/20 16:22:32 by mballet          ###   ########lyon.fr    #
+#    Updated: 2021/05/20 18:42:43 by mballet          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,7 @@ EXE				=	cub3D
 
 SRCS			=	srcs/main.c \
 					srcs/utils.c \
+					srcs/utils2.c \
 					srcs/init/init_parsing.c \
 					srcs/init/init_ray_casting.c \
 					srcs/init/init_ray_c_rays.c \
@@ -80,7 +81,6 @@ $(MLX):
 				@mv $(FILEMLX)/$(MLX) .
 
 clean:
-				$(MAKE) -C$(FILEMLX) clean -s
 				$(RM) $(OBJS)
 
 fclean:		clean

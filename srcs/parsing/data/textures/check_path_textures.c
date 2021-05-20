@@ -37,6 +37,8 @@ static void	get_path(t_vars *cub, char *str, int cardinal)
 		i = 3;
 	if (cardinal == 4)
 		i = 2;
+	while(str[i] && str[i] == ' ')
+		i++;
 	size = ft_strlen(str) - i;
 	if (cardinal == NORTH)
 		ft_cpyy(&cub->parsing.no, str, size, i);

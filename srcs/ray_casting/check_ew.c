@@ -50,15 +50,15 @@ t_dot_intersct	check_wall_e(t_vars *cub, t_vector ray, t_dot_intersct *intersct)
 			y = (int)(*intersct).dot.y;
 			if ((*intersct).dot.z < 1 && (*intersct).dot.z >= 0 \
 				&& (is_wall_e(cub, x, y)) == 1)
-				return ((t_dot_intersct){(*intersct).dot, (*intersct).t_distance, 2});
+				return ((t_dot_intersct){(*intersct).dot, (*intersct).t_distance, 2, ray});
 			else if ((*intersct).dot.z >= 1 || (*intersct).dot.z < 0)
 			{
-				return ((t_dot_intersct){(*intersct).dot, (*intersct).t_distance, -1});
+				return ((t_dot_intersct){(*intersct).dot, (*intersct).t_distance, -1, ray});
 			}
 		}
 		i++;
 	}
-	return ((t_dot_intersct){(t_vector){0, 0, 0}, -1, -1});
+	return ((t_dot_intersct){(t_vector){0, 0, 0}, -1, -1, ray});
 }
 
 static int	is_wall_w(t_vars *cub, int x, int y)
@@ -99,14 +99,14 @@ t_dot_intersct	check_wall_w(t_vars *cub, t_vector ray, t_dot_intersct *intersct)
 			if ((*intersct).dot.z < 1 && (*intersct).dot.z >= 0 \
 				&& (is_wall_w(cub, x, y)) == 1)
 			{
-				return ((t_dot_intersct){(*intersct).dot, (*intersct).t_distance, 3});
+				return ((t_dot_intersct){(*intersct).dot, (*intersct).t_distance, 3, ray});
 			}
 			else if ((*intersct).dot.z >= 1 || (*intersct).dot.z < 0)
 			{
-				return ((t_dot_intersct){(*intersct).dot, (*intersct).t_distance, -1});
+				return ((t_dot_intersct){(*intersct).dot, (*intersct).t_distance, -1, ray});
 			}
 		}
 		i--;
 	}
-	return ((t_dot_intersct){(t_vector){0, 0, 0}, -1, -1});
+	return ((t_dot_intersct){(t_vector){0, 0, 0}, -1, -1, ray});
 }
