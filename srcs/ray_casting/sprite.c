@@ -1,19 +1,5 @@
 #include "cub3D.h"
 
-static void	init(t_vars *cub, t_sprite **sprite)
-{
-	int	i;
-
-	i = 0;
-	while (i < cub->ray_c.nbr_sprite)
-	{
-		(*sprite)[i].dot = (t_vector){0,0,0};
-		(*sprite)[i].distance = 0;
-		(*sprite)[i].ray = (t_vector){0,0,0};
-		i++;
-	}
-}
-
 static int	intersct_sprite(t_vars *cub, t_vector ray, t_plan plan, \
 							t_dot_intersct *intersct)
 {
@@ -51,7 +37,7 @@ static float	get_r(t_vars *cub, t_dot_intersct *intersct, int i)
 	return (r);
 }
 
-t_dot_intersct	compare_sprite(t_vars *cub, t_sprite *sprite)
+t_dot_intersct	compare_sprite(t_vars *cub, t_dot_intersct *sprite)
 {
 	t_dot_intersct	temp;
 	int	i;
@@ -63,29 +49,47 @@ t_dot_intersct	compare_sprite(t_vars *cub, t_sprite *sprite)
 	while (i < cub->ray_c.nbr_sprite)
 	{
 		//printf("%d\n", i);
-		if (sprite[i].distance > 0 && (temp.t_distance == -1 \
-			|| sprite[i].distance < temp.t_distance))
+		if (sprite[i].t_distance >= 0 && (temp.t_distance == -1 \
+			|| sprite[i].t_distance < temp.t_distance))
 		{
 			//printf("%d, %f\n", i, sprite[i].distance);
-			temp.t_distance = sprite[i].distance;
+			temp.t_distance = sprite[i].t_distance;
 			temp.dot.x = sprite[i].dot.x;
 			temp.dot.y = sprite[i].dot.y;
 			temp.dot.z = sprite[i].dot.z;
+			temp.cardinal = 6;
 		}
 		i++;
 	}
-	temp.cardinal = 6;
 	//printf("%f\n", temp.t_distance);
 	return (temp);
+}
+
+static void	init(t_vars *cub, t_dot_intersct *sprite)
+{
+	int i;
+
+	i = 0;
+	while (i < cub->ray_c.nbr_sprite)
+	{
+		sprite[i].dot = (t_vector){0, 0, 0};
+		sprite[i].t_distance = -1;
+		sprite[i].cardinal = -1;
+		i++;
+	}
 }
 
 t_dot_intersct	sprite(t_vars *cub, t_vector ray, t_dot_intersct *intersct, \
 						float *r)
 {
 	int				i;
+	t_dot_intersct	*sprite;
 	t_dot_intersct	temp;
 
-	init(cub, &cub->ray_c.sprite);
+	sprite = malloc(sizeof(t_dot_intersct) * cub->ray_c.nbr_sprite);
+	if (!sprite)
+		return ((t_dot_intersct){(t_vector){0,0,0}, 0, -10, (t_vector){0,0,0}});
+	init(cub, sprite);
 	i = 0;
 	while (i < cub->ray_c.nbr_sprite)
 	{
@@ -96,11 +100,11 @@ t_dot_intersct	sprite(t_vars *cub, t_vector ray, t_dot_intersct *intersct, \
 			if ((*intersct).dot.z < 1 && (*intersct).dot.z >= 0 \
 				&& *r >= 0 && *r < 1)
 			{
-				cub->ray_c.sprite[i].dot.x = (*intersct).dot.x;
-				cub->ray_c.sprite[i].dot.y = (*intersct).dot.y;
-				cub->ray_c.sprite[i].dot.z = (*intersct).dot.z;
-				cub->ray_c.sprite[i].distance = (*intersct).t_distance;
-				cub->ray_c.sprite[i].ray = (*intersct).ray;
+				sprite[i].dot.x = (*intersct).dot.x;
+				sprite[i].dot.y = (*intersct).dot.y;
+				sprite[i].dot.z = (*intersct).dot.z;
+				sprite[i].t_distance = (*intersct).t_distance;
+				sprite[i].ray = (*intersct).ray;
 				//printf("%i, %f\n", i, cub->ray_c.sprite[i].distance);
 
 			}
@@ -112,7 +116,9 @@ t_dot_intersct	sprite(t_vars *cub, t_vector ray, t_dot_intersct *intersct, \
 		}
 		i++;
 	}
-	temp = compare_sprite(cub, cub->ray_c.sprite);
+	temp = compare_sprite(cub, sprite);
 	//printf("%f\n", temp.t_distance);
+	if (sprite)
+		free(sprite);
 	return (temp);
 }

@@ -96,9 +96,6 @@ typedef struct s_sprite
 	t_vector	v;
 	t_vector	v2;
 	float		sprite_front;
-	t_vector	dot;
-	t_vector	ray;
-	float		distance;
 }t_sprite;
 
 

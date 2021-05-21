@@ -66,6 +66,8 @@ static int	check_direction(t_vars *cub, t_dot_intersct intersct[], \
 	intersct[4] = check_wall_f(cub, ray, &intersct[4]);
 	intersct[5] = check_wall_c(cub, ray, &intersct[5]);
 	intersct[6] = sprite(cub, ray, &intersct[6], r);
+	if (intersct[6].cardinal == -10)
+		return (0);
 	return (1);
 }
 
@@ -125,11 +127,11 @@ void	*graphical_loop(void *thread_data)
 // 			ray_temp = rotation_x(cub, ray_temp);
 // 			ray_temp = rotation_z(cub, ray_temp);
 // 			r = 0;
-// 			if (!(check_direction(cub, intersct, ray_temp, &r, i, j)))
+// 			if (!(check_direction(cub, intersct, ray_temp, &r)))
 // 				return (0);
 // 			prio = compare_distance(intersct);
 // 			prio.ray = ray_temp;
-// 			display(&(->cub, i, j, prio, &r);
+// 			display(cub, i, j, prio, r);
 // 			j++;
 // 		}
 // 		i++;
