@@ -42,5 +42,8 @@ int	init_plans(t_vars *cub)
 		return (0);
 	cub->ray_c.plans[4][0] = (t_plan){0, 0, 1, 0};
 	cub->ray_c.plans[5][0] = (t_plan){0, 0, 1, -1};
+	// if (cub->ray_c.nbr_sprite != 0)
+	// for (int i = 0;i < cub->parsing.map_x;i++)
+	// 	printf("sprite[%d] = x :%f, y :%f || %d\n", i, cub->ray_c.plans[i].pos.x, cub->ray_c.sprite[i].pos.y, cub->ray_c.nbr_sprite);
 	return (1);
 }
