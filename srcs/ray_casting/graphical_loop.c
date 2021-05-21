@@ -40,7 +40,7 @@ static void	init_intersct(t_dot_intersct intersct[])
 	}
 }
 
-static int	check_direction(t_vars *cub, t_dot_intersct intersct[], t_vector ray, float *r)
+static int	check_direction(t_vars *cub, t_dot_intersct intersct[], t_vector ray, float *r, int i, int j)
 {
 	if (ray.y < 0)
 	{	
@@ -60,7 +60,7 @@ static int	check_direction(t_vars *cub, t_dot_intersct intersct[], t_vector ray,
 	}
 	intersct[4] = check_wall_f(cub, ray, &intersct[4]);
 	intersct[5] = check_wall_c(cub, ray, &intersct[5]);
-	if (!(sprite(cub, ray, &intersct[6], r)))
+	if (!(sprite(cub, ray, &intersct[6], r, i, j)))
 	{
 		return(0);
 	}
@@ -90,7 +90,7 @@ void	*graphical_loop(void *thread_data)
 			ray_temp = rotation_x(&((t_thread*)thread_data)->cub, ray_temp);
 			ray_temp = rotation_z(&((t_thread*)thread_data)->cub, ray_temp);
 			r = 0;
-			if (!(check_direction(&((t_thread*)thread_data)->cub, intersct, ray_temp, &r)))
+			if (!(check_direction(&((t_thread*)thread_data)->cub, intersct, ray_temp, &r, i, j)))
 				return ((void *)-1);
 			prio = compare_distance(intersct);
 			prio.ray = ray_temp;
@@ -101,3 +101,35 @@ void	*graphical_loop(void *thread_data)
 	}
 	return ((void *)0);
 }
+
+// int	graphical_loop(t_vars *cub)
+// {
+// 	int				i;
+// 	int				j;
+// 	t_dot_intersct	intersct[7];
+// 	t_dot_intersct	prio;
+// 	t_vector		ray_temp;
+// 	float			r;
+
+// 	init_intersct(intersct);
+// 	i = 0;
+// 	while (i < cub->parsing.ry)
+// 	{
+// 		j = 0;
+// 		while (j < cub->parsing.rx)
+// 		{
+// 			ray_temp = cub->ray_c.stock_rays[i][j];
+// 			ray_temp = rotation_x(cub, ray_temp);
+// 			ray_temp = rotation_z(cub, ray_temp);
+// 			r = 0;
+// 			if (!(check_direction(cub, intersct, ray_temp, &r, i, j)))
+// 				return (0);
+// 			prio = compare_distance(intersct);
+// 			prio.ray = ray_temp;
+// 			display(&(->cub, i, j, prio, &r);
+// 			j++;
+// 		}
+// 		i++;
+// 	}
+// 	return (1);
+// }

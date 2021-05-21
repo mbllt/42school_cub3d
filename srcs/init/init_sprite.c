@@ -1,23 +1,21 @@
 #include "cub3D.h"
 
-static t_vector	*ft_realloc_sprite(t_vector *sprite, int size_src, int size_dst)
+static int get_nbr_sprite(t_vars *cub, char **map)
 {
-	t_vector	*temp;
-	int			i;
-
-	if (!(sprite))
-		return (NULL);
-	if (!(temp = malloc(sizeof(t_vector) * size_dst)))
-		return (NULL);
-	i = 0;
-	while (i < size_src)
+	int	x;
+	int	y;
+	int	i;
+	
+	i = 1;
+	y = -1;
+	while (++y < cub->parsing.map_y)
 	{
-		temp[i] = sprite[i];
-		i++;
+		x = -1;
+		while (++x < cub->parsing.map_x)
+			if (map[y][x] == '2')
+				i++;
 	}
-	if (sprite)
-		free(sprite);
-	return (temp);
+	return (i - 1);
 }
 
 int	init_sprite(t_vars *cub, char **world_map)
@@ -26,6 +24,10 @@ int	init_sprite(t_vars *cub, char **world_map)
 	int	y;
 	int	i;
 
+	cub->ray_c.nbr_sprite = get_nbr_sprite(cub, cub->parsing.world_map);
+	cub->ray_c.sprite = malloc(sizeof(t_sprite) * cub->ray_c.nbr_sprite);
+	if (!(cub->ray_c.nbr_sprite))
+		return (0);
 	i = 1;
 	y = -1;
 	while (++y < cub->parsing.map_y)
@@ -35,23 +37,14 @@ int	init_sprite(t_vars *cub, char **world_map)
 		{
 			if (world_map[y][x] == '2')
 			{
-				if (i == 1)
-					cub->ray_c.sprite_p = malloc(sizeof(t_vector) * i);
-				if (!cub->ray_c.sprite_p)
-					return (0);
-				else
-					cub->ray_c.sprite_p = ft_realloc_sprite(cub->ray_c.sprite_p, i - 1, i);
-				if (!cub->ray_c.sprite_p)
-					return (0);
-				cub->ray_c.sprite_p[i - 1].y = y + 0.5;
-				cub->ray_c.sprite_p[i - 1].x = x + 0.5;
+				cub->ray_c.sprite[i - 1].pos.y = y + 0.5;
+				cub->ray_c.sprite[i - 1].pos.x = x + 0.5;
 				i++;
 			}
 		}
 	}
-	cub->ray_c.nbr_sprite = i - 1;
 	if (cub->ray_c.nbr_sprite != 0)
 		for (int i = 0;i < cub->ray_c.nbr_sprite;i++)
-			printf("sprite[%d] = x :%f, y :%f || %d\n", i, cub->ray_c.sprite_p[i].x, cub->ray_c.sprite_p[i].y, cub->ray_c.nbr_sprite);
+			printf("sprite[%d] = x :%f, y :%f || %d\n", i, cub->ray_c.sprite[i].pos.x, cub->ray_c.sprite[i].pos.y, cub->ray_c.nbr_sprite);
 	return (1);
 }

@@ -36,3 +36,8 @@ t_vector	normalisation_v(t_vector v)
 	v.z *= norm;
 	return (v);
 }
+
+inline float	scalaire_v(t_vector v, t_vector v2)
+{
+	return ((v.x * v2.x) + (v.y * v2.y) + (v.z * v2.z));
+}

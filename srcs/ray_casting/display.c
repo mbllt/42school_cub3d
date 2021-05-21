@@ -24,8 +24,8 @@ static void	get_xy_eawe(t_dot_intersct prio_wall, t_text text, int *x, int *y)
 
 static void	get_xy_sprite(t_dot_intersct prio_wall, t_text text, int *x, int *y, float r)
 {
-	(*x) = text.width * r;
-	(*y) = text.height * (1 - prio_wall.dot.z);
+	(*x) = text.width * (1 - r);
+	(*y) = text.height * (1 -prio_wall.dot.z);
 }
 
 void	display(t_vars *cub, int i, int j, t_dot_intersct prio_wall, float *r)

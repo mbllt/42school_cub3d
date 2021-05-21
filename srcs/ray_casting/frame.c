@@ -54,13 +54,16 @@ int	frame(t_vars *cub)
 		ft_exit(cub);
 		return (0);
 	}
-	if (!(create_plans_sprite(cub, &cub->ray_c.plans_sprite, &cub->ray_c.v)))
+	if (!(create_plans_sprite(cub)))
 		return (0);
 	mlx_sync(MLX_SYNC_WIN_CMD_COMPLETED, cub->ray_c.win);
 	mlx_sync(MLX_SYNC_IMAGE_WRITABLE, cub->ray_c.img);
 	mlx_do_sync(cub->ray_c.mlx);
 	if (!(multithread(cub)))
 		return (0);
+	// for (int i = 0;i < 4;i++)
+	// 	if (!(graphical_loop(cub)))
+	// 		return (0);
 	mlx_put_image_to_window(cub->ray_c.mlx, cub->ray_c.win, \
 							cub->ray_c.img, 0, 0);
 	mlx_sync(MLX_SYNC_WIN_FLUSH_CMD, cub->ray_c.win);
