@@ -1,4 +1,4 @@
-R 400 400
+R 800 200
 NO textures/eagle.xpm
 SO textures/purplestone.xpm
 EA textures/greystone.xpm
@@ -7,7 +7,6 @@ S   textures/barrel.xpm
 
 F textures/wood.xpm
 C textures/wood.xpm
-
 
  1111111111
  1200000001

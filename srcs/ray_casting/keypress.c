@@ -48,14 +48,10 @@ int	key_press(int key, t_vars *cub)
 
 int	key_release(int key, t_vars *cub)
 {
-	// if (time(NULL) == cub->seconde)
-	// 	cub->fps++;
-	// else
-	// 	printf("fps : %d\n", cub->fps);
-	if (key == O)
-		cub->ray_c.key.up = 0;
-	if (key == L)
-		cub->ray_c.key.down = 0;
+	// if (key == O)
+	// 	cub->ray_c.key.up = 0;
+	// if (key == L)
+	// 	cub->ray_c.key.down = 0;
 	if (key == W)
 		cub->ray_c.key.forward = 0;
 	if (key == S)
@@ -72,8 +68,6 @@ int	key_release(int key, t_vars *cub)
 		cub->ray_c.key.rot_x_left = 0;
 	if (key == KEYDOWN)
 		cub->ray_c.key.rot_x_right = 0;
-	// if (!(graphical_loop(cub, cub->parsing.rx, cub->parsing.ry)))
-	// 	return (0);
 	return (1);
 }
 
@@ -97,14 +91,14 @@ void	move(t_vars *cub)
 
 	temp_dir_ray = (t_vector){0, -1, 0};
 	temp_dir_ray = rotation_z(cub, temp_dir_ray);
-	if (cub->ray_c.key.up == 1)
-	{
-		cub->parsing.pz += MOVE_SPEED;
-	}
-	if (cub->ray_c.key.down == 1)
-	{
-		cub->parsing.pz -= MOVE_SPEED;
-	}
+	// if (cub->ray_c.key.up == 1)
+	// {
+	// 	cub->parsing.pz += MOVE_SPEED;
+	// }
+	// if (cub->ray_c.key.down == 1)
+	// {
+	// 	cub->parsing.pz -= MOVE_SPEED;
+	// }
 	if (cub->ray_c.key.forward == 1)
 	{
 		cub->parsing.px += temp_dir_ray.x * MOVE_SPEED;

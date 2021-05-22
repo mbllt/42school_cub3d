@@ -44,8 +44,5 @@ int	init_sprite(t_vars *cub, char **world_map)
 			}
 		}
 	}
-	if (cub->ray_c.nbr_sprite != 0)
-		for (int i = 0;i < cub->ray_c.nbr_sprite;i++)
-			printf("sprite[%d] = x :%f, y :%f || %d\n", i, cub->ray_c.sprite[i].pos.x, cub->ray_c.sprite[i].pos.y, cub->ray_c.nbr_sprite);
 	return (1);
 }

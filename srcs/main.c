@@ -1,4 +1,14 @@
 #include "cub3D.h"
+static int	check_argv(char *str)
+{
+	int	i;
+
+	i = ft_strlen(str);
+	if (str[i - 1] != 'b' || str[i - 2] != 'u' || str[i - 3] != 'c' \
+		|| str[i - 4] != '.')
+		return (0);
+	return (1);
+}
 
 int	cub_loop(t_vars *cub, int argc, char **argv)
 {
@@ -20,6 +30,7 @@ int	cub_loop(t_vars *cub, int argc, char **argv)
 	mlx_loop_hook(cub->ray_c.mlx, frame, cub);
 	mlx_hook(cub->ray_c.win, 2, 1L<<0, key_press, cub);
 	mlx_hook(cub->ray_c.win, 3, 1L<<1, key_release, cub);
+	mlx_hook(cub->ray_c.win, 17, 1L<<5, ft_exit, cub);
 	cub->ray_c.seconde = time(NULL);
 	mlx_loop(cub->ray_c.mlx);
 	return (1);
@@ -38,7 +49,7 @@ int	main(int argc, char **argv)
 	init_rays(&cub, cub.parsing.rx, cub.parsing.ry);
 	if (!(init_plans(&cub)))
 		return (0);
-	if (argc == 2/* || (argc == 3 && save(argc, argv) */)
+	if (argc == 2 && check_argv(argv[1]) == 1/* || (argc == 3 && save(argc, argv) */)
 	{
 		if (!(cub_loop(&cub, argc, argv)))
 			return(-1);
