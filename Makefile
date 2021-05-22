@@ -6,7 +6,7 @@
 #    By: mballet <mballet@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/14 14:39:52 by mballet           #+#    #+#              #
-#    Updated: 2021/05/22 17:37:06 by mballet          ###   ########lyon.fr    #
+#    Updated: 2021/05/22 17:52:46 by mballet          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,7 @@ EXE				=	cub3D
 SRCS			=	srcs/main.c \
 					srcs/utils.c \
 					srcs/utils2.c \
+					srcs/ft_exit.c \
 					srcs/init/init_parsing.c \
 					srcs/init/init_ray_casting.c \
 					srcs/init/init_ray_c_rays.c \
@@ -40,10 +41,9 @@ SRCS			=	srcs/main.c \
 					srcs/parsing/utils3.c \
 					srcs/parsing/utils4.c \
 					srcs/parsing/data/check_data.c \
-					srcs/parsing/data/res_colors/check_res_color.c \
-					srcs/parsing/data/res_colors/resolution.c \
+					srcs/parsing/data/check_res.c \
+					srcs/parsing/data/resolution.c \
 					srcs/parsing/data/textures/check_path_textures.c \
-					srcs/parsing/data/textures/get_path_nsew.c \
 					srcs/parsing/data/textures/get_textures.c \
 					srcs/parsing/map/ft_map.c \
 					srcs/parsing/map/check_world_map.c \

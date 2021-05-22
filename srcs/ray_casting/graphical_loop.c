@@ -106,35 +106,3 @@ void	*graphical_loop(void *thread_data)
 	}
 	return ((void *)0);
 }
-
-// int	graphical_loop(t_vars *cub)
-// {
-// 	int				i;
-// 	int				j;
-// 	t_dot_intersct	intersct[7];
-// 	t_dot_intersct	prio;
-// 	t_vector		ray_temp;
-// 	float			r;
-
-// 	init_intersct(intersct);
-// 	i = 0;
-// 	while (i < cub->parsing.ry)
-// 	{
-// 		j = 0;
-// 		while (j < cub->parsing.rx)
-// 		{
-// 			ray_temp = cub->ray_c.stock_rays[i][j];
-// 			ray_temp = rotation_x(cub, ray_temp);
-// 			ray_temp = rotation_z(cub, ray_temp);
-// 			r = 0;
-// 			if (!(check_direction(cub, intersct, ray_temp, &r)))
-// 				return (0);
-// 			prio = compare_distance(intersct);
-// 			prio.ray = ray_temp;
-// 			display(cub, i, j, prio, r);
-// 			j++;
-// 		}
-// 		i++;
-// 	}
-// 	return (1);
-// }

@@ -1,30 +1,5 @@
 #include "cub3D.h"
 
-int	ft_exit(t_vars *cub)
-{
-	int	i;
-
-	i = -1;
-	mlx_destroy_window(cub->ray_c.mlx, cub->ray_c.win);
-	while (++i < cub->parsing.rx)
-	{
-		if (cub->ray_c.stock_rays[i])
-			free(cub->ray_c.stock_rays[i]);
-	}
-	if (cub->ray_c.stock_rays)
-			free(cub->ray_c.stock_rays);
-	i = -1;
-	while (++i < 3)
-	{
-		if (cub->ray_c.matrix_z[i])
-			free(cub->ray_c.matrix_z[i]);
-	}
-	free(cub->ray_c.matrix_z);
-	/* free everything */
-	exit(0);
-	return (0);
-}
-
 int	multithread(t_vars *cub)
 {
 	pthread_t	threads[4];
@@ -62,9 +37,6 @@ int	frame(t_vars *cub)
 	mlx_do_sync(cub->ray_c.mlx);
 	if (!(multithread(cub)))
 		return (0);
-	// for (int i = 0;i < 4;i++)
-	// 	if (!(graphical_loop(cub)))
-	// 		return (0);
 	mlx_put_image_to_window(cub->ray_c.mlx, cub->ray_c.win, \
 							cub->ray_c.img, 0, 0);
 	mlx_sync(MLX_SYNC_WIN_FLUSH_CMD, cub->ray_c.win);

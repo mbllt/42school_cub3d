@@ -155,6 +155,8 @@ typedef struct s_parsing
 	float		pz;
 	char		cardinal;
 	t_text		textures[7];
+	char 		**file;
+	int			file_y;
 }t_parsing;
 
 typedef struct s_vars

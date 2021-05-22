@@ -48,7 +48,7 @@ static int		find_len(char const *s, char c, int start)
 	return (len);
 }
 
-int				free_malloc(char **dest, int i)
+int	free_malloc(char **dest, int i)
 {
 	while (i >= 0)
 		free(dest[i--]);
@@ -56,7 +56,7 @@ int				free_malloc(char **dest, int i)
 	return (1);
 }
 
-char			**ft_split(char *s, char c, int *size)
+char	**ft_split(char *s, char c, int *size)
 {
 	int		start;
 	int		len;

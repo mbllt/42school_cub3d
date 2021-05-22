@@ -77,8 +77,6 @@ int	parsing(t_vars *cub, char **argv)
 {
 	int		fd;
 	char	*line;
-	char	**file;
-	int		file_y;
 
 	fd = 0;
 	line = NULL;
@@ -88,28 +86,13 @@ int	parsing(t_vars *cub, char **argv)
 		write(1, "\nInvalid file .cub\n", 19);
 		return (0);
 	}
-	file = NULL;
-	file_y = 1;
-	file = read_parsing(cub, fd, line, &file_y);
-	if (!file)
+	cub->parsing.file = NULL;
+	cub->parsing.file_y = 1;
+	cub->parsing.file = read_parsing(cub, fd, line, &cub->parsing.file_y);
+	if (!cub->parsing.file)
 		return (0);
 	close(fd);
-	if (!(ft_map(cub, file, file_y - 1)))
+	if (!(ft_map(cub, cub->parsing.file, cub->parsing.file_y - 1)))
 		return (0);
-	// printf("Rx:		%d && Ry :%d\n", cub->parsing.rx, cub->parsing.ry);
-	// printf("NO:		%s\n", cub->parsing.no);
-	// printf("SO:		%s\n", cub->parsing.so);
-	// printf("EA:		%s\n", cub->parsing.ea);
-	// printf("WE:		%s\n", cub->parsing.we);
-	// printf("S:		%s\n", cub->parsing.s);
-	// printf("Fx:		%f && Fy :%f && Fz :%f\n", cub->parsing.f.x, cub->parsing.f.y, cub->parsing.f.z);
-	// printf("Cx:		%f && Cy :%f && Cz :%f\n\n", cub->parsing.c.x, cub->parsing.c.y, cub->parsing.c.z);
-	// printf("	---------------------\n\n");
-	// for (int i = 0;i < cub->parsing.map_y;i++)
-	// 	printf("	%s\n", cub->parsing.world_map[i]);
-	// printf("\n	---------------------\n\n");
-	// printf("Cardinal:	%c\n", cub->parsing.cardinal);
-	// printf("Px:		%f\n", cub->parsing.px);
-	// printf("Py:		%f\n", cub->parsing.py);
 	return (1);
 }

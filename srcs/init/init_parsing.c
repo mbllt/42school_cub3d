@@ -1,13 +1,5 @@
 #include "cub3D.h"
 
-// static int	init_malloc_textures(t_vars *cub)
-// {
-// 	cub->parsing.textures = malloc(sizeof(t_text *) * 5);
-// 	if (!cub->parsing.textures)
-// 		return (0);
-// 	return (1);
-// }
-
 int	init_parsing(t_vars *cub)
 {
 	cub->parsing.rx = 0;
@@ -26,7 +18,5 @@ int	init_parsing(t_vars *cub)
 	cub->parsing.py = 0;
 	cub->parsing.pz = 0.5;
 	cub->parsing.cardinal = 0;
-	// if (!(init_malloc_textures(cub)))
-	// 	return (0);
 	return (1);
 }

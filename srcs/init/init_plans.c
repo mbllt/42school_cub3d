@@ -7,14 +7,13 @@ static int	fill_in_plans(t_plan **plans, int cardinal, int size)
 	plans[cardinal] = malloc(sizeof(t_plan) * size);
 	if (!plans[cardinal])
 		return (0);
-	i = 0;
-	while (i < size)
+	i = -1;
+	while (++i < size)
 	{
 		if (cardinal == SOUTH)
 			plans[cardinal][i] = (t_plan){0, 1, 0, -i};
 		else if (cardinal == EAST)
 			plans[cardinal][i] = (t_plan){1, 0, 0, -i};
-		i++;
 	}
 	i = size - 1;
 	while (i >= 0)
@@ -42,8 +41,5 @@ int	init_plans(t_vars *cub)
 		return (0);
 	cub->ray_c.plans[4][0] = (t_plan){0, 0, 1, 0};
 	cub->ray_c.plans[5][0] = (t_plan){0, 0, 1, -1};
-	// if (cub->ray_c.nbr_sprite != 0)
-	// for (int i = 0;i < cub->parsing.map_x;i++)
-	// 	printf("sprite[%d] = x :%f, y :%f || %d\n", i, cub->ray_c.plans[i].pos.x, cub->ray_c.sprite[i].pos.y, cub->ray_c.nbr_sprite);
 	return (1);
 }
