@@ -37,7 +37,7 @@ static float	get_r(t_vars *cub, t_dot_intersct *intersct, int i)
 	return (r);
 }
 
-t_dot_intersct	compare_sprite(t_vars *cub, t_dot_intersct *sprite)
+t_dot_intersct	compare_sprite(t_vars *cub, t_dot_intersct *sprite, float *r_temp, float *r)
 {
 	t_dot_intersct	temp;
 	int	i;
@@ -58,6 +58,7 @@ t_dot_intersct	compare_sprite(t_vars *cub, t_dot_intersct *sprite)
 			temp.dot.y = sprite[i].dot.y;
 			temp.dot.z = sprite[i].dot.z;
 			temp.cardinal = 6;
+			*r = r_temp[i];
 		}
 		i++;
 	}
@@ -65,13 +66,14 @@ t_dot_intersct	compare_sprite(t_vars *cub, t_dot_intersct *sprite)
 	return (temp);
 }
 
-static void	init(t_vars *cub, t_dot_intersct *sprite)
+static void	init(t_vars *cub, t_dot_intersct *sprite, float *r_temp)
 {
 	int i;
 
 	i = 0;
 	while (i < cub->ray_c.nbr_sprite)
 	{
+		r_temp[i] = -1;
 		sprite[i].dot = (t_vector){0, 0, 0};
 		sprite[i].t_distance = -1;
 		sprite[i].cardinal = -1;
@@ -84,12 +86,16 @@ t_dot_intersct	sprite(t_vars *cub, t_vector ray, t_dot_intersct *intersct, \
 {
 	int				i;
 	t_dot_intersct	*sprite;
+	float			*r_temp;
 	t_dot_intersct	temp;
 
 	sprite = malloc(sizeof(t_dot_intersct) * cub->ray_c.nbr_sprite);
 	if (!sprite)
 		return ((t_dot_intersct){(t_vector){0,0,0}, 0, -10, (t_vector){0,0,0}});
-	init(cub, sprite);
+	r_temp = malloc(sizeof(float) * cub->ray_c.nbr_sprite);
+	if (!r_temp)
+		return ((t_dot_intersct){(t_vector){0,0,0}, 0, -10, (t_vector){0,0,0}});
+	init(cub, sprite, r_temp);
 	i = 0;
 	while (i < cub->ray_c.nbr_sprite)
 	{
@@ -100,6 +106,7 @@ t_dot_intersct	sprite(t_vars *cub, t_vector ray, t_dot_intersct *intersct, \
 			if ((*intersct).dot.z < 1 && (*intersct).dot.z >= 0 \
 				&& *r >= 0 && *r < 1)
 			{
+				r_temp[i] = *r;
 				sprite[i].dot.x = (*intersct).dot.x;
 				sprite[i].dot.y = (*intersct).dot.y;
 				sprite[i].dot.z = (*intersct).dot.z;
@@ -116,9 +123,11 @@ t_dot_intersct	sprite(t_vars *cub, t_vector ray, t_dot_intersct *intersct, \
 		}
 		i++;
 	}
-	temp = compare_sprite(cub, sprite);
+	temp = compare_sprite(cub, sprite, r_temp, r);
 	//printf("%f\n", temp.t_distance);
 	if (sprite)
 		free(sprite);
+	if(r_temp)
+		free(r_temp);
 	return (temp);
 }

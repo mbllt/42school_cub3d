@@ -86,7 +86,9 @@ int	ft_map(t_vars *cub, char **map, int file_y)
 	}
 	get_size_x_map(cub, map, file_y);
 	if (!(get_world_map(cub, map, cub->parsing.map_y, file_y - 1)))
+	{
 		return (0);
+	}
 	if (!(check_world_map(cub, cub->parsing.world_map)))
 	{
 		write(1, "\nError : map\n", 13);
