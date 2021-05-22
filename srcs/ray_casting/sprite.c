@@ -81,6 +81,21 @@ static void	init(t_vars *cub, t_dot_intersct *sprite, float *r_temp)
 	}
 }
 
+static int	check_transparence(t_vars *cub, t_dot_intersct intersct, float r)
+{
+	unsigned int	pixel;
+	int				x;
+	int				y;
+
+	x = 0;
+	y = 0;
+	get_xy_sprite(intersct, cub->parsing.textures[6], &x, &y, r);
+	pixel = get_pixel(cub->parsing.textures[6], x, y);
+	if ((pixel >> 24) > 0)
+		return (0);
+	return (1);
+}
+
 t_dot_intersct	sprite(t_vars *cub, t_vector ray, t_dot_intersct *intersct, \
 						float *r)
 {
@@ -104,7 +119,7 @@ t_dot_intersct	sprite(t_vars *cub, t_vector ray, t_dot_intersct *intersct, \
 		{
 			*r = get_r(cub, intersct, i);
 			if ((*intersct).dot.z < 1 && (*intersct).dot.z >= 0 \
-				&& *r >= 0 && *r < 1)
+				&& *r >= 0 && *r < 1 && check_transparence(cub, *intersct, *r) == 1)
 			{
 				r_temp[i] = *r;
 				sprite[i].dot.x = (*intersct).dot.x;

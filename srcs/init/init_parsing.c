@@ -17,8 +17,8 @@ int	init_parsing(t_vars *cub)
 	cub->parsing.ea = NULL;
 	cub->parsing.we = NULL;
 	cub->parsing.s = NULL;
-	cub->parsing.f = (t_vector){0,0,0};
-	cub->parsing.c = (t_vector){0,0,0};
+	cub->parsing.f = NULL;
+	cub->parsing.c = NULL;
 	cub->parsing.nbr_param = 0;
 	cub->parsing.map_x = 0;
 	cub->parsing.map_y = 0;

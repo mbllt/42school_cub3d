@@ -6,7 +6,7 @@
 #    By: mballet <mballet@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/14 14:39:52 by mballet           #+#    #+#              #
-#    Updated: 2021/05/21 17:46:45 by mballet          ###   ########lyon.fr    #
+#    Updated: 2021/05/22 16:17:50 by mballet          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,7 +42,6 @@ SRCS			=	srcs/main.c \
 					srcs/parsing/data/check_data.c \
 					srcs/parsing/data/res_colors/check_res_color.c \
 					srcs/parsing/data/res_colors/resolution.c \
-					srcs/parsing/data/res_colors/colors.c \
 					srcs/parsing/data/textures/check_path_textures.c \
 					srcs/parsing/data/textures/get_path_nsew.c \
 					srcs/parsing/data/textures/get_textures.c \

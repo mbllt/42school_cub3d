@@ -9,7 +9,7 @@ int	is_res_or_colors(char *line)
 	while (line[i] == ' ')
 		i++;
 	c = line[i];
-	if (c == 'R' || c == 'F' || c == 'C')
+	if (c == 'R')
 		return (1);
 	return (0);
 }
@@ -23,7 +23,7 @@ int	is_path_textures(char *line)
 	while (line[i] == ' ')
 		i++;
 	c = line[i];
-	if (c == 'N' || c == 'S' || c == 'W' || c == 'E')
+	if (c == 'N' || c == 'S' || c == 'W' || c == 'E' || c == 'F' || c == 'C')
 		return (1);
 	return (0);
 }

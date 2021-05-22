@@ -141,8 +141,8 @@ typedef struct s_parsing
 	char		*we;
 	char		*ea;
 	char		*s;
-	t_vector	f;
-	t_vector	c;
+	char		*f;
+	char		*c;
 	unsigned int	ff;
 	unsigned int	cc;
 	int			nbr_param;
@@ -154,7 +154,7 @@ typedef struct s_parsing
 	float		py;
 	float		pz;
 	char		cardinal;
-	t_text		textures[5];
+	t_text		textures[7];
 }t_parsing;
 
 typedef struct s_vars
@@ -245,5 +245,6 @@ int				multithread(t_vars *cub);
 int				create_plans_sprite(t_vars *cub);
 unsigned int	get_pixel(t_text texture, int x, int y);
 float			scalaire_v(t_vector v, t_vector v2);
+void			get_xy_sprite(t_dot_intersct prio_wall, t_text text, int *x, int *y, float r);
 
 #endif

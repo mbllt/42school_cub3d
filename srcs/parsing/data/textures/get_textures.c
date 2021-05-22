@@ -23,10 +23,14 @@ int	get_textures(t_vars *cub, t_text *textures)
 						&textures[2].width, &textures[2].height);
 	textures[3].img = mlx_xpm_file_to_image(cub->ray_c.mlx, cub->parsing.we, \
 						&textures[3].width, &textures[3].height);
-	textures[4].img = mlx_xpm_file_to_image(cub->ray_c.mlx, cub->parsing.s, \
+	textures[4].img = mlx_xpm_file_to_image(cub->ray_c.mlx, cub->parsing.f, \
 						&textures[4].width, &textures[4].height);
+	textures[5].img = mlx_xpm_file_to_image(cub->ray_c.mlx, cub->parsing.c, \
+						&textures[5].width, &textures[5].height);
+	textures[6].img = mlx_xpm_file_to_image(cub->ray_c.mlx, cub->parsing.s, \
+						&textures[6].width, &textures[6].height);
 	i = -1;
-	while (++i < 5)
+	while (++i < 7)
 	{
 		if (!(textures[i].img))
 		{
@@ -35,7 +39,7 @@ int	get_textures(t_vars *cub, t_text *textures)
 		}
 	}
 	i = -1;
-	while (++i < 5)
+	while (++i < 7)
 		if (!(get_addr_text(cub->parsing.textures, i)))
 			return (0);
 	return (1);

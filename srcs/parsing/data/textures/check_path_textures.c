@@ -1,14 +1,5 @@
 #include "cub3D.h"
 
-// typedef enum e_cardinal
-// {
-// 	NORTH,
-// 	SOUTH,
-// 	EAST,
-// 	WEST,
-// 	SPRITE,
-// }t_cardinal;
-
 static int	ft_cpyy(char **dest, char *src, int size, int i)
 {
 	int	j;
@@ -27,7 +18,7 @@ static int	ft_cpyy(char **dest, char *src, int size, int i)
 	return (1);
 }
 
-static void	get_path(t_vars *cub, char *str, int cardinal)
+static void	get_paths(t_vars *cub, char *str, int cardinal)
 {
 	int	size;
 	int	i;
@@ -35,7 +26,7 @@ static void	get_path(t_vars *cub, char *str, int cardinal)
 	i = 0;
 	if (cardinal >= 0 && cardinal <= 3)
 		i = 3;
-	if (cardinal == 4)
+	if (cardinal >= 4 && cardinal <= 6)
 		i = 2;
 	while(str[i] && str[i] == ' ')
 		i++;
@@ -49,6 +40,10 @@ static void	get_path(t_vars *cub, char *str, int cardinal)
 	if (cardinal == WEST)
 		ft_cpyy(&cub->parsing.we, str, size, i);
 	if (cardinal == 4)
+		ft_cpyy(&cub->parsing.f, str, size, i);
+	if (cardinal == 5)
+		ft_cpyy(&cub->parsing.c, str, size, i);
+	if (cardinal == 6)
 		ft_cpyy(&cub->parsing.s, str, size, i);
 }
 
@@ -56,9 +51,9 @@ static int	check_get_path(t_vars *cub, char *str, int cardinal)
 {
 	if (cardinal >= 0 && cardinal <= 3 && str[2] != ' ')
 		return (0);
-	if (cardinal == 4 && str[1] != ' ')
+	if (cardinal >= 4 && cardinal <= 6 && str[1] != ' ')
 		return (0);
-	get_path(cub, str, cardinal);
+	get_paths(cub, str, cardinal);
 	return (1);
 }
 
@@ -72,7 +67,7 @@ int	check_path_textures(t_vars *cub, char *line)
 		i++;
 	cardinal = is_cardinal(line[i]);
 	if (cardinal == 1 && line[1] == ' ')
-		cardinal = 4;
+		cardinal = 6;
 	if (!(check_get_path(cub, line, cardinal)))
 	{
 		write(1, "\nError : path textures\n", 23);
