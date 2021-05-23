@@ -10,10 +10,15 @@ static int	init_pixel_data(t_vars *cub)
 	i = -1;
 	while (++i < cub->parsing.rx)
 	{
-		cub->pixel_data[i] = malloc(sizeof(unsigned int) * \
-									cub->parsing.ry);
+		cub->pixel_data[i] = malloc(sizeof(unsigned int) * cub->parsing.ry);
 		if (!cub->pixel_data[i])
+		{
+			while (--i >= 0)
+				if (cub->pixel_data[i])
+					free(cub->pixel_data[i]);
+			free(cub->pixel_data);
 			return (0);
+		}
 	}
 	return (1);
 }

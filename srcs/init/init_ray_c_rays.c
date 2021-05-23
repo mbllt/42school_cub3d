@@ -19,7 +19,13 @@ int	init_stock_rays(t_vars *cub, int width, int height)
 	{
 		cub->ray_c.stock_rays[i] = malloc(sizeof(t_vector) * height);
 		if (!cub->ray_c.stock_rays[i])
+		{
+			while (--i >= 0)
+				if (cub->ray_c.stock_rays[i])
+					free(cub->ray_c.stock_rays[i]);
+			free(cub->ray_c.stock_rays);
 			return (0);
+		}
 	}
 	return (1);
 }
