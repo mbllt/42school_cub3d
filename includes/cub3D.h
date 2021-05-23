@@ -98,7 +98,6 @@ typedef struct s_sprite
 	float		sprite_front;
 }t_sprite;
 
-
 typedef	struct s_ray
 {
 	float		fov;
@@ -159,10 +158,38 @@ typedef struct s_parsing
 	int			file_y;
 }t_parsing;
 
+typedef struct __attribute__((__packed__)) s_info_header
+{
+	unsigned int	size;
+	unsigned int	width;
+	unsigned int	height;
+	unsigned int	planes;
+	unsigned int	bpp;
+	unsigned int	compression;
+	unsigned int	imagesize;
+	unsigned int	xpixelsperm;
+	unsigned int	ypixelsperm;
+	unsigned int	colors_used;
+	unsigned int	important_colors;
+}t_info_header;
+
+typedef struct __attribute__((__packed__)) s_image
+{
+	char			signature[3];
+	unsigned int	file_size;
+	unsigned int	reserved;
+	unsigned int	data_offset;
+	t_info_header	header_bitmap;
+
+}t_image;
+
 typedef struct s_vars
 {
-	t_ray		ray_c;
-	t_parsing	parsing;
+	t_ray			ray_c;
+	t_parsing		parsing;
+	unsigned int	save_on;
+	t_image			save;
+	unsigned int	**pixel_data;
 }t_vars;
 
 typedef struct s_thread
@@ -245,5 +272,7 @@ int				create_plans_sprite(t_vars *cub);
 unsigned int	get_pixel(t_text texture, int x, int y);
 float			scalaire_v(t_vector v, t_vector v2);
 void			get_xy_sprite(t_dot_intersct prio_wall, t_text text, int *x, int *y, float r);
+int				init_save_image(t_vars *cub);
+int				save_image(t_vars *cub);
 
 #endif

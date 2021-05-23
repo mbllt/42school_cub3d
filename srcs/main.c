@@ -1,5 +1,5 @@
 #include "cub3D.h"
-static int	check_argv(char *str)
+static int	check_argv1(char *str)
 {
 	int	i;
 
@@ -7,6 +7,20 @@ static int	check_argv(char *str)
 	if (str[i - 1] != 'b' || str[i - 2] != 'u' || str[i - 3] != 'c' \
 		|| str[i - 4] != '.')
 		return (0);
+	return (1);
+}
+
+static int	check_argv2(t_vars *cub, char *str)
+{
+	int	i;
+
+	i = ft_strlen(str);
+	if (i != 6)
+		return (0);
+	if (str[i - 1] != 'e' || str[i - 2] != 'v' || str[i - 3] != 'a' \
+		|| str[i - 4] != 's' || str[i - 5] != '-' || str[i - 6] != '-')
+		return (0);
+	cub->save_on = 1;
 	return (1);
 }
 
@@ -49,8 +63,12 @@ int	main(int argc, char **argv)
 	init_rays(&cub, cub.parsing.rx, cub.parsing.ry);
 	if (!(init_plans(&cub)))
 		return (0);
-	if (argc == 2 && check_argv(argv[1]) == 1/* || (argc == 3 && save(argc, argv) */)
+	if ((argc == 2 && check_argv1(argv[1]) == 1)\
+		|| (argc == 3 && check_argv2(&cub, argv[2]) == 1))
 	{
+		if (cub.save_on == 1)
+			if (!(init_save_image(&cub)))
+				return (0);
 		if (!(cub_loop(&cub, argc, argv)))
 			return(-1);
 	}

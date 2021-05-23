@@ -81,6 +81,7 @@ int	ft_exit(t_vars *cub)
 	ft_double_free(cub->parsing.file, cub->parsing.file_y -1);
 	free_path(cub);
 	ft_double_free(cub->parsing.world_map, cub->parsing.map_y);
+	ft_double_free((char **)cub->pixel_data, cub->parsing.rx);
 	exit(0);
 	return (1);
 }

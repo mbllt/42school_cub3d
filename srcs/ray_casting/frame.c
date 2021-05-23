@@ -11,7 +11,8 @@ int	multithread(t_vars *cub)
 	{
 		thread_data[i].cub = (*cub);
 		thread_data[i].thread_num = i;
-		if ((pthread_create(&threads[i], NULL, graphical_loop, &thread_data[i])) != 0)
+		if ((pthread_create(&threads[i], NULL, \
+			graphical_loop, &thread_data[i])) != 0)
 			return (0);
 	}
 	i = -1;
@@ -37,9 +38,14 @@ int	frame(t_vars *cub)
 	mlx_do_sync(cub->ray_c.mlx);
 	if (!(multithread(cub)))
 		return (0);
+	if (cub->save_on == 1)
+	{
+		if (!(save_image(cub)))
+			write(1, "\nCould not save the image\n", 26);
+		ft_exit(cub);
+	}
 	mlx_put_image_to_window(cub->ray_c.mlx, cub->ray_c.win, \
 							cub->ray_c.img, 0, 0);
 	mlx_sync(MLX_SYNC_WIN_FLUSH_CMD, cub->ray_c.win);
 	return (1);
 }
-

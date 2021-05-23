@@ -6,7 +6,7 @@
 #    By: mballet <mballet@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/14 14:39:52 by mballet           #+#    #+#              #
-#    Updated: 2021/05/22 17:52:46 by mballet          ###   ########lyon.fr    #
+#    Updated: 2021/05/23 14:49:55 by mballet          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,7 @@ SRCS			=	srcs/main.c \
 					srcs/init/init_plans.c \
 					srcs/init/init_rays.c \
 					srcs/init/init_sprite.c \
+					srcs/init/init_save_image.c \
 					srcs/ray_casting/frame.c \
 					srcs/ray_casting/rotation.c \
 					srcs/ray_casting/graphical_loop.c \
@@ -48,6 +49,7 @@ SRCS			=	srcs/main.c \
 					srcs/parsing/map/ft_map.c \
 					srcs/parsing/map/check_world_map.c \
 					srcs/parsing/map/get_world_map.c \
+					srcs/save_image/save_image.c \
 
 OBJS			=	$(SRCS:.c=.o)
 
