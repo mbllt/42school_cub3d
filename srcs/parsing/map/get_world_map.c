@@ -46,9 +46,6 @@ int	get_world_map(t_vars *cub, char **map, int map_y, int file_y)
 		index_map = (file_y - (map_y - 1)) + i;
 		 if(!(ft_cpymap(cub->parsing.world_map[i], map[index_map], cub->parsing.map_x)))
 		 	return (0);
-		//printf("x :%d\n", cub->parsing.map_x);
-		// for (int k = 0;k < cub->parsing.map_y;k++)
-		// 	printf("\n%s\n", cub->parsing.world_map[k]);
 		i++;
 	}
 	return (1);

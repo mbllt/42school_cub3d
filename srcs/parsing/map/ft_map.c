@@ -99,6 +99,5 @@ int	ft_map(t_vars *cub, char **map, int file_y)
 		write(1, "\nError : map\n", 13);
 		return (0);
 	}
-	//printf("%f, %f\n", cub->parsing.px, cub->parsing.py);
 	return (1);
 }

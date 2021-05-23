@@ -19,8 +19,6 @@ t_vector	rotation_x(t_vars *cub, t_vector ray)
 	bis.z += cub->ray_c.matrix_x[2][0] * temp.x;
 	bis.z += cub->ray_c.matrix_x[2][1] * temp.y;
 	bis.z += cub->ray_c.matrix_x[2][2] * temp.z;
-	// if ((*ray).x == bis.x && (*ray).y == bis.y && (*ray).z == bis.x)
-	// 	printf("same\n");
 	return (bis);
 }
 
@@ -43,9 +41,5 @@ t_vector	rotation_z(t_vars *cub, t_vector ray)
 	bis.z += cub->ray_c.matrix_z[2][0] * temp.x;
 	bis.z += cub->ray_c.matrix_z[2][1] * temp.y;
 	bis.z += cub->ray_c.matrix_z[2][2] * temp.z;
-	// if ((*ray).x == bis.x && (*ray).y == bis.y && (*ray).z == bis.x)
-	// 	printf("same\n");
-	//printf("%f\n", cub->ray_c.rota_z);
-	//printf("%f %f\n", (cos(0.03) + cos(0.03)), (cos(0.06) + cos(0.008)));
 	return (bis);
 }

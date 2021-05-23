@@ -52,8 +52,6 @@ static int	check_corner(t_vars *cub, char **world_map, int i , int j)
 	if (!(is_one(world_map[i][start_x])) || !(is_one(world_map[i][end_x])) \
 		|| !(is_one(world_map[start_y][j])) || !(is_one(world_map[end_y][j])))
 	{
-		// printf("%d\n", end_x);
-		// printf("%s\n", world_map[i]);
 		return (0);
 	}
 	return (1);
@@ -83,7 +81,6 @@ static int	check_zero_inside(t_vars *cub, char **world_map)
 			{
 				if (!(check_corner(cub, world_map, i, j)))
 				{
-					//printf("%c\n", world_map[i][j]);
 					return (0);
 				}
 				if (!(check_around(world_map, i, j)))

@@ -23,7 +23,6 @@ static int	init_malloc_plans(t_vars *cub)
 	}
 	while (i < 6)
 	{
-		//printf("%d\n", i);
 		cub->ray_c.plans[i] = malloc(sizeof(t_plan));
 		if (!cub->ray_c.plans[i])
 			return (0);
@@ -67,8 +66,6 @@ static int	init_ray_casting2(t_vars *cub)
 		return (0);
 	if (!(init_matrix_z(cub)))
 		return (0);
-	// if (!(init_threading(cub)))
-	// 	return (0);
 	return (1);
 }
 int	init_ray_casting(t_vars *cub)
@@ -88,8 +85,6 @@ int	init_ray_casting(t_vars *cub)
 	cub->ray_c.rota_z = 0;
 	cub->ray_c.fps = 0;
 	cub->ray_c.seconde = 0;
-	// if (!init_cos_sin(cub))
-	// 	return (0);
 	cub->ray_c.pixel_color = NULL;
 	if (!(init_ray_casting2(cub)))
 		return(0);

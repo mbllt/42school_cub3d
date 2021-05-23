@@ -90,7 +90,6 @@ void	display(t_vars *cub, int i, int j, t_dot_intersct prio_wall, float r)
 	}
 	else
 	{
-		// printf("%d, %d\n", i, j);
 		my_mlx_pixel_put(cub, i, j, (unsigned int)"255,0,255");
 	}
 }

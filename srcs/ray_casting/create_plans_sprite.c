@@ -2,7 +2,6 @@
 
 static void	get_v(t_vector *v, t_vars *cub, t_vector sp_pos)
 {
-	//printf("%f\n", cub->parsing.px);
 	*v = (t_vector) {
 		.x = sp_pos.x - cub->parsing.px,
 		.y = sp_pos.y - cub->parsing.py,
@@ -29,9 +28,6 @@ static void	create_plans(t_sprite sprite, t_plan *plan, int i)
 	plan->b = sprite.v.y;
 	plan->c = 0;
 	plan->d = - sprite.v.x * sprite.pos.x - sprite.v.y * sprite.pos.y;
-	//printf("%d : %fx+%fy+%fz+%f=0\n", i, plan->a, plan->b, plan->c, plan->d);
-	//printf("(%f,%f,%f) | ", pos_sprite.x, pos_sprite.y, pos_sprite.z);
-	//printf("(%f,%f,%f)\n\n", cub->parsing.px, cub->parsing.py, cub->parsing.pz);
 }
 
 int	create_plans_sprite(t_vars *cub)
@@ -46,8 +42,6 @@ int	create_plans_sprite(t_vars *cub)
 		get_v2(&cub->ray_c.sprite[i].v2, cub->ray_c.sprite[i].v);
 		create_plans(cub->ray_c.sprite[i], &cub->ray_c.sprite[i].plans, i);
 		cub->ray_c.sprite[i].sprite_front = scalaire_v(cub->ray_c.sprite[i].v, cub->ray_c.ray_dir);
-		//printf("plan[%d] : a = %f && b = %f && c = %f && d = %f\n\n", i, (*plan)[i].a, (*plan)[i].b, (*plan)[i].c, (*plan)[i].d);
 	}
-	//printf("%f\n", (*plan)[2].d);
 	return (1);
 }

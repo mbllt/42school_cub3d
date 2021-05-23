@@ -30,7 +30,6 @@ int	is_path_textures(char *line)
 
 int	is_one(char c)
 {
-	//printf("%c\n", c);
 	if (c == '1')
 		return (1);
 	return (0);

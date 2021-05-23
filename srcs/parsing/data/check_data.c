@@ -24,15 +24,6 @@ static int	check_data_param_valid(char *line, int *part_map)
 	return (1);
 }
 
-// static int	check_map_space(char *line, int part_map)
-// {
-// 	if (part_map && line[0] == 0)
-// 	{
-		// write(1, "\nWrong map\n", 11);
-		// return (0);
-// 	}
-// }
-
 static int	check_nbr_param_and_order(char *line, int ret)
 {
 	static int	nbr_param = 0;

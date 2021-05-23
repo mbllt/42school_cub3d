@@ -78,9 +78,9 @@ int	ft_exit(t_vars *cub)
 	free_plans(cub);
 	if (cub->ray_c.sprite)
 		free(cub->ray_c.sprite);
-	if (cub->parsing.file)
-		ft_double_free(cub->parsing.file, cub->parsing.file_y -1);
+	ft_double_free(cub->parsing.file, cub->parsing.file_y -1);
 	free_path(cub);
+	ft_double_free(cub->parsing.world_map, cub->parsing.map_y);
 	exit(0);
 	return (1);
 }

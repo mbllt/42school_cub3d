@@ -6,8 +6,6 @@ static	int	get_addr_text(t_text *textures, int i)
 										&(textures[i].bits_per_pixel), \
 										&(textures[i].line_length), 
 										&(textures[i].endian));
-	// printf("i :%d\nimg :%p\nwidth :%d, height :%d\naddr :%p\nbpp :%d\nline_lenght :%d\nendian :%d\n\n", \
-			// i, textures[i].img, textures[i].width, textures[i].height, textures[i].addr, textures[i].bits_per_pixel, textures[i].line_length, textures[i].endian);
 	return (1);
 }
 

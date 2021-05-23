@@ -9,7 +9,6 @@ static int	intersct_plan_ns(t_vars *cub, t_vector ray, int i, t_dot_intersct *in
 	if ((*intersct).t_distance < 0)
 		return (0);
 	intersct_dot(cub, ray, intersct);
-	//printf("%f, %f, %f\n", intersct.dot.x, intersct.dot.y, intersct.dot.z);
 	return (1);
 }
 

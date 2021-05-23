@@ -60,7 +60,6 @@ int	init_matrix_z(t_vars *cub)
 	if (first == 0)
 		if (!(malloc_matrix_z(cub)))
 			return (0);
-	//printf("%f\n", cub->ray_c.rota_z);
 	cub->ray_c.matrix_z[0][0] = cos(cub->ray_c.rota_z);
 	cub->ray_c.matrix_z[0][1] = -sin(cub->ray_c.rota_z);
 	cub->ray_c.matrix_z[0][2] = 0;
