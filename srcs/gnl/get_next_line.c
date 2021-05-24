@@ -1,18 +1,6 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: mballet <ballet.mia.6@gmail.com>           +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/05 14:12:30 by mballet           #+#    #+#             */
-/*   Updated: 2021/05/10 21:24:33 by mballet          ###   ########lyon.fr   */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "get_next_line.h"
 
-int		reset_temp(char **temp, int read_return)
+int	reset_temp(char **temp, int read_return)
 {
 	int		i;
 	int		a;
@@ -24,7 +12,8 @@ int		reset_temp(char **temp, int read_return)
 		i++;
 	if (*temp)
 		free(*temp);
-	if (!((*temp) = malloc(sizeof(char) * (read_return - i + 1))))
+	(*temp) = malloc(sizeof(char) * (read_return - i + 1));
+	if (!(*temp))
 		return (-1);
 	a = 0;
 	i++;
@@ -36,10 +25,10 @@ int		reset_temp(char **temp, int read_return)
 	return (1);
 }
 
-int		fill_in_line(char **temp, ssize_t read_return, char **line)
+int	fill_in_line(char **temp, ssize_t read_return, char **line)
 {
-	int i;
-	int a;
+	int	i;
+	int	a;
 
 	if ((*line))
 		free(*line);
@@ -51,7 +40,8 @@ int		fill_in_line(char **temp, ssize_t read_return, char **line)
 	i = 0;
 	while ((*temp)[i] != '\0' && (*temp)[i] != '\n')
 		i++;
-	if (!((*line) = malloc(sizeof(char) * i + 1)))
+	(*line) = malloc(sizeof(char) * i + 1);
+	if (!(*line))
 		return (0);
 	a = 0;
 	while (a < i)
@@ -63,9 +53,10 @@ int		fill_in_line(char **temp, ssize_t read_return, char **line)
 	return (1);
 }
 
-int		fill_in_temp(char **temp, char *buffer)
+int	fill_in_temp(char **temp, char *buffer)
 {
-	if (!(*temp = ft_strjoin(*temp, buffer)))
+	(*temp) = ft_strjoin(*temp, buffer);
+	if (!(*temp))
 	{
 		free(*temp);
 		return (0);
@@ -73,9 +64,9 @@ int		fill_in_temp(char **temp, char *buffer)
 	return (1);
 }
 
-int		condition_fill_in_temp(char **temp)
+int	condition_fill_in_temp(char **temp)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (*temp)
@@ -88,7 +79,7 @@ int		condition_fill_in_temp(char **temp)
 	return (0);
 }
 
-int		get_next_line(int fd, char **line)
+int	get_next_line(int fd, char **line)
 {
 	char			buffer[BUFFER_SIZE + 1];
 	static char		*temp[4096];
@@ -101,9 +92,11 @@ int		get_next_line(int fd, char **line)
 	read_return = 1;
 	if (temp[fd])
 		read_return = ft_strlen(temp[fd]);
-	while (!(condition_fill_in_temp(&temp[fd])) &&
-			(read_return = read(fd, buffer, BUFFER_SIZE)) > 0)
+	while (!(condition_fill_in_temp(&temp[fd])))
 	{
+		read_return = read(fd, buffer, BUFFER_SIZE);
+		if (read_return <= 0)
+			break ;
 		buffer[read_return] = '\0';
 		if (!(fill_in_temp(&temp[fd], buffer)))
 			return (-1);

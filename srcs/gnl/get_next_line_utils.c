@@ -1,20 +1,9 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: mballet <mballet@student.42lyon.fr>        +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/09 14:59:32 by mballet           #+#    #+#             */
-/*   Updated: 2021/03/01 09:10:08 by mballet          ###   ########lyon.fr   */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "get_next_line.h"
 
-int		line_null(char **line)
+int	line_null(char **line)
 {
-	if (!((*line) = malloc(sizeof(char) * 1)))
+	(*line) = malloc(sizeof(char) * 1);
+	if (!(*line))
 		return (0);
 	(*line)[0] = 0;
 	return (1);
@@ -54,11 +43,18 @@ char	*ft_strjoin(char *s1, char *s2)
 
 	if (!s1)
 		tab = ft_strdup(s2);
-	if (s2[0] == '\0' && (tab = malloc(sizeof(char) * 1)))
-		return (!(tab) ? NULL : tab);
+	if (s2[0] == '\0')
+	{
+		tab = malloc(sizeof(char) * 1);
+		if (!tab)
+			return (NULL);
+		else
+			return (tab);
+	}
 	if (s1 && s2)
 	{
-		if (!(tab = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1))))
+		tab = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
+		if (!(tab))
 			return (NULL);
 		i = -1;
 		while (s1[++i])
@@ -75,7 +71,7 @@ char	*ft_strjoin(char *s1, char *s2)
 
 size_t	ft_strlen(const char *s)
 {
-	size_t i;
+	size_t	i;
 
 	i = 0;
 	while (s[i] != '\0')

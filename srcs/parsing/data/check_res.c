@@ -15,14 +15,10 @@ int	check_res_color(t_vars *cub, char *line)
 		if (!(check_get_res(cub, str, size)))
 		{
 			write(1, "\nError : resolution\n", 21);
+			if (str)
+				ft_double_free(str, size);
 			return (0);
 		}
-	}
-	else
-	{
-		if (str)
-			ft_double_free(str, size);
-		return (0);
 	}
 	if (str)
 		ft_double_free(str, size);
