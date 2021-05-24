@@ -31,10 +31,11 @@ static float	get_r(t_vars *cub, t_dot_intersct *intersct, int i)
 	return (r);
 }
 
-t_dot_intersct	compare_sprite(t_vars *cub, t_dot_intersct *sprite, float *r_temp, float *r)
+t_dot_intersct	compare_sprite(t_vars *cub, t_dot_intersct *sprite, \
+		float *r_temp, float *r)
 {
 	t_dot_intersct	temp;
-	int	i;
+	int				i;
 
 	temp.dot = (t_vector){0, 0, 0};
 	temp.t_distance = -1;
@@ -59,7 +60,7 @@ t_dot_intersct	compare_sprite(t_vars *cub, t_dot_intersct *sprite, float *r_temp
 
 static void	init(t_vars *cub, t_dot_intersct *sprite, float *r_temp)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < cub->ray_c.nbr_sprite)
@@ -97,10 +98,12 @@ t_dot_intersct	sprite(t_vars *cub, t_vector ray, t_dot_intersct *intersct, \
 
 	sprite = malloc(sizeof(t_dot_intersct) * cub->ray_c.nbr_sprite);
 	if (!sprite)
-		return ((t_dot_intersct){(t_vector){0,0,0}, 0, -10, (t_vector){0,0,0}});
+		return ((t_dot_intersct){(t_vector){0, 0, 0}, 0, -10, \
+			(t_vector){0, 0, 0}});
 	r_temp = malloc(sizeof(float) * cub->ray_c.nbr_sprite);
 	if (!r_temp)
-		return ((t_dot_intersct){(t_vector){0,0,0}, 0, -10, (t_vector){0,0,0}});
+		return ((t_dot_intersct){(t_vector){0, 0, 0}, 0, -10, \
+			(t_vector){0, 0, 0}});
 	init(cub, sprite, r_temp);
 	i = 0;
 	while (i < cub->ray_c.nbr_sprite)
@@ -110,7 +113,8 @@ t_dot_intersct	sprite(t_vars *cub, t_vector ray, t_dot_intersct *intersct, \
 		{
 			*r = get_r(cub, intersct, i);
 			if ((*intersct).dot.z < 1 && (*intersct).dot.z >= 0 \
-				&& *r >= 0 && *r < 1 && check_transparence(cub, *intersct, *r) == 1)
+				&& *r >= 0 && *r < 1 && check_transparence(cub, *intersct, *r) \
+					== 1)
 			{
 				r_temp[i] = *r;
 				sprite[i].dot.x = (*intersct).dot.x;
@@ -118,7 +122,6 @@ t_dot_intersct	sprite(t_vars *cub, t_vector ray, t_dot_intersct *intersct, \
 				sprite[i].dot.z = (*intersct).dot.z;
 				sprite[i].t_distance = (*intersct).t_distance;
 				sprite[i].ray = (*intersct).ray;
-
 			}
 		}
 		i++;
@@ -126,7 +129,7 @@ t_dot_intersct	sprite(t_vars *cub, t_vector ray, t_dot_intersct *intersct, \
 	temp = compare_sprite(cub, sprite, r_temp, r);
 	if (sprite)
 		free(sprite);
-	if(r_temp)
+	if (r_temp)
 		free(r_temp);
 	return (temp);
 }

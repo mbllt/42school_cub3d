@@ -11,14 +11,14 @@
 # include <pthread.h>
 # include <limits.h>
 
-#define BLACK	0x00000000
-#define TEAL	0x00008080
-#define BLUE	0x0000BFFF
-#define BROWN	0x00FFDEAD
-#define GREEN	0x0000FF00
-#define ORANGE	0x00FFA500
-#define PINK	0x00DB7093
-#define GREY	0x00808080
+# define BLACK	0x00000000
+# define TEAL	0x00008080
+# define BLUE	0x0000BFFF
+# define BROWN	0x00FFDEAD
+# define GREEN	0x0000FF00
+# define ORANGE	0x00FFA500
+# define PINK	0x00DB7093
+# define GREY	0x00808080
 
 typedef enum e_dir
 {
@@ -37,8 +37,7 @@ typedef struct s_index
 	int	y;
 }t_index;
 
-
-typedef	struct s_direction
+typedef struct s_direction
 {
 	float	t_north;
 	float	t_south;
@@ -86,14 +85,14 @@ typedef struct s_key
 
 typedef struct s_text
 {
-	int		width;
-	int		height;
-	void	*mlx;
-	void	*img;
+	int				width;
+	int				height;
+	void			*mlx;
+	void			*img;
 	unsigned int	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
+	int				bits_per_pixel;
+	int				line_length;
+	int				endian;
 }t_text;
 
 typedef struct s_sprite
@@ -105,7 +104,7 @@ typedef struct s_sprite
 	float		sprite_front;
 }t_sprite;
 
-typedef	struct s_ray
+typedef struct s_ray
 {
 	float		fov;
 	float		ratio_horizon;
@@ -140,32 +139,32 @@ typedef	struct s_ray
 
 typedef struct s_parsing
 {
-	int			rx;
-	int			ry;
-	short int	scale_on;
-	int			old_rx;
-	int			old_ry;
-	char		*no;
-	char		*so;
-	char		*we;
-	char		*ea;
-	char		*s;
-	char		*f;
-	char		*c;
+	int				rx;
+	int				ry;
+	short int		scale_on;
+	int				old_rx;
+	int				old_ry;
+	char			*no;
+	char			*so;
+	char			*we;
+	char			*ea;
+	char			*s;
+	char			*f;
+	char			*c;
 	unsigned int	ff;
 	unsigned int	cc;
-	int			nbr_param;
-	int			map_x;
-	int			map_y;
-	char		**world_map;
-	t_vector	pos;
-	float		px;
-	float		py;
-	float		pz;
-	char		cardinal;
-	t_text		textures[7];
-	char 		**file;
-	int			file_y;
+	int				nbr_param;
+	int				map_x;
+	int				map_y;
+	char			**world_map;
+	t_vector		pos;
+	float			px;
+	float			py;
+	float			pz;
+	char			cardinal;
+	t_text			textures[7];
+	char			**file;
+	int				file_y;
 }t_parsing;
 
 typedef struct __attribute__((__packed__)) s_header_bitmap
@@ -225,7 +224,8 @@ int				frame(t_vars *cub);
 void			*graphical_loop(void *thread_data);
 t_vector		rotation_x(t_vars *cub, t_vector ray);
 t_vector		rotation_z(t_vars *cub, t_vector ray);
-void			display(t_vars *cub, int i, int j, t_dot_intersct prio_wall, float r);
+void			display(t_vars *cub, int i, int j, t_dot_intersct prio_wall, \
+				float r);
 int				cub_loop(t_vars *cub, int argc, char **argv);
 int				parsing(t_vars *cub, char **argv);
 int				check_data(t_vars *cub, char *line, int ret);
@@ -259,30 +259,43 @@ t_plan			*find_walls_n(t_vars *cub, int size);
 t_plan			*find_walls_s(t_vars *cub, int size);
 t_plan			*find_walls_e(t_vars *cub, int size);
 t_plan			*find_walls_w(t_vars *cub, int size);
-t_dot_intersct	check_wall_n(t_vars *cub, t_vector ray, t_dot_intersct *intersct);
-t_dot_intersct	check_wall_s(t_vars *cub, t_vector ray, t_dot_intersct *intersct);
-t_dot_intersct	check_wall_e(t_vars *cub, t_vector ray, t_dot_intersct *intersct);
-t_dot_intersct	check_wall_w(t_vars *cub, t_vector ray, t_dot_intersct *intersct);
-t_dot_intersct	check_wall_f(t_vars *cub, t_vector ray, t_dot_intersct *intersct);
-t_dot_intersct	check_wall_c(t_vars *cub, t_vector ray, t_dot_intersct *intersct);
-void			intersct_dot(t_vars *cub, t_vector ray, t_dot_intersct *intersct);
+t_dot_intersct	check_wall_n(t_vars *cub, t_vector ray, \
+				t_dot_intersct *intersct);
+t_dot_intersct	check_wall_s(t_vars *cub, t_vector ray, \
+				t_dot_intersct *intersct);
+t_dot_intersct	check_wall_e(t_vars *cub, t_vector ray, \
+				t_dot_intersct *intersct);
+t_dot_intersct	check_wall_w(t_vars *cub, t_vector ray, \
+				t_dot_intersct *intersct);
+t_dot_intersct	check_wall_f(t_vars *cub, t_vector ray, \
+				t_dot_intersct *intersct);
+t_dot_intersct	check_wall_c(t_vars *cub, t_vector ray, \
+				t_dot_intersct *intersct);
+void			intersct_dot(t_vars *cub, t_vector ray, \
+				t_dot_intersct *intersct);
 void			move(t_vars *cub);
 void			rotate(t_vars *cub);
 int				get_textures(t_vars *cub, t_text *textures);
 unsigned int	create_trgb(int t, int r, int g, int b);
 int				init_sprite(t_vars *cub, char **world_map);
-t_dot_intersct	sprite(t_vars *cub, t_vector ray, t_dot_intersct *intersct, float *r);
-t_dot_intersct	check_sprite_n(t_vars *cub, t_vector ray, t_dot_intersct *intersct);
-t_dot_intersct	check_sprite_s(t_vars *cub, t_vector ray, t_dot_intersct *intersct);
-t_dot_intersct	check_sprite_e(t_vars *cub, t_vector ray, t_dot_intersct *intersct);
-t_dot_intersct	check_sprite_w(t_vars *cub, t_vector ray, t_dot_intersct *intersct);
+t_dot_intersct	sprite(t_vars *cub, t_vector ray, \
+				t_dot_intersct *intersct, float *r);
+t_dot_intersct	check_sprite_n(t_vars *cub, t_vector ray, \
+				t_dot_intersct *intersct);
+t_dot_intersct	check_sprite_s(t_vars *cub, t_vector ray, \
+				t_dot_intersct *intersct);
+t_dot_intersct	check_sprite_e(t_vars *cub, t_vector ray, \
+				t_dot_intersct *intersct);
+t_dot_intersct	check_sprite_w(t_vars *cub, t_vector ray, \
+				t_dot_intersct *intersct);
 t_vector		normalisation_v(t_vector v);
 float			norm_v(t_vector v);
 int				multithread(t_vars *cub);
 int				create_plans_sprite(t_vars *cub);
 unsigned int	get_pixel(t_text texture, int x, int y);
 float			scalaire_v(t_vector v, t_vector v2);
-void			get_xy_sprite(t_dot_intersct prio_wall, t_text text, int *x, int *y, float r);
+void			get_xy_sprite(t_dot_intersct prio_wall, \
+				t_text text, int *x, int *y, float r);
 int				init_save_image(t_vars *cub);
 int				save_header(t_vars *cub);
 int				get_index_x(void *thread_data);

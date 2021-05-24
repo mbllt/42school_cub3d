@@ -30,7 +30,7 @@ int	frame(t_vars *cub)
 		ft_exit(cub);
 		return (0);
 	}
-	cub->ray_c.ray_dir = rotation_z(cub, (t_vector){0,-1,0});
+	cub->ray_c.ray_dir = rotation_z(cub, (t_vector){0, -1, 0});
 	if (!(create_plans_sprite(cub)))
 		return (0);
 	mlx_sync(MLX_SYNC_WIN_CMD_COMPLETED, cub->ray_c.win);

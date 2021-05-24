@@ -10,7 +10,7 @@ void	intersct_dot(t_vars *cub, t_vector ray, t_dot_intersct *intersct)
 static t_dot_intersct	compare_distance(t_dot_intersct *intersct)
 {
 	t_dot_intersct	temp;
-	int	i;
+	int				i;
 
 	temp.dot = (t_vector){0, 0, 0};
 	temp.t_distance = -1;
@@ -32,7 +32,7 @@ static t_dot_intersct	compare_distance(t_dot_intersct *intersct)
 
 static void	init_intersct(t_dot_intersct intersct[])
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < 7)
@@ -82,16 +82,16 @@ void	*graphical_loop(void *thread_data)
 	float			r;
 
 	index.x = get_index_x(thread_data);
-	while (index.x < (((t_thread*)thread_data)->thread_num + 1) * \
-			ceil((((t_thread*)thread_data)->cub.parsing.rx * 0.25)) \
-			&& index.x < ((t_thread*)thread_data)->cub.parsing.rx)
+	while (index.x < (((t_thread *)thread_data)->thread_num + 1) *\
+			ceil((((t_thread *)thread_data)->cub.parsing.rx * 0.25)) \
+			&& index.x < ((t_thread *)thread_data)->cub.parsing.rx)
 	{
 		index.y = 0;
-		while (index.y < ((t_thread*)thread_data)->cub.parsing.ry)
+		while (index.y < ((t_thread *)thread_data)->cub.parsing.ry)
 		{
 			ray_temp = get_ray_temp(thread_data, index.x, index.y);
-			if (!(dir(&((t_thread*)thread_data)->cub, intersct, ray_temp, &r)))
-				return ((void *)-1);
+			if (!(dir(&((t_thread *)thread_data)->cub, intersct, ray_temp, &r)))
+				return ((void *) - 1);
 			prio = compare_distance(intersct);
 			prio.ray = ray_temp;
 			display(thread_data, index.x, index.y, prio, r);
