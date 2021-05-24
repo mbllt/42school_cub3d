@@ -83,7 +83,9 @@ int	main(int argc, char **argv)
 		|| (argc == 3 && check_argv2(&cub, argv[2]) == 1))
 	{
 		if (!(cub_loop(&cub, argc, argv)))
+		{
 			return (-1);
+		}
 	}
 	else
 		write(1, "\nError : invalid arguments\n", 27);

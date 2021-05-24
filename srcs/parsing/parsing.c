@@ -5,7 +5,7 @@ static int	ft_cpy(char **file, char *line, int size, int j)
 	int	i;
 
 	file[j] = malloc(sizeof(char) * size + 1);
-	if (!file)
+	if (!file[j])
 		return (0);
 	i = 0;
 	while (i < size)

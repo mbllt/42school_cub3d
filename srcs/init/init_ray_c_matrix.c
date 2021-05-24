@@ -1,6 +1,6 @@
 #include "cub3D.h"
 
-static int	malloc_matrix_x(t_vars *cub)
+int	malloc_matrix_x(t_vars *cub)
 {
 	int	i;
 
@@ -19,11 +19,6 @@ static int	malloc_matrix_x(t_vars *cub)
 
 int	init_matrix_x(t_vars *cub)
 {
-	static int	first = 0;
-
-	if (first == 0)
-		if (!(malloc_matrix_x(cub)))
-			return (0);
 	cub->ray_c.matrix_x[0][0] = 1;
 	cub->ray_c.matrix_x[0][1] = 0;
 	cub->ray_c.matrix_x[0][2] = 0;
@@ -36,7 +31,7 @@ int	init_matrix_x(t_vars *cub)
 	return (1);
 }
 
-static int	malloc_matrix_z(t_vars *cub)
+int	malloc_matrix_z(t_vars *cub)
 {
 	int	i;
 
@@ -55,11 +50,6 @@ static int	malloc_matrix_z(t_vars *cub)
 
 int	init_matrix_z(t_vars *cub)
 {
-	static int	first = 0;
-
-	if (first == 0)
-		if (!(malloc_matrix_z(cub)))
-			return (0);
 	cub->ray_c.matrix_z[0][0] = cos(cub->ray_c.rota_z);
 	cub->ray_c.matrix_z[0][1] = -sin(cub->ray_c.rota_z);
 	cub->ray_c.matrix_z[0][2] = 0;

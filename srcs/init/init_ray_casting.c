@@ -74,7 +74,11 @@ static int	init_ray_casting2(t_vars *cub)
 	init_xyz(cub);
 	if (!(init_malloc_plans(cub)))
 		return (0);
+	if (!(malloc_matrix_x(cub)))
+		return (0);
 	if (!(init_matrix_x(cub)))
+		return (0);
+	if (!(malloc_matrix_z(cub)))
 		return (0);
 	if (!(init_matrix_z(cub)))
 		return (0);

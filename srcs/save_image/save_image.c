@@ -38,7 +38,7 @@ int	save_header(t_vars *cub)
 {
 	int	ret_write;
 
-	cub->fd = open("save.bmp", O_WRONLY | O_CREAT | O_TRUNC, S_IRWXO);
+	cub->fd = open("save.bmp", O_WRONLY | O_CREAT | O_TRUNC, S_IRWXU);
 	if (cub->fd < 0)
 	{
 		return (0);

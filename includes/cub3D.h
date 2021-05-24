@@ -301,5 +301,7 @@ int				save_header(t_vars *cub);
 int				get_index_x(void *thread_data);
 t_vector		get_ray_temp(void *thread_data, int x, int y);
 int				save_bitmap(t_vars *cub);
+int				malloc_matrix_x(t_vars *cub);
+int				malloc_matrix_z(t_vars *cub);
 
 #endif
