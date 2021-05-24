@@ -24,7 +24,9 @@ static char	**ft_realloc_double(char **str, int size_src, int size_dst)
 
 	if (!(*str))
 		return (NULL);
-	if (!(temp = malloc(sizeof(char*) * size_dst)))
+	temp = NULL;
+	temp = malloc(sizeof(char *) * size_dst);
+	if (!temp)
 	{
 		if (str)
 			free(str);
@@ -43,8 +45,8 @@ static char	**ft_realloc_double(char **str, int size_src, int size_dst)
 
 static char	**read_parsing(t_vars *cub, int fd, char *line, int *file_y)
 {
-	int	ret;
-	char **file;
+	int		ret;
+	char	**file;
 
 	ret = 1;
 	file = NULL;

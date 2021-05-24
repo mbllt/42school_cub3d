@@ -16,7 +16,6 @@ static size_t	ft_cpymap(char *dest, const char *src, size_t destsize)
 		dest[i] = src[i];
 		i++;
 	}
-
 	while (i < destsize)
 	{
 		dest[i] = ' ';
@@ -37,15 +36,17 @@ int	get_world_map(t_vars *cub, char **map, int map_y, int file_y)
 	i = 0;
 	while (i < map_y)
 	{
-		cub->parsing.world_map[i] = malloc(sizeof(char) * (cub->parsing.map_x + 1));
+		cub->parsing.world_map[i] = malloc(sizeof(char) \
+			* (cub->parsing.map_x + 1));
 		if (!cub->parsing.world_map[i])
 		{
 			ft_double_free(cub->parsing.world_map, i);
 			return (0);
 		}
 		index_map = (file_y - (map_y - 1)) + i;
-		 if(!(ft_cpymap(cub->parsing.world_map[i], map[index_map], cub->parsing.map_x)))
-		 	return (0);
+		if (!(ft_cpymap(cub->parsing.world_map[i], map[index_map], \
+				cub->parsing.map_x)))
+			return (0);
 		i++;
 	}
 	return (1);

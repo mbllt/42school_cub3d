@@ -2,8 +2,8 @@
 
 int	is_res_or_colors(char *line)
 {
-	int	i;
-	char c;
+	int		i;
+	char	c;
 
 	i = 0;
 	while (line[i] == ' ')
@@ -16,8 +16,8 @@ int	is_res_or_colors(char *line)
 
 int	is_path_textures(char *line)
 {
-	int	i;
-	char c;
+	int		i;
+	char	c;
 
 	i = 0;
 	while (line[i] == ' ')

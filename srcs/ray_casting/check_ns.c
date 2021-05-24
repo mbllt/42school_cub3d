@@ -1,10 +1,11 @@
 #include "cub3D.h"
 
-static int	intersct_plan_ns(t_vars *cub, t_vector ray, int i, t_dot_intersct *intersct)
+static int	intersct_plan_ns(t_vars *cub, t_vector ray, \
+		int i, t_dot_intersct *intersct)
 {
 	if (ray.y == 0)
 		return (0);
-	(*intersct).t_distance = - cub->parsing.py + i;
+	(*intersct).t_distance = -cub->parsing.py + i;
 	(*intersct).t_distance /= ray.y;
 	if ((*intersct).t_distance < 0)
 		return (0);
@@ -35,14 +36,15 @@ static int	is_wall_n(t_vars *cub, int x, int y)
 	return (0);
 }
 
-t_dot_intersct	check_wall_n(t_vars *cub, t_vector ray, t_dot_intersct *intersct)
+t_dot_intersct	check_wall_n(t_vars *cub, t_vector ray, \
+		t_dot_intersct *intersct)
 {
 	int	i;
 	int	x;
 	int	y;
 
 	i = (int)cub->parsing.py;
-	while(i >= 0)
+	while (i >= 0)
 	{
 		if ((intersct_plan_ns(cub, ray, i, intersct)) == 1)
 		{
@@ -51,11 +53,13 @@ t_dot_intersct	check_wall_n(t_vars *cub, t_vector ray, t_dot_intersct *intersct)
 			if ((*intersct).dot.z < 1 && (*intersct).dot.z >= 0 \
 				&& (is_wall_n(cub, x, y)) == 1)
 			{
-				return ((t_dot_intersct){(*intersct).dot, (*intersct).t_distance, 0, ray});
+				return ((t_dot_intersct){(*intersct).dot, \
+					(*intersct).t_distance, 0, ray});
 			}
 			else if ((*intersct).dot.z >= 1 || (*intersct).dot.z < 0)
 			{
-				return ((t_dot_intersct){(*intersct).dot, (*intersct).t_distance, -1, ray});
+				return ((t_dot_intersct){(*intersct).dot, \
+					(*intersct).t_distance, -1, ray});
 			}
 		}
 		i--;
@@ -86,7 +90,8 @@ static int	is_wall_s(t_vars *cub, int x, int y)
 	return (0);
 }
 
-t_dot_intersct	check_wall_s(t_vars *cub, t_vector ray, t_dot_intersct *intersct)
+t_dot_intersct	check_wall_s(t_vars *cub, t_vector ray, \
+		t_dot_intersct *intersct)
 {
 	int	i;
 	int	x;
@@ -102,11 +107,13 @@ t_dot_intersct	check_wall_s(t_vars *cub, t_vector ray, t_dot_intersct *intersct)
 			if ((*intersct).dot.z < 1 && (*intersct).dot.z >= 0 \
 				&& (is_wall_s(cub, x, y)) == 1)
 			{
-				return ((t_dot_intersct){(*intersct).dot, (*intersct).t_distance, 1, ray});
+				return ((t_dot_intersct){(*intersct).dot, \
+					(*intersct).t_distance, 1, ray});
 			}
 			else if ((*intersct).dot.z >= 1 || (*intersct).dot.z < 0)
 			{
-				return ((t_dot_intersct){(*intersct).dot, (*intersct).t_distance, -1, ray});
+				return ((t_dot_intersct){(*intersct).dot, \
+					(*intersct).t_distance, -1, ray});
 			}
 		}
 		i++;

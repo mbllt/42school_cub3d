@@ -3,9 +3,9 @@
 static	int	get_addr_text(t_text *textures, int i)
 {
 	textures[i].addr = (unsigned int *)mlx_get_data_addr(textures[i].img, \
-										&(textures[i].bits_per_pixel), \
-										&(textures[i].line_length), 
-										&(textures[i].endian));
+			&(textures[i].bits_per_pixel), \
+			&(textures[i].line_length),
+			&(textures[i].endian));
 	return (1);
 }
 

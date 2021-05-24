@@ -1,4 +1,3 @@
-
 #include "cub3D.h"
 
 int	is_cardinal(char c)

@@ -60,7 +60,7 @@ int	check_data(t_vars *cub, char *line, int ret)
 				return (0);
 		if (is_path_textures(line))
 			if (!(check_path_textures(cub, line)))
-					return (0);
+				return (0);
 	}
 	nbr = check_nbr_param_and_order(line, ret);
 	if (nbr == -1)

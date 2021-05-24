@@ -1,6 +1,7 @@
 #include "cub3D.h"
 
-static int	intersct_plan_ew(t_vars *cub, t_vector ray, int i, t_dot_intersct *intersct)
+static int	intersct_plan_ew(t_vars *cub, t_vector ray, int i, \
+		t_dot_intersct *intersct)
 {
 	if (ray.x == 0)
 		return (0);
@@ -35,7 +36,8 @@ static int	is_wall_e(t_vars *cub, int x, int y)
 	return (0);
 }
 
-t_dot_intersct	check_wall_e(t_vars *cub, t_vector ray, t_dot_intersct *intersct)
+t_dot_intersct	check_wall_e(t_vars *cub, t_vector ray, \
+		t_dot_intersct *intersct)
 {
 	int	i;
 	int	x;
@@ -50,10 +52,12 @@ t_dot_intersct	check_wall_e(t_vars *cub, t_vector ray, t_dot_intersct *intersct)
 			y = (int)(*intersct).dot.y;
 			if ((*intersct).dot.z < 1 && (*intersct).dot.z >= 0 \
 				&& (is_wall_e(cub, x, y)) == 1)
-				return ((t_dot_intersct){(*intersct).dot, (*intersct).t_distance, 2, ray});
+				return ((t_dot_intersct){(*intersct).dot, \
+					(*intersct).t_distance, 2, ray});
 			else if ((*intersct).dot.z >= 1 || (*intersct).dot.z < 0)
 			{
-				return ((t_dot_intersct){(*intersct).dot, (*intersct).t_distance, -1, ray});
+				return ((t_dot_intersct){(*intersct).dot, \
+					(*intersct).t_distance, -1, ray});
 			}
 		}
 		i++;
@@ -83,7 +87,9 @@ static int	is_wall_w(t_vars *cub, int x, int y)
 	}
 	return (0);
 }
-t_dot_intersct	check_wall_w(t_vars *cub, t_vector ray, t_dot_intersct *intersct)
+
+t_dot_intersct	check_wall_w(t_vars *cub, t_vector ray, \
+		t_dot_intersct *intersct)
 {
 	int	i;
 	int	x;
@@ -99,11 +105,13 @@ t_dot_intersct	check_wall_w(t_vars *cub, t_vector ray, t_dot_intersct *intersct)
 			if ((*intersct).dot.z < 1 && (*intersct).dot.z >= 0 \
 				&& (is_wall_w(cub, x, y)) == 1)
 			{
-				return ((t_dot_intersct){(*intersct).dot, (*intersct).t_distance, 3, ray});
+				return ((t_dot_intersct){(*intersct).dot, \
+					(*intersct).t_distance, 3, ray});
 			}
 			else if ((*intersct).dot.z >= 1 || (*intersct).dot.z < 0)
 			{
-				return ((t_dot_intersct){(*intersct).dot, (*intersct).t_distance, -1, ray});
+				return ((t_dot_intersct){(*intersct).dot, \
+					(*intersct).t_distance, -1, ray});
 			}
 		}
 		i--;

@@ -25,7 +25,7 @@ static int	check_value_in_map(t_vars *cub, char **world_map)
 	return (1);
 }
 
-static int	check_corner(t_vars *cub, char **world_map, int i , int j)
+static int	check_corner(t_vars *cub, char **world_map, int i, int j)
 {
 	int	start_x;
 	int	end_x;
@@ -57,7 +57,7 @@ static int	check_corner(t_vars *cub, char **world_map, int i , int j)
 	return (1);
 }
 
-static int	check_around(char **world_map, int i , int j)
+static int	check_around(char **world_map, int i, int j)
 {
 	if (world_map[i][j - 1] == ' ' || world_map[i][j + 1] == ' ' \
 		|| world_map[i - 1][j] == ' ' || world_map[i + 1][j] == ' ')
@@ -92,7 +92,6 @@ static int	check_zero_inside(t_vars *cub, char **world_map)
 	}
 	return (1);
 }
-
 
 int	check_world_map(t_vars *cub, char **world_map)
 {

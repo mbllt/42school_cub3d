@@ -24,7 +24,7 @@ static size_t	nbr_str(const char *s, char c)
 	return (size);
 }
 
-static int		find_start(const char *s, char c, int start)
+static int	find_start(const char *s, char c, int start)
 {
 	int	i;
 
@@ -34,7 +34,7 @@ static int		find_start(const char *s, char c, int start)
 	return (i);
 }
 
-static int		find_len(char const *s, char c, int start)
+static int	find_len(char const *s, char c, int start)
 {
 	int	len;
 

@@ -18,7 +18,6 @@ static int	init_malloc_plans(t_vars *cub)
 			return (0);
 		}
 	}
-
 	while (i < 4)
 	{
 		cub->ray_c.plans[i] = malloc(sizeof(t_plan) * cub->parsing.map_y);
@@ -41,7 +40,7 @@ static int	init_malloc_plans(t_vars *cub)
 		}
 		i++;
 	}
-	return(1);
+	return (1);
 }
 
 static void	init_key(t_vars *cub)
@@ -81,6 +80,7 @@ static int	init_ray_casting2(t_vars *cub)
 		return (0);
 	return (1);
 }
+
 int	init_ray_casting(t_vars *cub)
 {
 	cub->ray_c.fov = 0;
@@ -100,7 +100,7 @@ int	init_ray_casting(t_vars *cub)
 	cub->ray_c.seconde = 0;
 	cub->ray_c.pixel_color = NULL;
 	if (!(init_ray_casting2(cub)))
-		return(0);
+		return (0);
 	cub->ray_c.nbr_sprite = 0;
 	if (!(init_sprite(cub, cub->parsing.world_map)))
 		return (0);

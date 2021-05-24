@@ -18,7 +18,7 @@ static int	get_size_y_map(t_vars *cub, char **map, int file_y)
 		else if (file_y == size_file && map[file_y][i] == 0)
 			return (0);
 		else
-			break;
+			break ;
 	}
 	cub->parsing.map_y = map_y;
 	return (1);
@@ -43,7 +43,7 @@ static void	get_size_x_map(t_vars *cub, char **map, int file_y)
 				map_x = i;
 		}
 		else
-			break;
+			break ;
 	}
 	cub->parsing.map_x = map_x;
 }
@@ -65,7 +65,7 @@ static int	get_cardinal(t_vars *cub)
 			{
 				cub->parsing.cardinal = cub->parsing.world_map[i][j];
 				cub->parsing.px = j + 0.5;
-				cub->parsing.py = i + 0.5; /* not sure for the - 0.5 */
+				cub->parsing.py = i + 0.5;
 				k++;
 			}
 			j++;

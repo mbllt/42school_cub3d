@@ -4,7 +4,7 @@ static int	init_pixel_data(t_vars *cub)
 {
 	int	i;
 
-	cub->pixel_data = malloc(sizeof(unsigned int*) * cub->parsing.rx);
+	cub->pixel_data = malloc(sizeof(unsigned int *) * cub->parsing.rx);
 	if (!cub->pixel_data)
 		return (0);
 	i = -1;

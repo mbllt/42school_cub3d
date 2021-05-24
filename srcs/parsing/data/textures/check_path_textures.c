@@ -28,7 +28,7 @@ static void	get_paths(t_vars *cub, char *str, int cardinal)
 		i = 3;
 	if (cardinal >= 4 && cardinal <= 6)
 		i = 2;
-	while(str[i] && str[i] == ' ')
+	while (str[i] && str[i] == ' ')
 		i++;
 	size = ft_strlen(str) - i;
 	if (cardinal == NORTH)
@@ -63,7 +63,7 @@ int	check_path_textures(t_vars *cub, char *line)
 	int	i;
 
 	i = 0;
-	while(line[i] && line[i] == ' ')
+	while (line[i] && line[i] == ' ')
 		i++;
 	cardinal = is_cardinal(line[i]);
 	if (cardinal == 1 && line[1] == ' ')

@@ -1,11 +1,11 @@
 #include "cub3D.h"
 
-static int get_nbr_sprite(t_vars *cub, char **map)
+static int	get_nbr_sprite(t_vars *cub, char **map)
 {
 	int	x;
 	int	y;
 	int	i;
-	
+
 	i = 1;
 	y = -1;
 	while (++y < cub->parsing.map_y)
