@@ -33,8 +33,8 @@ int	cub_loop(t_vars *cub, int argc, char **argv)
 		return (0);
 	if (!(get_textures(cub, cub->parsing.textures)))
 		return (0);	
-	cub->ray_c.win = mlx_new_window(cub->ray_c.mlx, cub->parsing.rx, cub->parsing.ry, "cub3D");
-	cub->ray_c.img = mlx_new_image(cub->ray_c.mlx, cub->parsing.rx, cub->parsing.ry);
+	cub->ray_c.win = mlx_new_window(cub->ray_c.mlx, cub->parsing.old_rx, cub->parsing.old_ry, "cub3D");
+	cub->ray_c.img = mlx_new_image(cub->ray_c.mlx, cub->parsing.old_rx, cub->parsing.old_ry);
 	if (!cub->ray_c.img)
 		return(0);
 	cub->ray_c.addr = mlx_get_data_addr(cub->ray_c.img, \

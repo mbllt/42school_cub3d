@@ -142,6 +142,9 @@ typedef struct s_parsing
 {
 	int			rx;
 	int			ry;
+	short int	scale_on;
+	int			old_rx;
+	int			old_ry;
 	char		*no;
 	char		*so;
 	char		*we;

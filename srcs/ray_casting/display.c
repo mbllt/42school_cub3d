@@ -53,6 +53,14 @@ void	display(t_vars *cub, int i, int j, t_dot_intersct prio_wall, float r)
 		pixel = get_pixel(cub->parsing.textures[0], x, y);
 		if (cub->save_on == 1)
 			cub->pixel_data[i][j] = pixel;
+		if (cub->parsing.scale_on == 1)
+		{
+			i *= 2;
+			j *= 2;
+			my_mlx_pixel_put(cub, i + 1, j + 1, (unsigned int)pixel);
+			my_mlx_pixel_put(cub, i, j + 1, (unsigned int)pixel);
+			my_mlx_pixel_put(cub, i + 1, j, (unsigned int)pixel);
+		}
 		my_mlx_pixel_put(cub, i, j, (unsigned int)pixel);
 	}
 	else if (prio_wall.cardinal == SOUTH)
@@ -61,6 +69,14 @@ void	display(t_vars *cub, int i, int j, t_dot_intersct prio_wall, float r)
 		pixel = get_pixel(cub->parsing.textures[1], x, y);
 		if (cub->save_on == 1)
 			cub->pixel_data[i][j] = pixel;
+		if (cub->parsing.scale_on == 1)
+		{
+			i *= 2;
+			j *= 2;
+			my_mlx_pixel_put(cub, i + 1, j + 1, (unsigned int)pixel);
+			my_mlx_pixel_put(cub, i, j + 1, (unsigned int)pixel);
+			my_mlx_pixel_put(cub, i + 1, j, (unsigned int)pixel);
+		}
 		my_mlx_pixel_put(cub, i, j, (unsigned int)pixel);
 	}
 	else if (prio_wall.cardinal == EAST)
@@ -69,6 +85,14 @@ void	display(t_vars *cub, int i, int j, t_dot_intersct prio_wall, float r)
 		pixel = get_pixel(cub->parsing.textures[2], x, y);
 		if (cub->save_on == 1)
 			cub->pixel_data[i][j] = pixel;
+		if (cub->parsing.scale_on == 1)
+		{
+			i *= 2;
+			j *= 2;
+			my_mlx_pixel_put(cub, i + 1, j + 1, (unsigned int)pixel);
+			my_mlx_pixel_put(cub, i, j + 1, (unsigned int)pixel);
+			my_mlx_pixel_put(cub, i + 1, j, (unsigned int)pixel);
+		}
 		my_mlx_pixel_put(cub, i, j, (unsigned int)pixel);
 	}
 	else if (prio_wall.cardinal == WEST)
@@ -77,6 +101,14 @@ void	display(t_vars *cub, int i, int j, t_dot_intersct prio_wall, float r)
 		pixel = get_pixel(cub->parsing.textures[3], x, y);
 		if (cub->save_on == 1)
 			cub->pixel_data[i][j] = pixel;
+		if (cub->parsing.scale_on == 1)
+		{
+			i *= 2;
+			j *= 2;
+			my_mlx_pixel_put(cub, i + 1, j + 1, (unsigned int)pixel);
+			my_mlx_pixel_put(cub, i, j + 1, (unsigned int)pixel);
+			my_mlx_pixel_put(cub, i + 1, j, (unsigned int)pixel);
+		}
 		my_mlx_pixel_put(cub, i, j, (unsigned int)pixel);
 	}
 	else if (prio_wall.cardinal == F)
@@ -85,6 +117,14 @@ void	display(t_vars *cub, int i, int j, t_dot_intersct prio_wall, float r)
 		pixel = get_pixel(cub->parsing.textures[4], x, y);
 		if (cub->save_on == 1)
 			cub->pixel_data[i][j] = pixel;
+		if (cub->parsing.scale_on == 1)
+		{
+			i *= 2;
+			j *= 2;
+			my_mlx_pixel_put(cub, i + 1, j + 1, (unsigned int)pixel);
+			my_mlx_pixel_put(cub, i, j + 1, (unsigned int)pixel);
+			my_mlx_pixel_put(cub, i + 1, j, (unsigned int)pixel);
+		}
 		my_mlx_pixel_put(cub, i, j, (unsigned int)pixel);
 	}
 	else if (prio_wall.cardinal == C)
@@ -93,6 +133,14 @@ void	display(t_vars *cub, int i, int j, t_dot_intersct prio_wall, float r)
 		pixel = get_pixel(cub->parsing.textures[5], x, y);
 		if (cub->save_on == 1)
 			cub->pixel_data[i][j] = pixel;
+		if (cub->parsing.scale_on == 1)
+		{
+			i *= 2;
+			j *= 2;
+			my_mlx_pixel_put(cub, i + 1, j + 1, (unsigned int)pixel);
+			my_mlx_pixel_put(cub, i, j + 1, (unsigned int)pixel);
+			my_mlx_pixel_put(cub, i + 1, j, (unsigned int)pixel);
+		}
 		my_mlx_pixel_put(cub, i, j, (unsigned int)pixel);
 	}
 	else if (prio_wall.cardinal == SPRITE)
@@ -101,10 +149,23 @@ void	display(t_vars *cub, int i, int j, t_dot_intersct prio_wall, float r)
 		pixel = get_pixel(cub->parsing.textures[6], x, y);
 		if (cub->save_on == 1)
 			cub->pixel_data[i][j] = pixel;
+		if (cub->parsing.scale_on == 1)
+		{
+			i *= 2;
+			j *= 2;
+			my_mlx_pixel_put(cub, i + 1, j + 1, (unsigned int)pixel);
+			my_mlx_pixel_put(cub, i, j + 1, (unsigned int)pixel);
+			my_mlx_pixel_put(cub, i + 1, j, (unsigned int)pixel);
+		}
 		my_mlx_pixel_put(cub, i, j, (unsigned int)pixel);
 	}
 	else
 	{
+		if (cub->parsing.scale_on == 1)
+		{
+			i *= 2;
+			j *= 2;
+		}
 		my_mlx_pixel_put(cub, i, j, (unsigned int)"255,0,255");
 	}
 }
