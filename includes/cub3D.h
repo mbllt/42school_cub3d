@@ -31,6 +31,13 @@ typedef enum e_dir
 	SPRITE,
 }t_dir;
 
+typedef struct s_index
+{
+	int	x;
+	int	y;
+}t_index;
+
+
 typedef	struct s_direction
 {
 	float	t_north;
@@ -158,37 +165,38 @@ typedef struct s_parsing
 	int			file_y;
 }t_parsing;
 
-typedef struct __attribute__((__packed__)) s_info_header
+typedef struct __attribute__((__packed__)) s_header_bitmap
 {
-	unsigned int	size;
-	unsigned int	width;
-	unsigned int	height;
-	unsigned int	planes;
-	unsigned int	bpp;
-	unsigned int	compression;
-	unsigned int	imagesize;
-	unsigned int	xpixelsperm;
-	unsigned int	ypixelsperm;
-	unsigned int	colors_used;
-	unsigned int	important_colors;
-}t_info_header;
+	unsigned int		size;
+	unsigned int		width;
+	unsigned int		height;
+	unsigned short int	planes;
+	unsigned short int	bpp;
+	unsigned int		compression;
+	unsigned int		imagesize;
+	unsigned int		xpixelsperm;
+	unsigned int		ypixelsperm;
+	unsigned int		colors_used;
+	unsigned int		important_colors;
+}t_header_bitmap;
 
-typedef struct __attribute__((__packed__)) s_image
+typedef struct __attribute__((__packed__)) s_header_file
 {
-	char			signature[3];
+	char			signature[2];
 	unsigned int	file_size;
 	unsigned int	reserved;
 	unsigned int	data_offset;
-	t_info_header	header_bitmap;
+	t_header_bitmap	header_bitmap;
 
-}t_image;
+}t_header_file;
 
 typedef struct s_vars
 {
 	t_ray			ray_c;
 	t_parsing		parsing;
 	unsigned int	save_on;
-	t_image			save;
+	t_header_file	save;
+	int				fd;
 	unsigned int	**pixel_data;
 }t_vars;
 
@@ -273,6 +281,9 @@ unsigned int	get_pixel(t_text texture, int x, int y);
 float			scalaire_v(t_vector v, t_vector v2);
 void			get_xy_sprite(t_dot_intersct prio_wall, t_text text, int *x, int *y, float r);
 int				init_save_image(t_vars *cub);
-int				save_image(t_vars *cub);
+int				save_header(t_vars *cub);
+int				get_index_x(void *thread_data);
+t_vector		get_ray_temp(void *thread_data, int x, int y);
+int				save_bitmap(t_vars *cub);
 
 #endif

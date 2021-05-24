@@ -32,15 +32,29 @@ int	cub_loop(t_vars *cub, int argc, char **argv)
 	if (!cub->ray_c.mlx)
 		return (0);
 	if (!(get_textures(cub, cub->parsing.textures)))
-		return (0);
+		return (0);	
 	cub->ray_c.win = mlx_new_window(cub->ray_c.mlx, cub->parsing.rx, cub->parsing.ry, "cub3D");
 	cub->ray_c.img = mlx_new_image(cub->ray_c.mlx, cub->parsing.rx, cub->parsing.ry);
 	if (!cub->ray_c.img)
 		return(0);
-		cub->ray_c.addr = mlx_get_data_addr(cub->ray_c.img, \
+	cub->ray_c.addr = mlx_get_data_addr(cub->ray_c.img, \
 		&cub->ray_c.bits_per_pixel, &cub->ray_c.line_length, \
 		&cub->ray_c.endian);
-
+	if (cub->save_on == 1)
+	{
+		if (!(init_save_image(cub)))
+			return (0);
+		if (!(save_header(cub)))
+			return (0);
+		if (!(create_plans_sprite(cub)))
+			return (0);
+		if (!(multithread(cub)))
+			return (0);
+		if (!(save_bitmap(cub)))
+			return (0);
+		close(cub->fd);
+		ft_exit(cub);
+	}
 	mlx_loop_hook(cub->ray_c.mlx, frame, cub);
 	mlx_hook(cub->ray_c.win, 2, 1L<<0, key_press, cub);
 	mlx_hook(cub->ray_c.win, 3, 1L<<1, key_release, cub);
@@ -66,9 +80,6 @@ int	main(int argc, char **argv)
 	if ((argc == 2 && check_argv1(argv[1]) == 1)\
 		|| (argc == 3 && check_argv2(&cub, argv[2]) == 1))
 	{
-		if (cub.save_on == 1)
-			if (!(init_save_image(&cub)))
-				return (0);
 		if (!(cub_loop(&cub, argc, argv)))
 			return(-1);
 	}

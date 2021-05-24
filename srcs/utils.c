@@ -41,3 +41,11 @@ inline float	scalaire_v(t_vector v, t_vector v2)
 {
 	return ((v.x * v2.x) + (v.y * v2.y) + (v.z * v2.z));
 }
+
+int	get_index_x(void *thread_data)
+{
+	int	index;
+	index = ((t_thread*)thread_data)->thread_num * \
+			ceil((((t_thread*)thread_data)->cub.parsing.rx * 0.25));
+	return (index);
+}

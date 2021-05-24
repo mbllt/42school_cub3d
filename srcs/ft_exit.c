@@ -69,8 +69,6 @@ static void	free_path(t_vars *cub)
 
 int	ft_exit(t_vars *cub)
 {
-	int	i;
-
 	mlx_destroy_window(cub->ray_c.mlx, cub->ray_c.win);
 	free_stock_rays(cub);
 	free_matrix(cub);
@@ -80,15 +78,7 @@ int	ft_exit(t_vars *cub)
 	ft_double_free(cub->parsing.file, cub->parsing.file_y -1);
 	free_path(cub);
 	ft_double_free(cub->parsing.world_map, cub->parsing.map_y);
-	if (cub->save_on == 1)
-	{
-		i = -1;
-		while (++i < cub->parsing.rx)
-			if (cub->pixel_data[i])
-				free(cub->pixel_data[i]);
-		if (cub->pixel_data)
-			free(cub->pixel_data);
-	}
 	exit(0);
+	/* free pixel_data */
 	return (1);
 }

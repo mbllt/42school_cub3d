@@ -44,9 +44,10 @@ static void	init_intersct(t_dot_intersct intersct[])
 	}
 }
 
-static int	check_direction(t_vars *cub, t_dot_intersct intersct[], \
+static int	dir(t_vars *cub, t_dot_intersct intersct[], \
 			t_vector ray, float *r)
 {
+	init_intersct(intersct);
 	if (ray.y < 0)
 	{	
 		intersct[0] = check_wall_n(cub, ray, &intersct[0]);
@@ -65,6 +66,7 @@ static int	check_direction(t_vars *cub, t_dot_intersct intersct[], \
 	}
 	intersct[4] = check_wall_f(cub, ray, &intersct[4]);
 	intersct[5] = check_wall_c(cub, ray, &intersct[5]);
+	*r = 0;
 	intersct[6] = sprite(cub, ray, &intersct[6], r);
 	if (intersct[6].cardinal == -10)
 		return (0);
@@ -73,36 +75,29 @@ static int	check_direction(t_vars *cub, t_dot_intersct intersct[], \
 
 void	*graphical_loop(void *thread_data)
 {
-	int				i;
-	int				j;
+	t_index			index;
 	t_dot_intersct	intersct[7];
 	t_dot_intersct	prio;
 	t_vector		ray_temp;
 	float			r;
 
-	init_intersct(intersct);
-	i = ((t_thread*)thread_data)->thread_num * \
-			ceil((((t_thread*)thread_data)->cub.parsing.rx * 0.25));
-	while (i < (((t_thread*)thread_data)->thread_num + 1) * \
+	index.x = get_index_x(thread_data);
+	while (index.x < (((t_thread*)thread_data)->thread_num + 1) * \
 			ceil((((t_thread*)thread_data)->cub.parsing.rx * 0.25)) \
-			&& i < ((t_thread*)thread_data)->cub.parsing.rx)
+			&& index.x < ((t_thread*)thread_data)->cub.parsing.rx)
 	{
-		j = 0;
-		while (j < ((t_thread*)thread_data)->cub.parsing.ry)
+		index.y = 0;
+		while (index.y < ((t_thread*)thread_data)->cub.parsing.ry)
 		{
-			ray_temp = ((t_thread*)thread_data)->cub.ray_c.stock_rays[i][j];
-			ray_temp = rotation_x(&((t_thread*)thread_data)->cub, ray_temp);
-			ray_temp = rotation_z(&((t_thread*)thread_data)->cub, ray_temp);
-			r = 0;
-			if (!(check_direction(&((t_thread*)thread_data)->cub, intersct, \
-					ray_temp, &r)))
+			ray_temp = get_ray_temp(thread_data, index.x, index.y);
+			if (!(dir(&((t_thread*)thread_data)->cub, intersct, ray_temp, &r)))
 				return ((void *)-1);
 			prio = compare_distance(intersct);
 			prio.ray = ray_temp;
-			display(&((t_thread*)thread_data)->cub, i, j, prio, r);
-			j++;
+			display(thread_data, index.x, index.y, prio, r);
+			index.y++;
 		}
-		i++;
+		index.x++;
 	}
 	return ((void *)0);
 }

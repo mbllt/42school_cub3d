@@ -20,3 +20,12 @@ unsigned int	get_pixel(t_text texture, int x, int y)
 	temp =  y * (texture.line_length * 0.25) + x;
 	return (texture.addr[temp]);
 }
+
+t_vector	get_ray_temp(void *thread_data, int x, int y)
+{
+	t_vector	ray_temp;
+	ray_temp = ((t_thread*)thread_data)->cub.ray_c.stock_rays[x][y];
+	ray_temp = rotation_x(&((t_thread*)thread_data)->cub, ray_temp);
+	ray_temp = rotation_z(&((t_thread*)thread_data)->cub, ray_temp);
+	return (ray_temp);
+}

@@ -1,99 +1,52 @@
 #include "cub3D.h"
+#include <errno.h>
+#include <string.h>
 
-static int	malloc_temp(t_vars *cub, unsigned int ***temp)
-{
-	int				i;
-
-	(*temp) = malloc(sizeof(unsigned int *) * cub->parsing.rx);
-	if ((*temp))
-		return (0);
-	i = -1;
-	while (++i < cub->parsing.rx)
-	{
-		(*temp)[i] = malloc(sizeof(unsigned int) * cub->parsing.ry);
-		if (!(*temp)[i])
-		{
-			while (--i >= 0)
-				if ((*temp)[i])
-					free((*temp)[i]);
-			free((*temp));
-			return (0);
-		}
-	}
-	return (1);
-}
-
-static int	fill_in_str(t_vars *cub, unsigned int ***temp)
+int	save_bitmap(t_vars *cub)
 {
 	int				i;
 	int				j;
+	int				ret;
+	unsigned char	buffer[3];
 
-	(*temp) = NULL;
-	malloc_temp(cub, temp);
-	if (!(*temp))
-		return (0);
-	i = 0;
-	while (i < cub->parsing.rx)
+	i = cub->parsing.ry;
+	while (--i >= 0)
 	{
+		buffer[0] = 0;
+		buffer[1] = 0;
+		buffer[2] = 0;
 		j = 0;
-		while (j < cub->parsing.ry)
+		while (j < cub->parsing.rx)
 		{
-			(*temp)[i][j] = cub->pixel_data[i][j];
-			//printf("yoy\n");
+			buffer[0] = cub->pixel_data[j][i] & 0x000000FF;
+			buffer[1] = cub->pixel_data[j][i] >> 8;
+			buffer[2] = cub->pixel_data[j][i] >> 16;
+			ret = write(cub->fd, &buffer, 3);
+			if (ret < 0)
+			{
+				close(cub->fd);
+				ft_exit(cub);
+				return (0);
+			}
 			j++;
 		}
-		i++;
 	}
 	return (1);
 }
 
-static void	ft_free_temp(unsigned int **temp, int size)
+int	save_header(t_vars *cub)
 {
-	int	i;
+	int	ret_write;
 
-	i = 0;
-	while (i < size)
-	{
-		if (temp[i])
-			free(temp[i]);
-		i++;
-	}
-	if (temp)
-		free(temp);
-}
-
-int	save_image(t_vars *cub)
-{
-	int				fd;
-	int				ret_write;
-	unsigned int	**temp;
-
-	fd = open("save.bmp", O_WRONLY | O_CREAT | O_TRUNC, 00777); /* try with S_IRWXO */
-	if (fd < 0)
+	cub->fd = open("save.bmp", O_WRONLY | O_CREAT | O_TRUNC, S_IRWXO); /*00777*/ /* try with S_IRWXO */
+	if (cub->fd < 0)
 	{
 		return (0);
 	}
-	ret_write = write(fd, (char *)&cub->save, sizeof(cub->save));
+	ret_write = write(cub->fd, &cub->save, 14 + 40);
 	if (ret_write < 0)
 	{
 		return (0);
 	}
-	fill_in_str(cub, &temp);
-	if (!temp)
-	{
-		return (0);
-	}
-	ret_write = write(fd, (char *)&temp, (cub->parsing.rx * cub->parsing.ry) * 4);
-	if (ret_write < 0)
-	{
-		return (0);
-	}
-	close(fd);
-	ft_free_temp(temp, cub->parsing.rx);
 	return (1);
 }
-
-//#include <errno.h>
-//#include <string.h>
-
-/*printf("%s\n", strerror(errno));*/
