@@ -17,7 +17,6 @@ int	check_res_color(t_vars *cub, char *line)
 			write(1, "\nError : resolution\n", 21);
 			if (str)
 			{
-				printf("yoy\n");
 				ft_double_free(str, size);
 			}
 			return (0);

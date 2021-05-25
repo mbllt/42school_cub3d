@@ -65,9 +65,10 @@ char	**ft_split(char *s, char c, int *size)
 	if (!s)
 		return (NULL);
 	(*size) = nbr_str(s, c);
-	dest = (char **)malloc(sizeof(char *) * (*size) + sizeof(char *));
+	dest = malloc(sizeof(char *) * (*size) + sizeof(char *));
 	if (!dest)
 		return (NULL);
+	//printf("%address :p\n", &(*dest));
 	i = -1;
 	start = 0;
 	len = 0;

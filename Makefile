@@ -6,7 +6,7 @@
 #    By: mballet <mballet@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/14 14:39:52 by mballet           #+#    #+#              #
-#    Updated: 2021/05/24 19:53:11 by mballet          ###   ########lyon.fr    #
+#    Updated: 2021/05/25 11:10:17 by mballet          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,7 +55,7 @@ OBJS			=	$(SRCS:.c=.o)
 
 HEADERS			=	includes/cub3D.h \
 					mlx/mlx.h \
-					includes/get_next_line.h \
+					includes/get_next_line.h
 
 CC				=	gcc
 

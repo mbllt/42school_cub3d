@@ -54,9 +54,9 @@ char	*ft_substr(char *s, int start, size_t len)
 		return (NULL);
 	size = find_size(s, start);
 	if (size > len)
-		str = (char *)malloc(sizeof(char) * (len + 1));
-	else
-		str = (char *)malloc(sizeof(char) * (size + 1));
+		str = malloc(sizeof(char) * (len + 1));
+	if (size <= len)
+		str = malloc(sizeof(char) * (size + 1));
 	if (!str)
 		return (NULL);
 	i = 0;

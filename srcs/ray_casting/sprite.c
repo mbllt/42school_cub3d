@@ -88,6 +88,26 @@ static int	check_transparence(t_vars *cub, t_dot_intersct intersct, float r)
 	return (1);
 }
 
+// static void	ft_bzero(void *s, size_t n)
+// {
+// 	unsigned char	*c;
+
+// 	c = (unsigned char*)s;
+// 	while (n-- > 0)
+// 		c[n] = 0;
+// }
+
+// static void	*ft_calloc(size_t count, size_t size)
+// {
+// 	void	*tab;
+
+// 	tab = malloc(size * count);
+// 	if (!tab)
+// 		return (NULL);
+// 	ft_bzero(tab, (size * count));
+// 	return (tab);
+// }
+
 t_dot_intersct	sprite(t_vars *cub, t_vector ray, t_dot_intersct *intersct, \
 						float *r)
 {
@@ -96,11 +116,11 @@ t_dot_intersct	sprite(t_vars *cub, t_vector ray, t_dot_intersct *intersct, \
 	float			*r_temp;
 	t_dot_intersct	temp;
 
-	sprite = malloc(sizeof(t_dot_intersct) * cub->ray_c.nbr_sprite);
+	sprite = malloc(cub->ray_c.nbr_sprite * sizeof(t_dot_intersct));
 	if (!sprite)
 		return ((t_dot_intersct){(t_vector){0, 0, 0}, 0, -10, \
 			(t_vector){0, 0, 0}});
-	r_temp = malloc(sizeof(float) * cub->ray_c.nbr_sprite);
+	r_temp = malloc(cub->ray_c.nbr_sprite * sizeof(float));
 	if (!r_temp)
 		return ((t_dot_intersct){(t_vector){0, 0, 0}, 0, -10, \
 			(t_vector){0, 0, 0}});

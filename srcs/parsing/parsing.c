@@ -59,7 +59,7 @@ static char	**read_parsing(t_vars *cub, int fd, char *line, int *file_y)
 			ret = -1;
 		if ((*file_y) == 1)
 			file = malloc(sizeof(char *) * (*file_y));
-		else
+		if ((*file_y) != 1)
 			file = ft_realloc_double(file, ((*file_y) - 1), (*file_y));
 		if (!file)
 			return (NULL);
