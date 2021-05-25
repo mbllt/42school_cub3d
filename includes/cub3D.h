@@ -306,5 +306,6 @@ void			init(t_vars *cub, t_dot_intersct *sprite, float *r_temp);
 float			get_r(t_vars *cub, t_dot_intersct *intersct, int i);
 int				malloc_sp_r_temp(t_vars *cub, t_dot_intersct **sprite, float **r_temp);
 void			free_sp_r_temp(t_dot_intersct **sprite, float **r_temp);
+unsigned int	dark_color(unsigned int pixel, float distance);
 
 #endif
