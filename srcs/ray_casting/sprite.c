@@ -88,26 +88,6 @@ static int	check_transparence(t_vars *cub, t_dot_intersct intersct, float r)
 	return (1);
 }
 
-// static void	ft_bzero(void *s, size_t n)
-// {
-// 	unsigned char	*c;
-
-// 	c = (unsigned char*)s;
-// 	while (n-- > 0)
-// 		c[n] = 0;
-// }
-
-// static void	*ft_calloc(size_t count, size_t size)
-// {
-// 	void	*tab;
-
-// 	tab = malloc(size * count);
-// 	if (!tab)
-// 		return (NULL);
-// 	ft_bzero(tab, (size * count));
-// 	return (tab);
-// }
-
 t_dot_intersct	sprite(t_vars *cub, t_vector ray, t_dot_intersct *intersct, \
 						float *r)
 {

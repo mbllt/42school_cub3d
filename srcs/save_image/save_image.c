@@ -2,7 +2,7 @@
 #include <errno.h>
 #include <string.h>
 
-int	save_bitmap(t_vars *cub)
+void	save_bitmap(t_vars *cub)
 {
 	int				i;
 	int				j;
@@ -26,27 +26,27 @@ int	save_bitmap(t_vars *cub)
 			{
 				close(cub->fd);
 				ft_exit(cub);
-				return (0);
+				return ;
 			}
 			j++;
 		}
 	}
-	return (1);
+	return ;
 }
 
-int	save_header(t_vars *cub)
+void	save_header(t_vars *cub)
 {
 	int	ret_write;
 
 	cub->fd = open("save.bmp", O_WRONLY | O_CREAT | O_TRUNC, S_IRWXU);
 	if (cub->fd < 0)
 	{
-		return (0);
+		return ;
 	}
 	ret_write = write(cub->fd, &cub->save, 14 + 40);
 	if (ret_write < 0)
 	{
-		return (0);
+		return ;
 	}
-	return (1);
+	return ;
 }

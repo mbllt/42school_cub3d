@@ -24,6 +24,27 @@ static int	check_argv2(t_vars *cub, char *str)
 	return (1);
 }
 
+static int	save(t_vars *cub)
+{
+	if (!(init_save_image(cub)))
+		return (0);
+	save_header(cub);
+	if (!(create_plans_sprite(cub)))
+	{
+		close(cub->fd);
+		return (0);
+	}
+	if (!(multithread(cub)))
+	{
+		close(cub->fd);
+		return (0);
+	}
+	save_bitmap(cub);
+	close(cub->fd);
+	ft_exit(cub);
+	return (1);
+}
+
 int	cub_loop(t_vars *cub, int argc, char **argv)
 {
 	(void)argc;
@@ -42,21 +63,8 @@ int	cub_loop(t_vars *cub, int argc, char **argv)
 	cub->ray_c.addr = mlx_get_data_addr(cub->ray_c.img, \
 		&cub->ray_c.bits_per_pixel, &cub->ray_c.line_length, \
 		&cub->ray_c.endian);
-	if (cub->save_on == 1)
-	{
-		if (!(init_save_image(cub)))
-			return (0);
-		if (!(save_header(cub)))
-			return (0);
-		if (!(create_plans_sprite(cub)))
-			return (0);
-		if (!(multithread(cub)))
-			return (0);
-		if (!(save_bitmap(cub)))
-			return (0);
-		close(cub->fd);
-		ft_exit(cub);
-	}
+	if (cub->save_on == 1 && !(save(cub)))
+		return (0);
 	mlx_loop_hook(cub->ray_c.mlx, frame, cub);
 	mlx_hook(cub->ray_c.win, 2, 1L << 0, key_press, cub);
 	mlx_hook(cub->ray_c.win, 3, 1L << 1, key_release, cub);
@@ -84,6 +92,7 @@ int	main(int argc, char **argv)
 	{
 		if (!(cub_loop(&cub, argc, argv)))
 		{
+			ft_exit(&cub);
 			return (-1);
 		}
 	}

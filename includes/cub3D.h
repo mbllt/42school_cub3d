@@ -298,10 +298,10 @@ float			scalaire_v(t_vector v, t_vector v2);
 void			get_xy_sprite(t_dot_intersct prio_wall, \
 				t_text text, int *x, int *y, float r);
 int				init_save_image(t_vars *cub);
-int				save_header(t_vars *cub);
+void			save_header(t_vars *cub);
 int				get_index_x(void *thread_data);
 t_vector		get_ray_temp(void *thread_data, int x, int y);
-int				save_bitmap(t_vars *cub);
+void			save_bitmap(t_vars *cub);
 int				malloc_matrix_x(t_vars *cub);
 int				malloc_matrix_z(t_vars *cub);
 
