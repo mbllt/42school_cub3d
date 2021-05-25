@@ -6,7 +6,7 @@
 #    By: mballet <mballet@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/14 14:39:52 by mballet           #+#    #+#              #
-#    Updated: 2021/05/25 14:20:38 by mballet          ###   ########lyon.fr    #
+#    Updated: 2021/05/25 15:52:52 by mballet          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,7 @@ EXE				=	cub3D
 SRCS			=	srcs/main.c \
 					srcs/utils.c \
 					srcs/utils2.c \
+					srcs/utils3.c \
 					srcs/ft_exit.c \
 					srcs/init/init_parsing.c \
 					srcs/init/init_ray_casting.c \

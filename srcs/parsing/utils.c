@@ -42,3 +42,10 @@ int	ft_atoi(const char *str)
 	}
 	return (0);
 }
+
+int	check_one(char c, char d, char e, char f)
+{
+	if (!(is_one(c)) || !(is_one(d)) || !(is_one(e)) || !(is_one(f)))
+		return (0);
+	return (1);
+}

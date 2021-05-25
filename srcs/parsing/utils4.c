@@ -68,7 +68,6 @@ char	**ft_split(char *s, char c, int *size)
 	dest = malloc(sizeof(char *) * (*size) + sizeof(char *));
 	if (!dest)
 		return (NULL);
-	//printf("%address :p\n", &(*dest));
 	i = -1;
 	start = 0;
 	len = 0;

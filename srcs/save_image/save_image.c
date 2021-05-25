@@ -15,8 +15,8 @@ void	save_bitmap(t_vars *cub)
 		buffer[0] = 0;
 		buffer[1] = 0;
 		buffer[2] = 0;
-		j = 0;
-		while (j < cub->parsing.rx)
+		j = -1;
+		while (++j < cub->parsing.rx)
 		{
 			buffer[0] = cub->pixel_data[j][i] & 0x000000FF;
 			buffer[1] = cub->pixel_data[j][i] >> 8;
@@ -26,12 +26,9 @@ void	save_bitmap(t_vars *cub)
 			{
 				close(cub->fd);
 				ft_exit(cub);
-				return ;
 			}
-			j++;
 		}
 	}
-	return ;
 }
 
 void	save_header(t_vars *cub)

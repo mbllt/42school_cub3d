@@ -43,6 +43,17 @@ static char	**ft_realloc_double(char **str, int size_src, int size_dst)
 	return (temp);
 }
 
+static int	malloc_file(char ***file, int *file_y)
+{
+	if ((*file_y) == 1)
+		*file = malloc(sizeof(char *) * (*file_y));
+	if ((*file_y) != 1)
+		*file = ft_realloc_double(*file, ((*file_y) - 1), (*file_y));
+	if (!(*file))
+		return (0);
+	return (1);
+}
+
 static char	**read_parsing(t_vars *cub, int fd, char *line, int *file_y)
 {
 	int		ret;
@@ -57,11 +68,7 @@ static char	**read_parsing(t_vars *cub, int fd, char *line, int *file_y)
 		ret = get_next_line(fd, &line);
 		if (ret >= 0 && !(check_data(cub, line, ret)))
 			ret = -1;
-		if ((*file_y) == 1)
-			file = malloc(sizeof(char *) * (*file_y));
-		if ((*file_y) != 1)
-			file = ft_realloc_double(file, ((*file_y) - 1), (*file_y));
-		if (!file)
+		if (!(malloc_file(&file, file_y)))
 			return (NULL);
 		ft_cpy(file, line, ft_strlen(line), (*file_y) - 1);
 		if (!file)

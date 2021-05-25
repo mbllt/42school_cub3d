@@ -45,3 +45,17 @@ t_vector	get_ray_temp(void *thread_data, int x, int y)
 	ray_temp = rotation_z(&((t_thread *)thread_data)->cub, ray_temp);
 	return (ray_temp);
 }
+
+float	get_r(t_vars *cub, t_dot_intersct *intersct, int i)
+{
+	t_vector	u;
+	float		r;
+
+	u = (t_vector){
+		.x = intersct->dot.x - cub->ray_c.sprite[i].pos.x,
+		.y = intersct->dot.y - cub->ray_c.sprite[i].pos.y,
+		.z = 0
+	};
+	r = scalaire_v(u, cub->ray_c.sprite[i].v2) + 0.5;
+	return (r);
+}

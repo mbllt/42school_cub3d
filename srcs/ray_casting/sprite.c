@@ -17,20 +17,6 @@ static int	intersct_sprite(t_vars *cub, t_vector ray, t_plan plan, \
 	return (1);
 }
 
-static float	get_r(t_vars *cub, t_dot_intersct *intersct, int i)
-{
-	t_vector	u;
-	float		r;
-
-	u = (t_vector){
-		.x = intersct->dot.x - cub->ray_c.sprite[i].pos.x,
-		.y = intersct->dot.y - cub->ray_c.sprite[i].pos.y,
-		.z = 0
-	};
-	r = scalaire_v(u, cub->ray_c.sprite[i].v2) + 0.5;
-	return (r);
-}
-
 t_dot_intersct	compare_sprite(t_vars *cub, t_dot_intersct *sprite, \
 		float *r_temp, float *r)
 {
@@ -58,22 +44,7 @@ t_dot_intersct	compare_sprite(t_vars *cub, t_dot_intersct *sprite, \
 	return (temp);
 }
 
-static void	init(t_vars *cub, t_dot_intersct *sprite, float *r_temp)
-{
-	int	i;
-
-	i = 0;
-	while (i < cub->ray_c.nbr_sprite)
-	{
-		r_temp[i] = -1;
-		sprite[i].dot = (t_vector){0, 0, 0};
-		sprite[i].t_distance = -1;
-		sprite[i].cardinal = -1;
-		i++;
-	}
-}
-
-static int	check_transparence(t_vars *cub, t_dot_intersct intersct, float r)
+static int	check_trans(t_vars *cub, t_dot_intersct intersct, float r)
 {
 	unsigned int	pixel;
 	t_index			index;
@@ -87,6 +58,17 @@ static int	check_transparence(t_vars *cub, t_dot_intersct intersct, float r)
 	return (1);
 }
 
+static void	fill_sprite(t_dot_intersct *sprite, float *r_temp, \
+		t_dot_intersct intersct, float r)
+{
+	*r_temp = r;
+	sprite->dot.x = intersct.dot.x;
+	sprite->dot.y = intersct.dot.y;
+	sprite->dot.z = intersct.dot.z;
+	sprite->t_distance = intersct.t_distance;
+	sprite->ray = intersct.ray;
+}
+
 t_dot_intersct	sprite(t_vars *cub, t_vector ray, t_dot_intersct *intersct, \
 						float *r)
 {
@@ -95,40 +77,23 @@ t_dot_intersct	sprite(t_vars *cub, t_vector ray, t_dot_intersct *intersct, \
 	float			*r_temp;
 	t_dot_intersct	temp;
 
-	sprite = malloc(cub->ray_c.nbr_sprite * sizeof(t_dot_intersct));
-	if (!sprite)
-		return ((t_dot_intersct){(t_vector){0, 0, 0}, 0, -10, \
-			(t_vector){0, 0, 0}});
-	r_temp = malloc(cub->ray_c.nbr_sprite * sizeof(float));
-	if (!r_temp)
+	if (!(malloc_sp_r_temp(cub, &sprite, &r_temp)))
 		return ((t_dot_intersct){(t_vector){0, 0, 0}, 0, -10, \
 			(t_vector){0, 0, 0}});
 	init(cub, sprite, r_temp);
-	i = 0;
-	while (i < cub->ray_c.nbr_sprite)
+	i = -1;
+	while (++i < cub->ray_c.nbr_sprite)
 	{
 		if (cub->ray_c.sprite[i].sprite_front >= 0 && intersct_sprite \
 			(cub, ray, cub->ray_c.sprite[i].plans, intersct) == 1)
 		{
 			*r = get_r(cub, intersct, i);
 			if ((*intersct).dot.z < 1 && (*intersct).dot.z >= 0 \
-				&& *r >= 0 && *r < 1 && check_transparence(cub, *intersct, *r) \
-					== 1)
-			{
-				r_temp[i] = *r;
-				sprite[i].dot.x = (*intersct).dot.x;
-				sprite[i].dot.y = (*intersct).dot.y;
-				sprite[i].dot.z = (*intersct).dot.z;
-				sprite[i].t_distance = (*intersct).t_distance;
-				sprite[i].ray = (*intersct).ray;
-			}
+				&& *r >= 0 && *r < 1 && check_trans(cub, *intersct, *r) == 1)
+				fill_sprite(&sprite[i], &r_temp[i], *intersct, *r);
 		}
-		i++;
 	}
 	temp = compare_sprite(cub, sprite, r_temp, r);
-	if (sprite)
-		free(sprite);
-	if (r_temp)
-		free(r_temp);
+	free_sp_r_temp(&sprite, &r_temp);
 	return (temp);
 }

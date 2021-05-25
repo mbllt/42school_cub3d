@@ -95,8 +95,8 @@ t_dot_intersct	check_wall_w(t_vars *cub, t_vector ray, \
 	int	x;
 	int	y;
 
-	i = (int)cub->parsing.px;
-	while (i >= 0)
+	i = (int)cub->parsing.px + 1;
+	while (--i >= 0)
 	{
 		if ((intersct_plan_ew(cub, ray, i, intersct)) == 1)
 		{
@@ -114,7 +114,6 @@ t_dot_intersct	check_wall_w(t_vars *cub, t_vector ray, \
 					(*intersct).t_distance, -1, ray});
 			}
 		}
-		i--;
 	}
 	return ((t_dot_intersct){(t_vector){0, 0, 0}, -1, -1, ray});
 }

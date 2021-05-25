@@ -25,7 +25,7 @@ static int	check_value_in_map(t_vars *cub, char **world_map)
 	return (1);
 }
 
-static int	check_corner(t_vars *cub, char **world_map, int i, int j)
+static int	check_corner(t_vars *cub, char **s, int i, int j)
 {
 	int	start_x;
 	int	end_x;
@@ -34,26 +34,23 @@ static int	check_corner(t_vars *cub, char **world_map, int i, int j)
 	int	k;
 
 	k = 0;
-	while (world_map[i][k] == ' ')
+	while (s[i][k] == ' ')
 		k++;
 	start_x = k;
 	k = 0;
-	while (world_map[i][cub->parsing.map_x - 1 - k] == ' ')
+	while (s[i][cub->parsing.map_x - 1 - k] == ' ')
 		k++;
 	end_x = cub->parsing.map_x - 1 - k;
 	k = 0;
-	while (world_map[k][j] == ' ')
+	while (s[k][j] == ' ')
 		k++;
 	start_y = k;
 	k = 0;
-	while (world_map[cub->parsing.map_y - 1 - k][j] == ' ')
+	while (s[cub->parsing.map_y - 1 - k][j] == ' ')
 		k++;
 	end_y = cub->parsing.map_y - 1 - k;
-	if (!(is_one(world_map[i][start_x])) || !(is_one(world_map[i][end_x])) \
-		|| !(is_one(world_map[start_y][j])) || !(is_one(world_map[end_y][j])))
-	{
+	if (!(check_one(s[i][start_x], s[i][end_x], s[start_y][j], s[end_y][j])))
 		return (0);
-	}
 	return (1);
 }
 

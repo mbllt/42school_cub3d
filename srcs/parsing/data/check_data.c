@@ -55,12 +55,10 @@ int	check_data(t_vars *cub, char *line, int ret)
 		return (0);
 	else
 	{
-		if (is_res_or_colors(line))
-			if (!(check_res_color(cub, line)))
-				return (0);
-		if (is_path_textures(line))
-			if (!(check_path_textures(cub, line)))
-				return (0);
+		if (is_res_or_colors(line) && !(check_res_color(cub, line)))
+			return (0);
+		if (is_path_textures(line) && !(check_path_textures(cub, line)))
+			return (0);
 	}
 	nbr = check_nbr_param_and_order(line, ret);
 	if (nbr == -1)

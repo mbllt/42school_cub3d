@@ -5,7 +5,7 @@ EA textures/greystone.xpm
 WE  textures/redbrick.xpm
 S   textures/barrel.xpm
 
-F textures/greystone.xpm
+F textures/redbrick.xpm
 C textures/wood.xpm
 
  1111 11111111111111111

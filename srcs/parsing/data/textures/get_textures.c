@@ -9,10 +9,8 @@ static	int	get_addr_text(t_text *textures, int i)
 	return (1);
 }
 
-int	get_textures(t_vars *cub, t_text *textures)
+static void	get_info_img(t_vars *cub, t_text *textures)
 {
-	int	i;
-
 	textures[0].img = mlx_xpm_file_to_image(cub->ray_c.mlx, cub->parsing.no, \
 						&textures[0].width, &textures[0].height);
 	textures[1].img = mlx_xpm_file_to_image(cub->ray_c.mlx, cub->parsing.so, \
@@ -27,6 +25,13 @@ int	get_textures(t_vars *cub, t_text *textures)
 						&textures[5].width, &textures[5].height);
 	textures[6].img = mlx_xpm_file_to_image(cub->ray_c.mlx, cub->parsing.s, \
 						&textures[6].width, &textures[6].height);
+}
+
+int	get_textures(t_vars *cub, t_text *textures)
+{
+	int	i;
+
+	get_info_img(cub, textures);
 	i = -1;
 	while (++i < 7)
 	{

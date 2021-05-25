@@ -7,28 +7,6 @@ static int	init_malloc_plans(t_vars *cub)
 	cub->ray_c.plans = malloc(sizeof(t_plan *) * 6);
 	if (!cub->ray_c.plans)
 		return (0);
-	// i = -1;
-	// while (++i < 2)
-	// {
-	// 	cub->ray_c.plans[i] = malloc(sizeof(t_plan) * cub->parsing.map_x);
-	// 	if (!cub->ray_c.plans[i])
-	// 	{
-	// 		while (--i >= 0)
-	// 			free(cub->ray_c.plans[i]);
-	// 		return (0);
-	// 	}
-	// }
-	// while (i < 4)
-	// {
-	// 	cub->ray_c.plans[i] = malloc(sizeof(t_plan) * cub->parsing.map_y);
-	// 	if (!cub->ray_c.plans[i])
-	// 	{
-	// 		while (--i >= 0)
-	// 			free(cub->ray_c.plans[i]);
-	// 		return (0);
-	// 	}
-	// 	i++;
-	// }
 	i = 4;
 	while (i < 6)
 	{

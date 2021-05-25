@@ -1,10 +1,5 @@
 #include "cub3D.h"
 
-inline unsigned int	create_trgb(int t, int r, int g, int b)
-{
-	return (t << 24 | r << 16 | g << 8 | b);
-}
-
 inline float	norm_v(t_vector v)
 {
 	return ((sqrt(v.x * v.x + v.y * v.y + v.z * v.z)));
@@ -33,4 +28,19 @@ int	get_index_x(void *thread_data)
 	index = ((t_thread *)thread_data)->thread_num * \
 			ceil((((t_thread *)thread_data)->cub.parsing.rx * 0.25));
 	return (index);
+}
+
+void	init(t_vars *cub, t_dot_intersct *sprite, float *r_temp)
+{
+	int	i;
+
+	i = 0;
+	while (i < cub->ray_c.nbr_sprite)
+	{
+		r_temp[i] = -1;
+		sprite[i].dot = (t_vector){0, 0, 0};
+		sprite[i].t_distance = -1;
+		sprite[i].cardinal = -1;
+		i++;
+	}
 }

@@ -206,7 +206,7 @@ int				init_parsing(t_vars *cub);
 int				init_ray_casting(t_vars *cub);
 void			init_vars_rays(t_vars *cub);
 int				init_stock_rays(t_vars *cub, int width, int height);
-void			init_rays(t_vars *cub, int width, int height);
+void			init_rays(int width, int height, t_ray *ray_c);
 int				init_plans(t_vars *cub);
 int				init_matrix_x(t_vars *cub);
 int				init_matrix_z(t_vars *cub);
@@ -301,5 +301,10 @@ unsigned int	get_xy_dir_ns(t_vars *cub, t_dot_intersct prio_wall);
 unsigned int	get_xy_dir_ew(t_vars *cub, t_dot_intersct prio_wall);
 unsigned int	get_xy_dir_fc(t_vars *cub, t_dot_intersct prio_wall);
 unsigned int	get_xy_spritee(t_vars *cub, t_dot_intersct prio_wall, float r);
+int				check_one(char c, char d, char e, char f);
+void			init(t_vars *cub, t_dot_intersct *sprite, float *r_temp);
+float			get_r(t_vars *cub, t_dot_intersct *intersct, int i);
+int				malloc_sp_r_temp(t_vars *cub, t_dot_intersct **sprite, float **r_temp);
+void			free_sp_r_temp(t_dot_intersct **sprite, float **r_temp);
 
 #endif
