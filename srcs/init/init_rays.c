@@ -11,7 +11,7 @@ void	init_rays(t_vars *cub, int width, int height)
 		(width * 2.0)) / height;
 	if (cub->ray_c.ratio_vertical < 0)
 		cub->ray_c.ratio_vertical *= -1;
-	if (cub->ray_c.ratio_vertical * height > 4.2)
+	if (cub->ray_c.ratio_vertical * height > 2.4)
 		write(1, "\nCette vision n'est pas humainement possible, attention!\n", 58);
 	i = 0;
 	while (i < width)

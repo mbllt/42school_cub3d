@@ -6,7 +6,7 @@
 #    By: mballet <mballet@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/14 14:39:52 by mballet           #+#    #+#              #
-#    Updated: 2021/05/25 11:10:17 by mballet          ###   ########lyon.fr    #
+#    Updated: 2021/05/25 14:20:38 by mballet          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,6 +34,10 @@ SRCS			=	srcs/main.c \
 					srcs/ray_casting/keypress.c \
 					srcs/ray_casting/sprite.c \
 					srcs/ray_casting/create_plans_sprite.c \
+					srcs/ray_casting/get_xy_dir_ns.c \
+					srcs/ray_casting/get_xy_dir_ew.c \
+					srcs/ray_casting/get_xy_dir_fc.c \
+					srcs/ray_casting/get_xy_sprite.c \
 					srcs/gnl/get_next_line.c \
 					srcs/gnl/get_next_line_utils.c \
 					srcs/parsing/parsing.c \

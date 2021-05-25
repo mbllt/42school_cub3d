@@ -304,5 +304,9 @@ t_vector		get_ray_temp(void *thread_data, int x, int y);
 void			save_bitmap(t_vars *cub);
 int				malloc_matrix_x(t_vars *cub);
 int				malloc_matrix_z(t_vars *cub);
+unsigned int	get_xy_dir_ns(t_vars *cub, t_dot_intersct prio_wall);
+unsigned int	get_xy_dir_ew(t_vars *cub, t_dot_intersct prio_wall);
+unsigned int	get_xy_dir_fc(t_vars *cub, t_dot_intersct prio_wall);
+unsigned int	get_xy_spritee(t_vars *cub, t_dot_intersct prio_wall, float r);
 
 #endif
