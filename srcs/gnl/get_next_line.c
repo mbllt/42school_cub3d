@@ -53,8 +53,9 @@ int	fill_in_line(char **temp, ssize_t read_return, char **line)
 	return (1);
 }
 
-int	fill_in_temp(char **temp, char *buffer)
+int	fill_in_temp(char **temp, char *buffer, ssize_t read_return)
 {
+	buffer[read_return] = '\0';
 	(*temp) = ft_strjoin(*temp, buffer);
 	if (!(*temp))
 	{
@@ -97,13 +98,11 @@ int	get_next_line(int fd, char **line)
 		read_return = read(fd, buffer, BUFFER_SIZE);
 		if (read_return <= 0)
 			break ;
-		buffer[read_return] = '\0';
-		if (!(fill_in_temp(&temp[fd], buffer)))
+		if (!(fill_in_temp(&temp[fd], buffer, read_return)))
 			return (-1);
 	}
-	if (temp[fd] && !(fill_in_line(&temp[fd], read_return, line)))
-		return (-1);
-	if (temp[fd] && !(reset_temp(&temp[fd], ft_strlen(temp[fd]))))
+	if (temp[fd] && (!(fill_in_line(&temp[fd], read_return, line)) \
+		|| !(reset_temp(&temp[fd], ft_strlen(temp[fd])))))
 		return (-1);
 	if (read_return == 0)
 		return ((free_temp(&temp[fd], read_return)));

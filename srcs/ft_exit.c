@@ -79,12 +79,11 @@ int	ft_exit(t_vars *cub)
 	ft_double_free(cub->parsing.world_map, cub->parsing.map_y);
 	if (cub->save_on == 1)
 	{
-		i = 0;
-		while (i < cub->parsing.rx)
+		i = -1;
+		while (++i < cub->parsing.rx)
 		{
 			if (cub->pixel_data[i])
 				free(cub->pixel_data[i]);
-			i++;
 		}
 		if (cub->pixel_data)
 			free(cub->pixel_data);

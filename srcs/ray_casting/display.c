@@ -9,7 +9,7 @@ static void	save_display(t_vars *cub, unsigned int pixel, int *i, int *j)
 	my_mlx_pixel_put(cub, (*i) + 1, (*j), (unsigned int)pixel);
 }
 
-void	display(t_vars *cub, int i, int j, t_dot_intersct prio_wall, float r)
+void	display(t_vars *cub, t_index index, t_dot_intersct prio_wall, float r)
 {
 	int				x;
 	int				y;
@@ -27,8 +27,8 @@ void	display(t_vars *cub, int i, int j, t_dot_intersct prio_wall, float r)
 	if (prio_wall.cardinal == SPRITE)
 		pixel = get_xy_spritee(cub, prio_wall, r);
 	if (cub->save_on == 1)
-		cub->pixel_data[i][j] = pixel;
+		cub->pixel_data[index.x][index.y] = pixel;
 	if (cub->parsing.scale_on == 1)
-		save_display(cub, pixel, &i, &j);
-	my_mlx_pixel_put(cub, i, j, (unsigned int)pixel);
+		save_display(cub, pixel, &index.x, &index.y);
+	my_mlx_pixel_put(cub, index.x, index.y, (unsigned int)pixel);
 }

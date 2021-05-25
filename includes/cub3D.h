@@ -10,7 +10,6 @@
 # include <time.h>
 # include <pthread.h>
 # include <limits.h>
-//# include "leaks.h"
 
 # define BLACK	0x00000000
 # define TEAL	0x00008080
@@ -31,12 +30,6 @@ typedef enum e_dir
 	C,
 	SPRITE,
 }t_dir;
-
-typedef struct s_index
-{
-	int	x;
-	int	y;
-}t_index;
 
 typedef struct s_direction
 {
@@ -225,7 +218,7 @@ int				frame(t_vars *cub);
 void			*graphical_loop(void *thread_data);
 t_vector		rotation_x(t_vars *cub, t_vector ray);
 t_vector		rotation_z(t_vars *cub, t_vector ray);
-void			display(t_vars *cub, int i, int j, t_dot_intersct prio_wall, \
+void			display(t_vars *cub, t_index index, t_dot_intersct prio_wall, \
 				float r);
 int				cub_loop(t_vars *cub, int argc, char **argv);
 int				parsing(t_vars *cub, char **argv);
@@ -296,7 +289,7 @@ int				create_plans_sprite(t_vars *cub);
 unsigned int	get_pixel(t_text texture, int x, int y);
 float			scalaire_v(t_vector v, t_vector v2);
 void			get_xy_sprite(t_dot_intersct prio_wall, \
-				t_text text, int *x, int *y, float r);
+				t_text text, t_index *index, float r);
 int				init_save_image(t_vars *cub);
 void			save_header(t_vars *cub);
 int				get_index_x(void *thread_data);

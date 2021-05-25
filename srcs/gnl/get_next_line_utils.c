@@ -38,31 +38,24 @@ char	*ft_strdup(const char *s1)
 char	*ft_strjoin(char *s1, char *s2)
 {
 	char	*tab;
-	size_t	i;
-	size_t	j;
+	t_index	index;
 
 	if (!s1)
 		tab = ft_strdup(s2);
 	if (s2[0] == '\0')
-	{
-		tab = malloc(sizeof(char) * 1);
-		if (!tab)
-			return (NULL);
-		else
-			return (tab);
-	}
+		return (malloc(sizeof(char) * 1));
 	if (s1 && s2)
 	{
 		tab = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
 		if (!(tab))
 			return (NULL);
-		i = -1;
-		while (s1[++i])
-			tab[i] = s1[i];
-		j = 0;
-		while (s2[j])
-			tab[i++] = s2[j++];
-		tab[i] = '\0';
+		index.x = -1;
+		while (s1[++index.x])
+			tab[index.x] = s1[index.x];
+		index.y = 0;
+		while (s2[index.y])
+			tab[index.x++] = s2[index.y++];
+		tab[index.x] = '\0';
 	}
 	if (s1)
 		free(s1);

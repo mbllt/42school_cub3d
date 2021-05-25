@@ -76,13 +76,12 @@ static void	init(t_vars *cub, t_dot_intersct *sprite, float *r_temp)
 static int	check_transparence(t_vars *cub, t_dot_intersct intersct, float r)
 {
 	unsigned int	pixel;
-	int				x;
-	int				y;
+	t_index			index;
 
-	x = 0;
-	y = 0;
-	get_xy_sprite(intersct, cub->parsing.textures[6], &x, &y, r);
-	pixel = get_pixel(cub->parsing.textures[6], x, y);
+	index.x = 0;
+	index.y = 0;
+	get_xy_sprite(intersct, cub->parsing.textures[6], &index, r);
+	pixel = get_pixel(cub->parsing.textures[6], index.x, index.y);
 	if ((pixel >> 24) > 0)
 		return (0);
 	return (1);

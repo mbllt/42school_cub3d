@@ -94,7 +94,7 @@ void	*graphical_loop(void *thread_data)
 				return ((void *) - 1);
 			prio = compare_distance(intersct);
 			prio.ray = ray_temp;
-			display(thread_data, index.x, index.y, prio, r);
+			display(thread_data, index, prio, r);
 			index.y++;
 		}
 		index.x++;
