@@ -56,14 +56,16 @@ int	key_release(int key, t_vars *cub)
 	return (1);
 }
 
-static void	move_right_left(t_vars *cub, t_vector temp_dir_ray)
+static void	move_right_left(t_vars *cub, t_vector temp_dir_ray, t_vector temp)
 {
-	if (cub->ray_c.key.right == 1 && check_collision(cub, temp_dir_ray, 2) == 1)
+	if (cub->ray_c.key.right == 1 && check_collision(cub, temp_dir_ray, 2, \
+		temp) == 1)
 	{
 		cub->parsing.px -= temp_dir_ray.y * MOVE_SPEED;
 		cub->parsing.py += temp_dir_ray.x * MOVE_SPEED;
 	}
-	if (cub->ray_c.key.left == 1 && check_collision(cub, temp_dir_ray, 3) == 1)
+	if (cub->ray_c.key.left == 1 && check_collision(cub, temp_dir_ray, 3, \
+		temp) == 1)
 	{
 		cub->parsing.px += temp_dir_ray.y * MOVE_SPEED;
 		cub->parsing.py -= temp_dir_ray.x * MOVE_SPEED;
@@ -73,6 +75,7 @@ static void	move_right_left(t_vars *cub, t_vector temp_dir_ray)
 void	move(t_vars *cub)
 {
 	t_vector	temp_dir_ray;
+	t_vector	temp;
 
 	// temp_dir_ray = (t_vector){0, -1, 0};
 	temp_dir_ray = cub->ray_c.ray_dir;
@@ -81,17 +84,20 @@ void	move(t_vars *cub)
 	// init_matrix_z(cub);
 	temp_dir_ray = rotation_z(cub, (t_vector){0, -1, 0});
 	//printf("here!!!\n");
-	if (cub->ray_c.key.forward == 1 && check_collision(cub, temp_dir_ray, 0) == 1)
+	temp = (t_vector){cub->parsing.px, cub->parsing.py, 0};
+	if (cub->ray_c.key.forward == 1 && check_collision(cub, temp_dir_ray, 0, \
+		temp) == 1)
 	{
 		cub->parsing.px += temp_dir_ray.x * MOVE_SPEED;
 		cub->parsing.py += temp_dir_ray.y * MOVE_SPEED;
 	}
-	if (cub->ray_c.key.backward == 1 && check_collision(cub, temp_dir_ray, 1) == 1)
+	if (cub->ray_c.key.backward == 1 && check_collision(cub, temp_dir_ray, 1, \
+		temp) == 1)
 	{
 		cub->parsing.px -= temp_dir_ray.x * MOVE_SPEED;
 		cub->parsing.py -= temp_dir_ray.y * MOVE_SPEED;
 	}
-	move_right_left(cub, temp_dir_ray);
+	move_right_left(cub, temp_dir_ray, temp);
 }
 
 void	rotate(t_vars *cub)

@@ -25,11 +25,6 @@ void	free_sp_r_temp(t_dot_intersct **sprite, float **r_temp)
 		free(*r_temp);
 }
 
-// inline unsigned int	create_trgb(int t, int r, int g, int b)
-// {
-// 	return (t << 24 | r << 16 | g << 8 | b);
-// }
-
 unsigned int	dark_color(unsigned int pixel, float distance)
 {
 	unsigned int	r;
@@ -67,57 +62,41 @@ void	rot_if_spon_sew(t_vars *cub, t_vector *ray)
 	cub->ray_c.rota_z = temp;
 }
 
-int	check_collision(t_vars *cub, t_vector temp_dir_ray, int key)
+static int	check_space_move(t_vars *cub, t_vector temp)
 {
-	t_vector	temp;
-	
+	if ((int)temp.x >= cub->parsing.map_x || (int)temp.x < 0 \
+		|| (int)temp.y >= cub->parsing.map_y || (int)temp.y < 0 \
+		|| cub->parsing.world_map[(int)temp.y][(int)temp.x] == '1' \
+		|| cub->parsing.world_map[(int)temp.y][(int)temp.x] == ' ')
+		return (0);
+	else if (cub->parsing.world_map[(int)temp.y][(int)temp.x] == '2')
+		ft_exit(cub);
+	return (1);
+}
+
+int	check_collision(t_vars *cub, t_vector temp_dir_ray, int key, t_vector temp)
+{
 	if (key == FRONT)
 	{
-		temp.x = cub->parsing.px;
-		temp.y = cub->parsing.py;
 		temp.x += temp_dir_ray.x * MOVE_SPEED;
 		temp.y += temp_dir_ray.y * MOVE_SPEED;
-		if ((int)temp.x >= cub->parsing.map_x || (int)temp.x < 0 \
-			|| (int)temp.y >= cub->parsing.map_y || (int)temp.y < 0 \
-			|| cub->parsing.world_map[(int)temp.y][(int)temp.x] == '1' \
-			/*&& is_cardinal(cub->parsing.world_map[(int)temp.x][(int)temp.y]) == -1*/)
-			return (0);
 	}
 	else if (key == BACK)
 	{
-		temp.x = cub->parsing.px;
-		temp.y = cub->parsing.py;
 		temp.x -= temp_dir_ray.x * MOVE_SPEED;
 		temp.y -= temp_dir_ray.y * MOVE_SPEED;
-		if ((int)temp.x >= cub->parsing.map_x || (int)temp.x < 0 \
-			|| (int)temp.y >= cub->parsing.map_y || (int)temp.y < 0 \
-			|| cub->parsing.world_map[(int)temp.y][(int)temp.x] == '1' \
-			/*&& is_cardinal(cub->parsing.world_map[(int)temp.x][(int)temp.y]) == -1*/)
-			return (0);
 	}
 	if (key == RIGHT)
 	{
-		temp.x = cub->parsing.px;
-		temp.y = cub->parsing.py;
 		temp.x -= temp_dir_ray.y * MOVE_SPEED;
 		temp.y += temp_dir_ray.x * MOVE_SPEED;
-		if ((int)temp.x >= cub->parsing.map_x || (int)temp.x < 0 \
-			|| (int)temp.y >= cub->parsing.map_y || (int)temp.y < 0 \
-			|| cub->parsing.world_map[(int)temp.y][(int)temp.x] == '1' \
-			/*&& is_cardinal(cub->parsing.world_map[(int)temp.x][(int)temp.y]) == -1*/)
-			return (0);
 	}
 	else if (key == LEFT)
 	{
-		temp.x = cub->parsing.px;
-		temp.y = cub->parsing.py;
 		temp.x += temp_dir_ray.y * MOVE_SPEED;
 		temp.y -= temp_dir_ray.x * MOVE_SPEED;
-		if ((int)temp.x >= cub->parsing.map_x || (int)temp.x < 0 \
-			|| (int)temp.y >= cub->parsing.map_y || (int)temp.y < 0 \
-			|| cub->parsing.world_map[(int)temp.y][(int)temp.x] == '1' \
-			/*&& is_cardinal(cub->parsing.world_map[(int)temp.x][(int)temp.y]) == -1*/)
-			return (0);
 	}
+	if (!check_space_move(cub, temp))
+		return (0);
 	return (1);
 }

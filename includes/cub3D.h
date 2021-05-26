@@ -309,6 +309,6 @@ void			free_sp_r_temp(t_dot_intersct **sprite, float **r_temp);
 unsigned int	dark_color(unsigned int pixel, float distance);
 int				is_param_text(char c);
 void			rot_if_spon_sew(t_vars *cub, t_vector *ray);
-int				check_collision(t_vars *cub, t_vector t_temp_dir_ray, int key);
+int				check_collision(t_vars *cub, t_vector t_temp_dir_ray, int key, t_vector temp);
 
 #endif
