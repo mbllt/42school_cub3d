@@ -30,6 +30,7 @@ int	frame(t_vars *cub)
 		ft_exit(cub);
 		return (0);
 	}
+	//printf("(%f,%f,%f)\n", cub->ray_c.ray_dir.x, cub->ray_c.ray_dir.y, cub->ray_c.ray_dir.z);
 	cub->ray_c.ray_dir = rotation_z(cub, (t_vector){0, -1, 0});
 	if (!(create_plans_sprite(cub)))
 		return (0);

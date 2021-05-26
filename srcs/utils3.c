@@ -49,3 +49,17 @@ unsigned int	dark_color(unsigned int pixel, float distance)
 		return (r << 16 | g << 8 | b);
 	return (r << 16 | g << 8 | b);
 }
+
+void	rot_if_spon_sew(t_vars *cub, t_vector *ray)
+{
+	float	temp;
+
+	temp = cub->ray_c.rota_z;
+	if (cub->parsing.cardinal == 'S')
+	{
+		cub->ray_c.rota_z = 180.0 * (M_PI / 180.0);
+		init_matrix_z(cub);
+		*ray = rotation_z(cub, *ray);
+	}
+	cub->ray_c.rota_z = temp;
+}

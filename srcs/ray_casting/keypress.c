@@ -74,8 +74,13 @@ void	move(t_vars *cub)
 {
 	t_vector	temp_dir_ray;
 
-	temp_dir_ray = (t_vector){0, -1, 0};
-	temp_dir_ray = rotation_z(cub, temp_dir_ray);
+	// temp_dir_ray = (t_vector){0, -1, 0};
+	temp_dir_ray = cub->ray_c.ray_dir;
+	//printf("(%f,%f,%f)\n", cub->ray_c.ray_dir.x, cub->ray_c.ray_dir.y, cub->ray_c.ray_dir.z);
+	// cub->ray_c.rota_z = 0.09;
+	// init_matrix_z(cub);
+	temp_dir_ray = rotation_z(cub, (t_vector){0, -1, 0});
+	//printf("here!!!\n");
 	if (cub->ray_c.key.forward == 1)
 	{
 		cub->parsing.px += temp_dir_ray.x * MOVE_SPEED;

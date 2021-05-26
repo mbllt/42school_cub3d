@@ -84,7 +84,7 @@ int	main(int argc, char **argv)
 		return (0);
 	if (!(init_ray_casting(&cub)))
 		return (0);
-	init_rays(cub.parsing.rx, cub.parsing.ry, &cub.ray_c);
+	init_rays(&cub, cub.parsing.rx, cub.parsing.ry, &cub.ray_c);
 	if (!(init_plans(&cub)))
 		return (0);
 	if ((argc == 2 && check_argv1(argv[1]) == 1) \

@@ -10,12 +10,6 @@ int	is_cardinal(char c)
 		return (2);
 	if (c == 'W')
 		return (3);
-	if (c == 'F')
-		return (4);
-	if (c == 'C')
-		return (5);
-	if (c == 'S')
-		return (6);
 	return (-1);
 }
 

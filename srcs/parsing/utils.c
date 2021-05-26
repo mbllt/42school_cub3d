@@ -49,3 +49,22 @@ int	check_one(char c, char d, char e, char f)
 		return (0);
 	return (1);
 }
+
+int	is_param_text(char c)
+{
+	if (c == 'N')
+		return (0);
+	if (c == 'S')
+		return (1);
+	if (c == 'E')
+		return (2);
+	if (c == 'W')
+		return (3);
+	if (c == 'F')
+		return (4);
+	if (c == 'C')
+		return (5);
+	if (c == 'S')
+		return (6);
+	return (-1);
+}

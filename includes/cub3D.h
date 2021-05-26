@@ -101,8 +101,8 @@ typedef struct s_sprite
 typedef struct s_ray
 {
 	float		fov;
-	float		ratio_horizon;
-	float		ratio_vertical;
+	float		ratio_h;
+	float		ratio_v;
 	void		*mlx;
 	void		*win;
 	void		*img;
@@ -206,7 +206,7 @@ int				init_parsing(t_vars *cub);
 int				init_ray_casting(t_vars *cub);
 void			init_vars_rays(t_vars *cub);
 int				init_stock_rays(t_vars *cub, int width, int height);
-void			init_rays(int width, int height, t_ray *ray_c);
+void			init_rays(t_vars *cub, int width, int height, t_ray *ray_c);
 int				init_plans(t_vars *cub);
 int				init_matrix_x(t_vars *cub);
 int				init_matrix_z(t_vars *cub);
@@ -307,5 +307,7 @@ float			get_r(t_vars *cub, t_dot_intersct *intersct, int i);
 int				malloc_sp_r_temp(t_vars *cub, t_dot_intersct **sprite, float **r_temp);
 void			free_sp_r_temp(t_dot_intersct **sprite, float **r_temp);
 unsigned int	dark_color(unsigned int pixel, float distance);
+int				is_param_text(char c);
+void			rot_if_spon_sew(t_vars *cub, t_vector *ray);
 
 #endif
