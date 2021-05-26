@@ -35,18 +35,17 @@ unsigned int	dark_color(unsigned int pixel, float distance)
 	g = g >> 24;
 	b = pixel << 24;
 	b = b >> 24;
-	if (( r / distance * 1.2) < 255)
-	{
-		//printf("%d\n", l);
+	if ((r / distance * 1.2) < 255)
 		r /= distance * 1.2;
-	}
+	else
+		return (r << 16 | g << 8 | b);
 	if ((g / distance * 1.2) < 255)
-	{
 		g /= distance * 1.2;
-	}
+	else
+		return (r << 16 | g << 8 | b);
 	if ((b / distance * 1.2) < 255)
-	{
 		b /= distance * 1.2;
-	}
+	else
+		return (r << 16 | g << 8 | b);
 	return (r << 16 | g << 8 | b);
 }
