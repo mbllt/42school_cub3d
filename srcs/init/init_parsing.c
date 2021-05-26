@@ -24,5 +24,9 @@ int	init_parsing(t_vars *cub)
 	cub->temp = -1;
 	cub->i = 0;
 	cub->fps = 0;
+	cub->parsing.ff = 0;
+	cub->parsing.cc = 0;
+	cub->parsing.f_color_on = -1;
+	cub->parsing.c_color_on = -1;
 	return (1);
 }

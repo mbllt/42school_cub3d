@@ -147,6 +147,14 @@ typedef struct s_parsing
 	char			*c;
 	unsigned int	ff;
 	unsigned int	cc;
+	t_vector		f_c;
+	t_vector		c_c;
+	int				f_color_on;
+	int				c_color_on;
+	void			*f_ptr;
+	void			*c_ptr;
+	void			*f_img;
+	void			*c_img;
 	int				nbr_param;
 	int				map_x;
 	int				map_y;
@@ -315,5 +323,9 @@ int				is_param_text(char c);
 void			rot_if_spon_sew(t_vars *cub, t_vector *ray);
 int				check_collision(t_vars *cub, t_vector t_temp_dir_ray, int key);
 void			change_ray_dir(t_vars *cub, char c);
+void			create_image_color(t_vars *cub, unsigned int color, int nbr);
+int				is_color_path(char *str);
+int				check_colors(t_vars *cub, char **str, int size);
+unsigned int	create_trgb(int t, int r, int g, int b);
 
 #endif

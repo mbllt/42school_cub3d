@@ -66,6 +66,14 @@ int	check_path_textures(t_vars *cub, char *line)
 	while (line[i] && line[i] == ' ')
 		i++;
 	cardinal = is_param_text(line[i]);
+	if (cardinal == 4 && is_color_path(line) == 1)
+		return (1);
+	else if (cardinal == 4)
+		cub->parsing.f_color_on = 0;
+	if (cardinal == 5 && is_color_path(line) == 1)
+		return (1);
+	else if (cardinal == 5)
+		cub->parsing.c_color_on = 0;
 	if (cardinal == 1 && line[1] == ' ')
 		cardinal = 6;
 	if (!(check_get_path(cub, line, cardinal)))

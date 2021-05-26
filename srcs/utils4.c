@@ -17,7 +17,7 @@ static int	check_space_move(t_vars *cub, t_vector temp)
 		return (0);
 	else if (cub->parsing.world_map[(int)temp.y][(int)temp.x] == '2')
 	{
-		write(1, "\n             \xF0\x9F\x98\xB1\n", 20);
+		write(1, "\n           \xF0\x9F\x98\xB1\n", 18);
 		write(1, "\033[31m", 6);
 		write(1, "You're dead, try again !\n", 26);
 		ft_exit(cub);

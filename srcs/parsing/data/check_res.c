@@ -22,6 +22,16 @@ int	check_res_color(t_vars *cub, char *line)
 			return (0);
 		}
 	}
+	if (str[0][0] == 'C' || str[0][0] == 'F')
+	{
+		if (!is_color_path(line))
+			return (1);
+		if (!(check_colors(cub, str, size)))
+		{
+			write(1, "\nError : colors\n", 16);
+			return (0);
+		}
+	}
 	if (str)
 	{
 		ft_double_free(str, size);

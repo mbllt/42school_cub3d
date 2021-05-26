@@ -6,7 +6,7 @@
 #    By: mballet <mballet@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/14 14:39:52 by mballet           #+#    #+#              #
-#    Updated: 2021/05/26 17:02:43 by mballet          ###   ########lyon.fr    #
+#    Updated: 2021/05/26 22:08:34 by mballet          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,9 +47,11 @@ SRCS_FILES			=	main.c \
 					parsing/utils2.c \
 					parsing/utils3.c \
 					parsing/utils4.c \
+					parsing/utils5.c \
 					parsing/data/check_data.c \
 					parsing/data/check_res.c \
 					parsing/data/resolution.c \
+					parsing/data/colors.c \
 					parsing/data/textures/check_path_textures.c \
 					parsing/data/textures/get_textures.c \
 					parsing/map/ft_map.c \
@@ -96,20 +98,20 @@ green			= \033[32m
 
 all:		$(EXE)
 
-$(EXE):		$(MLX) $(OBJS) | $(OBJS_MAIN)
-				@$(CC) -o $@ $^
-				@echo "$(green)Cub lancé !"
-
 $(OBJS_MAIN):
 				@mkdir -p $(OBJS_DIR)
 				@mkdir -p $(PATHS_OBJS)
+
+$(EXE):		$(MLX) $(OBJS)
+				$(CC) -o $@ $^
+				@echo "$(green)Cub lancé !"
 
 $(MLX):
 				@$(MAKE) -C$(FILEMLX) -s
 				@mv $(FILEMLX)/$(MLX) .
 
 $(OBJS_DIR)/%.o :	$(SRCS_DIR)/%.c $(HEADERS)
-				@$(CC) $(CFLAGS) -o $@ -c $<
+				$(CC) $(CFLAGS) -o $@ -c $<
 
 clean:
 				@$(RM) $(OBJS)

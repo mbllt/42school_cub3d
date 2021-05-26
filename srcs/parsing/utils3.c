@@ -11,6 +11,10 @@ int	is_res_or_colors(char *line)
 	c = line[i];
 	if (c == 'R')
 		return (1);
+	if (c == 'F')
+		return (1);
+	if (c == 'C')
+		return (1);
 	return (0);
 }
 
