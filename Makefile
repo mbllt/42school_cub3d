@@ -6,7 +6,7 @@
 #    By: mballet <mballet@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/14 14:39:52 by mballet           #+#    #+#              #
-#    Updated: 2021/05/26 14:57:39 by mballet          ###   ########lyon.fr    #
+#    Updated: 2021/05/26 17:02:43 by mballet          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,7 @@ SRCS_FILES			=	main.c \
 					utils.c \
 					utils2.c \
 					utils3.c \
+					utils4.c \
 					ft_exit.c \
 					init/init_parsing.c \
 					init/init_ray_casting.c \
@@ -91,28 +92,31 @@ MLX				=	libmlx.dylib
 
 RM				=	/bin/rm -f
 
+green			= \033[32m
+
 all:		$(EXE)
 
 $(EXE):		$(MLX) $(OBJS) | $(OBJS_MAIN)
-				$(CC) -o $@ $^
+				@$(CC) -o $@ $^
+				@echo "$(green)Cub lancé !"
 
 $(OBJS_MAIN):
-				mkdir -p $(OBJS_DIR)
-				mkdir -p $(PATHS_OBJS)
+				@mkdir -p $(OBJS_DIR)
+				@mkdir -p $(PATHS_OBJS)
 
 $(MLX):
 				@$(MAKE) -C$(FILEMLX) -s
 				@mv $(FILEMLX)/$(MLX) .
 
 $(OBJS_DIR)/%.o :	$(SRCS_DIR)/%.c $(HEADERS)
-				$(CC) $(CFLAGS) -o $@ -c $<
+				@$(CC) $(CFLAGS) -o $@ -c $<
 
 clean:
-				$(RM) $(OBJS)
+				@$(RM) $(OBJS)
 
 fclean:		clean
-				$(RM) $(MLX)
-				$(RM) $(EXE)
+				@$(RM) $(MLX)
+				@$(RM) $(EXE)
 
 re:			fclean all
 

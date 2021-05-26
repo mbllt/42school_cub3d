@@ -6,7 +6,7 @@
 /*   By: mballet <mballet@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/09 15:01:40 by mballet           #+#    #+#             */
-/*   Updated: 2021/05/25 14:52:03 by mballet          ###   ########lyon.fr   */
+/*   Updated: 2021/05/26 18:25:11 by mballet          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ char	*ft_strjoin(char *s1, char *s2);
 size_t	ft_strlen(const char *s);
 ssize_t	free_temp(char **temp, ssize_t read_return);
 
-#ifndef BUFFER_SIZE
-# define BUFFER_SIZE	1
-#endif
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE	1
+# endif
 
 #endif

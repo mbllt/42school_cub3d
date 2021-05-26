@@ -23,8 +23,6 @@ void	init_rays(t_vars *cub, int width, int height, t_ray *ray_c)
 			ray_c->stock_rays[i][j].x = (i - width * 0.5) * ray_c->ratio_h;
 			ray_c->stock_rays[i][j].y = -1;
 			ray_c->stock_rays[i][j].z = (height * 0.5 - j) * ray_c->ratio_v;
-			//
-			rot_if_spon_sew(cub, &ray_c->stock_rays[i][j]);
 			ray_c->stock_rays[i][j] = normalisation_v(ray_c->stock_rays[i][j]);
 		}
 	}

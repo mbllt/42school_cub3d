@@ -64,24 +64,10 @@ static int	init_ray_casting2(t_vars *cub)
 	return (1);
 }
 
-static void	change_ray_dir(t_vars *cub, char c)
-{
-	float	temp;
-
-	temp = cub->ray_c.rota_z;
-	if (c == 'S')
-	{
-		cub->ray_c.rota_z = 180.0 * (M_PI / 180.0);
-		init_matrix_z(cub);
-		cub->ray_c.ray_dir = rotation_z(cub, (t_vector){0, -1 , 0});
-	}
-	cub->ray_c.rota_z = temp;
-}
-
 int	init_ray_casting(t_vars *cub)
 {
 	cub->ray_c.fov = 0;
-	cub->ray_c.ratio_h= 0;
+	cub->ray_c.ratio_h = 0;
 	cub->ray_c.ratio_v = 0;
 	cub->ray_c.mlx = NULL;
 	cub->ray_c.win = NULL;

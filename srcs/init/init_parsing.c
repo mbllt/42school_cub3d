@@ -21,5 +21,8 @@ int	init_parsing(t_vars *cub)
 	cub->parsing.py = 0;
 	cub->parsing.pz = 0.5;
 	cub->parsing.cardinal = 0;
+	cub->temp = -1;
+	cub->i = 0;
+	cub->fps = 0;
 	return (1);
 }

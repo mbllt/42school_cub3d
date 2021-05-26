@@ -194,6 +194,9 @@ typedef struct s_vars
 	t_header_file	save;
 	int				fd;
 	unsigned int	**pixel_data;
+	unsigned long	temp;
+	int				i;
+	unsigned long	fps;
 }t_vars;
 
 typedef struct s_thread
@@ -304,11 +307,13 @@ unsigned int	get_xy_spritee(t_vars *cub, t_dot_intersct prio_wall, float r);
 int				check_one(char c, char d, char e, char f);
 void			init(t_vars *cub, t_dot_intersct *sprite, float *r_temp);
 float			get_r(t_vars *cub, t_dot_intersct *intersct, int i);
-int				malloc_sp_r_temp(t_vars *cub, t_dot_intersct **sprite, float **r_temp);
+int				malloc_sp_r_temp(t_vars *cub, t_dot_intersct **sprite, \
+				float **r_temp);
 void			free_sp_r_temp(t_dot_intersct **sprite, float **r_temp);
 unsigned int	dark_color(unsigned int pixel, float distance);
 int				is_param_text(char c);
 void			rot_if_spon_sew(t_vars *cub, t_vector *ray);
-int				check_collision(t_vars *cub, t_vector t_temp_dir_ray, int key, t_vector temp);
+int				check_collision(t_vars *cub, t_vector t_temp_dir_ray, int key);
+void			change_ray_dir(t_vars *cub, char c);
 
 #endif
