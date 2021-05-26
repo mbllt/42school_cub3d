@@ -70,45 +70,53 @@ void	rot_if_spon_sew(t_vars *cub, t_vector *ray)
 int	check_collision(t_vars *cub, t_vector temp_dir_ray, int key)
 {
 	t_vector	temp;
-
+	
 	if (key == FRONT)
 	{
 		temp.x = cub->parsing.px;
 		temp.y = cub->parsing.py;
 		temp.x += temp_dir_ray.x * MOVE_SPEED;
 		temp.y += temp_dir_ray.y * MOVE_SPEED;
-		if (cub->parsing.world_map[(int)temp.x][(int)temp.y] != '0' \
-			&& !is_cardinal(cub->parsing.world_map[(int)temp.x][(int)temp.y]))
+		if ((int)temp.x >= cub->parsing.map_x || (int)temp.x < 0 \
+			|| (int)temp.y >= cub->parsing.map_y || (int)temp.y < 0 \
+			|| cub->parsing.world_map[(int)temp.y][(int)temp.x] == '1' \
+			/*&& is_cardinal(cub->parsing.world_map[(int)temp.x][(int)temp.y]) == -1*/)
 			return (0);
 	}
-	if (key == BACK)
+	else if (key == BACK)
 	{
 		temp.x = cub->parsing.px;
 		temp.y = cub->parsing.py;
 		temp.x -= temp_dir_ray.x * MOVE_SPEED;
 		temp.y -= temp_dir_ray.y * MOVE_SPEED;
-		if (cub->parsing.world_map[(int)temp.x][(int)temp.y] != '0' \
-			&& !is_cardinal(cub->parsing.world_map[(int)temp.x][(int)temp.y]))
+		if ((int)temp.x >= cub->parsing.map_x || (int)temp.x < 0 \
+			|| (int)temp.y >= cub->parsing.map_y || (int)temp.y < 0 \
+			|| cub->parsing.world_map[(int)temp.y][(int)temp.x] == '1' \
+			/*&& is_cardinal(cub->parsing.world_map[(int)temp.x][(int)temp.y]) == -1*/)
 			return (0);
 	}
 	if (key == RIGHT)
 	{
 		temp.x = cub->parsing.px;
 		temp.y = cub->parsing.py;
-		temp.x -= temp_dir_ray.x * MOVE_SPEED;
-		temp.y += temp_dir_ray.y * MOVE_SPEED;
-		if (cub->parsing.world_map[(int)temp.x][(int)temp.y] != '0' \
-			&& !is_cardinal(cub->parsing.world_map[(int)temp.x][(int)temp.y]))
+		temp.x -= temp_dir_ray.y * MOVE_SPEED;
+		temp.y += temp_dir_ray.x * MOVE_SPEED;
+		if ((int)temp.x >= cub->parsing.map_x || (int)temp.x < 0 \
+			|| (int)temp.y >= cub->parsing.map_y || (int)temp.y < 0 \
+			|| cub->parsing.world_map[(int)temp.y][(int)temp.x] == '1' \
+			/*&& is_cardinal(cub->parsing.world_map[(int)temp.x][(int)temp.y]) == -1*/)
 			return (0);
 	}
-	if (key == LEFT)
+	else if (key == LEFT)
 	{
 		temp.x = cub->parsing.px;
 		temp.y = cub->parsing.py;
-		temp.x += temp_dir_ray.x * MOVE_SPEED;
-		temp.y -= temp_dir_ray.y * MOVE_SPEED;
-		if (cub->parsing.world_map[(int)temp.x][(int)temp.y] != '0' \
-			&& !is_cardinal(cub->parsing.world_map[(int)temp.x][(int)temp.y]))
+		temp.x += temp_dir_ray.y * MOVE_SPEED;
+		temp.y -= temp_dir_ray.x * MOVE_SPEED;
+		if ((int)temp.x >= cub->parsing.map_x || (int)temp.x < 0 \
+			|| (int)temp.y >= cub->parsing.map_y || (int)temp.y < 0 \
+			|| cub->parsing.world_map[(int)temp.y][(int)temp.x] == '1' \
+			/*&& is_cardinal(cub->parsing.world_map[(int)temp.x][(int)temp.y]) == -1*/)
 			return (0);
 	}
 	return (1);
