@@ -26,11 +26,7 @@ void	display(t_vars *cub, t_index index, t_dot_intersct prio_wall, float r)
 		pixel = get_xy_dir_fc(cub, prio_wall);
 	if (prio_wall.cardinal == SPRITE)
 		pixel = get_xy_spritee(cub, prio_wall, r);
-	//if (prio_wall.t_distance > 1)
 	pixel = dark_color(pixel, prio_wall.t_distance);
-	// if (prio_wall.cardinal == EAST && prio_wall.t_distance >= 3.0)
-	// 	printf("%x\n", pixel);
-	// printf("%d\n", pixel);
 	if (cub->save_on == 1)
 		cub->pixel_data[index.x][index.y] = pixel;
 	if (cub->parsing.scale_on == 1)
