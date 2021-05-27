@@ -1,46 +1,51 @@
 #include "cub3D.h"
-static int	check_argv1(char *str)
+
+static int	check_args(t_vars *cub, int argc, char **argv)
 {
 	int	i;
 
-	i = ft_strlen(str);
-	if (str[i - 1] != 'b' || str[i - 2] != 'u' || str[i - 3] != 'c' \
-		|| str[i - 4] != '.')
+	if (argc != 2 && argc != 3)
 		return (0);
-	return (1);
-}
-
-static int	check_argv2(t_vars *cub, char *str)
-{
-	int	i;
-
-	i = ft_strlen(str);
-	if (i != 6)
-		return (0);
-	if (str[i - 1] != 'e' || str[i - 2] != 'v' || str[i - 3] != 'a' \
-		|| str[i - 4] != 's' || str[i - 5] != '-' || str[i - 6] != '-')
-		return (0);
-	cub->save_on = 1;
+	if (argc == 2)
+	{
+		i = ft_strlen(argv[1]);
+		if (argv[1][i - 1] != 'b' || argv[1][i - 2] != 'u' \
+				|| argv[1][i - 3] != 'c' || argv[1][i - 4] != '.')
+			return (0);
+	}
+	else if (argc == 3)
+	{
+		i = ft_strlen(argv[2]);
+		if (i != 6 || argv[2][i - 1] != 'e' || argv[2][i - 2] != 'v' \
+				|| argv[2][i - 3] != 'a' || argv[2][i - 4] != 's' \
+				|| argv[2][i - 5] != '-' || argv[2][i - 6] != '-')
+			return (0);
+		cub->save_on = 1;
+	}
 	return (1);
 }
 
 static int	save(t_vars *cub)
 {
+	cub->ray_c.free_win = 1;
 	if (!(init_save_image(cub)))
 		return (0);
 	save_header(cub);
 	if (!(create_plans_sprite(cub)))
 	{
-		close(cub->fd);
+		if (close(cub->fd) == -1)
+			write(1, "\nClose did not work\n", 20);
 		return (0);
 	}
 	if (!(multithread(cub)))
 	{
-		close(cub->fd);
+		if (close(cub->fd) == -1)
+			write(1, "\nClose did not work\n", 20);
 		return (0);
 	}
 	save_bitmap(cub);
-	close(cub->fd);
+	if (close(cub->fd) == -1)
+		write(1, "\nClose did not work\n", 20);
 	ft_exit(cub);
 	return (1);
 }
@@ -58,7 +63,6 @@ int	cub_loop(t_vars *cub, int argc, char **argv)
 						cub->parsing.old_ry, "cub3D");
 	cub->ray_c.img = mlx_new_image(cub->ray_c.mlx, cub->parsing.old_rx, \
 						cub->parsing.old_ry);
-	cub->ray_c.free_win = 1;
 	if (!cub->ray_c.img)
 		return (0);
 	cub->ray_c.addr = mlx_get_data_addr(cub->ray_c.img, \
@@ -80,15 +84,18 @@ int	main(int argc, char **argv)
 	t_vars	cub;
 
 	init_parsing(&cub);
-	if (!(parsing(&cub, argv)))
-		return (0);
-	if (!(init_ray_casting(&cub)))
-		return (0);
+	if (!(parsing(&cub, argv)) || !(init_ray_casting(&cub)))
+	{
+		ft_exit(&cub);
+		return (-1);
+	}
 	init_rays(&cub, cub.parsing.rx, cub.parsing.ry, &cub.ray_c);
 	if (!(init_plans(&cub)))
-		return (0);
-	if ((argc == 2 && check_argv1(argv[1]) == 1) \
-		|| (argc == 3 && check_argv2(&cub, argv[2]) == 1))
+	{
+		ft_exit(&cub);
+		return (-1);
+	}
+	if (check_args(&cub, argc, argv) == 1)
 	{
 		if (!(cub_loop(&cub, argc, argv)))
 		{

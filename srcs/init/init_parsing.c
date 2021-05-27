@@ -25,4 +25,5 @@ void	init_parsing(t_vars *cub)
 	cub->parsing.cc = 0;
 	cub->parsing.f_color_on = -1;
 	cub->parsing.c_color_on = -1;
+	cub->ray_c.nbr_sprite = 0;
 }

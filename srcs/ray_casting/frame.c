@@ -23,6 +23,7 @@ int	multithread(t_vars *cub)
 
 int	frame(t_vars *cub)
 {
+	cub->ray_c.free_win = 1;
 	move(cub);
 	rotate(cub);
 	if (cub->ray_c.key.exit == 1)

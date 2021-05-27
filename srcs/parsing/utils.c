@@ -50,10 +50,10 @@ int	check_one(char c, char d, char e, char f)
 	return (1);
 }
 
-int	is_param_text(char c, char d, int ret)
+int	is_param_text(char c, char d)
 {
-	static int	all_param = 0;
-
+	if (!check_double_nsews(c, d) || !check_double_fc(c))
+		return (-1);
 	if (c == 'N')
 		return (0);
 	if (c == 'S')

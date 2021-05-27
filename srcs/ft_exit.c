@@ -71,7 +71,9 @@ static void	free_path(t_vars *cub)
 	if (cub->ray_c.free_text == 1)
 		while (++i < 7)
 			if (cub->parsing.textures[i].img)
-				mlx_destroy_image(cub->ray_c.mlx, cub->parsing.textures[i].img);
+				if (mlx_destroy_image(cub->ray_c.mlx, \
+					cub->parsing.textures[i].img))
+					write(1, "\nDestroy image did not work\n", 27);
 }
 
 int	ft_exit(t_vars *cub)
@@ -98,10 +100,7 @@ int	ft_exit(t_vars *cub)
 	if (cub->ray_c.sprite)
 		free(cub->ray_c.sprite);
 	if (cub->ray_c.free_win == 1)
-	{
-		mlx_destroy_image(cub->ray_c.mlx, cub->ray_c.img);
-		mlx_destroy_window(cub->ray_c.mlx, cub->ray_c.win);
-	}
+		ft_destroy(cub);
 	exit(0);
 	return (1);
 }

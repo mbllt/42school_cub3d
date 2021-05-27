@@ -15,12 +15,6 @@ static int	check_space_move(t_vars *cub, t_vector temp)
 		|| cub->parsing.world_map[(int)temp.y][(int)temp.x] == '1' \
 		|| cub->parsing.world_map[(int)temp.y][(int)temp.x] == ' ')
 		return (0);
-	else if (cub->parsing.world_map[(int)temp.y][(int)temp.x] == '2')
-	{
-		write(1, "\n\e[33m       ﾍ(￣▽￣*)ﾉ\n\n", 34);
-		write(1, "\033[31mYou're dead, try again !\033[0m\n", 35);
-		ft_exit(cub);
-	}
 	return (1);
 }
 
@@ -83,4 +77,12 @@ void	my_mlx_pixel_put_bis(t_text text, int x, int y, unsigned int color)
 	temp = y * text.line_length + x * (text.bits_per_pixel * 0.125);
 	dst = (char *)text.addr + temp;
 	*(unsigned int *)dst = color;
+}
+
+void	ft_destroy(t_vars *cub)
+{
+	if (mlx_destroy_image(cub->ray_c.mlx, cub->ray_c.img))
+		write(1, "\nDestroy image did not work\n", 27);
+	if (mlx_destroy_window(cub->ray_c.mlx, cub->ray_c.win))
+		write(1, "\nDestroy window did not work\n", 28);
 }

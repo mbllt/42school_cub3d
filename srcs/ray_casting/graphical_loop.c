@@ -49,25 +49,17 @@ static int	dir(t_vars *cub, t_dot_intersct intersct[], \
 {
 	init_intersct(intersct);
 	if (ray.y < 0)
-	{	
 		intersct[0] = check_wall_n(cub, ray, &intersct[0]);
-	}
 	if (ray.y > 0)
-	{
 		intersct[1] = check_wall_s(cub, ray, &intersct[1]);
-	}
 	if (ray.x > 0)
-	{
 		intersct[2] = check_wall_e(cub, ray, &intersct[2]);
-	}
 	if (ray.x < 0)
-	{
 		intersct[3] = check_wall_w(cub, ray, &intersct[3]);
-	}
 	intersct[4] = check_wall_f(cub, ray, &intersct[4]);
 	intersct[5] = check_wall_c(cub, ray, &intersct[5]);
 	*r = 0;
-	if (cub->ray_c.sprite_on == 1)
+	if (cub->ray_c.nbr_sprite != 0)
 	{
 		intersct[6] = sprite(cub, ray, &intersct[6], r);
 		if (intersct[6].cardinal == -10)

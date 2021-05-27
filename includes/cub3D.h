@@ -251,7 +251,7 @@ int				is_one(char c);
 int				is_pos(int nbr);
 int				size_colors(int nbr);
 int				check_res_color(t_vars *cub, char *line);
-int				check_path_textures(t_vars *cub, char *line, int ret);
+int				check_path_textures(t_vars *cub, char *line);
 char			*ft_substr(char *s, int start, size_t len);
 int				check_map(t_vars *cub, char **map);
 int				is_path_textures(char *line);
@@ -318,7 +318,7 @@ int				malloc_sp_r_temp(t_vars *cub, t_dot_intersct **sprite, \
 				float **r_temp);
 void			free_sp_r_temp(t_dot_intersct **sprite, float **r_temp);
 unsigned int	dark_color(unsigned int pixel, float distance);
-int				is_param_text(char c, char d, int ret);
+int				is_param_text(char c, char d);
 void			rot_if_spon_sew(t_vars *cub, t_vector *ray);
 int				check_collision(t_vars *cub, t_vector t_temp_dir_ray, int key);
 void			change_ray_dir(t_vars *cub, char c);
@@ -327,4 +327,8 @@ int				check_colors(t_vars *cub, char **str, int size);
 unsigned int	create_trgb(int t, int r, int g, int b);
 void			my_mlx_pixel_put_bis(t_text text, int x, int y, \
 				unsigned int color);
+int				check_double_fc(char c);
+int				check_double_nsews(char c, char d);
+void			ft_destroy(t_vars *cub);
+
 #endif

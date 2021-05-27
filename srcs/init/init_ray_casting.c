@@ -61,6 +61,9 @@ static int	init_ray_casting2(t_vars *cub)
 		return (0);
 	if (!(init_matrix_z(cub)))
 		return (0);
+	if (cub->ray_c.nbr_sprite != 0 \
+		&& !(init_sprite(cub, cub->parsing.world_map)))
+		return (0);
 	return (1);
 }
 
@@ -84,12 +87,8 @@ int	init_ray_casting(t_vars *cub)
 	cub->ray_c.pixel_color = NULL;
 	if (!(init_ray_casting2(cub)))
 		return (0);
-	cub->ray_c.nbr_sprite = 0;
-	if (cub->ray_c.sprite_on == 1 && !(init_sprite(cub, cub->parsing.world_map)))
-		return (0);
 	cub->ray_c.ray_dir = (t_vector){0, -1, 0};
 	change_ray_dir(cub, cub->parsing.cardinal);
-	cub->ray_c.sprite_on = 0;
 	cub->ray_c.free_text = 1;
 	cub->ray_c.free_win = 0;
 	return (1);

@@ -24,8 +24,7 @@ void	save_bitmap(t_vars *cub)
 			ret = write(cub->fd, &buffer, 3);
 			if (ret < 0)
 			{
-				close(cub->fd);
-				ft_exit(cub);
+				return ;
 			}
 		}
 	}
