@@ -78,8 +78,7 @@ int	main(int argc, char **argv)
 {
 	t_vars	cub;
 
-	if (!(init_parsing(&cub)))
-		return (0);
+	init_parsing(&cub);
 	if (!(parsing(&cub, argv)))
 		return (0);
 	if (!(init_ray_casting(&cub)))

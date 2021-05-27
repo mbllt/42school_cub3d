@@ -6,7 +6,7 @@
 #    By: mballet <mballet@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/14 14:39:52 by mballet           #+#    #+#              #
-#    Updated: 2021/05/26 22:08:34 by mballet          ###   ########lyon.fr    #
+#    Updated: 2021/05/27 12:04:39 by mballet          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -103,15 +103,15 @@ $(OBJS_MAIN):
 				@mkdir -p $(PATHS_OBJS)
 
 $(EXE):		$(MLX) $(OBJS)
-				$(CC) -o $@ $^
-				@echo "$(green)Cub lancé !"
+				@$(CC) -o $@ $^
+				@echo "        $(green)Cub lancé !"
 
 $(MLX):
 				@$(MAKE) -C$(FILEMLX) -s
 				@mv $(FILEMLX)/$(MLX) .
 
 $(OBJS_DIR)/%.o :	$(SRCS_DIR)/%.c $(HEADERS)
-				$(CC) $(CFLAGS) -o $@ -c $<
+				@$(CC) $(CFLAGS) -o $@ -c $<
 
 clean:
 				@$(RM) $(OBJS)

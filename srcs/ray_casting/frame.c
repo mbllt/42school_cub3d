@@ -43,16 +43,3 @@ int	frame(t_vars *cub)
 	mlx_sync(MLX_SYNC_WIN_FLUSH_CMD, cub->ray_c.win);
 	return (1);
 }
-
-	// unsigned long	fps;
-
-	// fps = time(NULL);
-	// if (cub->temp != fps)
-	// {
-	// 	cub->temp = fps;
-	// 	cub->fps = cub->i;
-	// 	cub->i = 1;
-	// }
-	// else
-	// 	cub->i++;
-	// printf("%lu\n", cub->fps);

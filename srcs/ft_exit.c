@@ -51,20 +51,25 @@ static void	free_plans(t_vars *cub)
 
 static void	free_path(t_vars *cub)
 {
+	int	i;
+
 	if (cub->parsing.no)
 		free(cub->parsing.no);
-	if (cub->parsing.no)
+	if (cub->parsing.so)
 		free(cub->parsing.so);
-	if (cub->parsing.no)
+	if (cub->parsing.we)
 		free(cub->parsing.we);
-	if (cub->parsing.no)
+	if (cub->parsing.ea)
 		free(cub->parsing.ea);
-	if (cub->parsing.no)
+	if (cub->parsing.f_color_on == 0)
 		free(cub->parsing.f);
-	if (cub->parsing.no)
+	if (cub->parsing.c_color_on == 0)
 		free(cub->parsing.c);
-	if (cub->parsing.no)
+	if (cub->parsing.s)
 		free(cub->parsing.s);
+	i = -1;
+	while (++i < 7)
+		mlx_destroy_image(cub->ray_c.mlx, cub->parsing.textures[i].img);
 }
 
 int	ft_exit(t_vars *cub)
@@ -88,10 +93,10 @@ int	ft_exit(t_vars *cub)
 		if (cub->pixel_data)
 			free(cub->pixel_data);
 	}
-	mlx_destroy_image(cub->ray_c.mlx, cub->ray_c.img);
-	mlx_destroy_window(cub->ray_c.mlx, cub->ray_c.win);
 	if (cub->ray_c.sprite)
 		free(cub->ray_c.sprite);
+	mlx_destroy_image(cub->ray_c.mlx, cub->ray_c.img);
+	mlx_destroy_window(cub->ray_c.mlx, cub->ray_c.win);
 	exit(0);
 	return (1);
 }

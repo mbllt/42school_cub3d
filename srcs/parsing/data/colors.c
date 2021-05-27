@@ -77,14 +77,12 @@ int	check_colors(t_vars *cub, char **str, int size)
 		cub->parsing.f_color_on	= 1;
 		cub->parsing.ff = create_trgb(0, cub->parsing.f_c.x, \
 			cub->parsing.f_c.y, cub->parsing.f_c.z);
-		create_image_color(cub, cub->parsing.ff, 4);
 	}
 	if (str[0][0] == 'C')
 	{
 		cub->parsing.c_color_on	= 1;
 		cub->parsing.cc = create_trgb(0, cub->parsing.c_c.x, \
 			cub->parsing.c_c.y, cub->parsing.c_c.z);
-		create_image_color(cub, cub->parsing.cc, 5);
 	}
 	return (1);
 }

@@ -17,9 +17,8 @@ static int	check_space_move(t_vars *cub, t_vector temp)
 		return (0);
 	else if (cub->parsing.world_map[(int)temp.y][(int)temp.x] == '2')
 	{
-		write(1, "\n           \xF0\x9F\x98\xB1\n", 18);
-		write(1, "\033[31m", 6);
-		write(1, "You're dead, try again !\n", 26);
+		write(1, "\n\e[33m       ﾍ(￣▽￣*)ﾉ\n\n", 34);
+		write(1, "\033[31mYou're dead, try again !\033[0m\n", 35);
 		ft_exit(cub);
 	}
 	return (1);
@@ -74,4 +73,14 @@ void	change_ray_dir(t_vars *cub, char c)
 		cub->ray_c.rota_z = M_PI * 1.5;
 		init_matrix_z(cub);
 	}
+}
+
+void	my_mlx_pixel_put_bis(t_text text, int x, int y, unsigned int color)
+{
+	char	*dst;
+	int		temp;
+
+	temp = y * text.line_length + x * (text.bits_per_pixel * 0.125);
+	dst = (char *)text.addr + temp;
+	*(unsigned int *)dst = color;
 }
