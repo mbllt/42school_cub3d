@@ -1,10 +1,10 @@
-R 1000 1000
+R 1400 850
 NO textures/eagle.xpm
 SO textures/purplestone.xpm
 EA textures/greystone.xpm
 WE  textures/redbrick.xpm
 S  textures/de05.xpm
-F textures/wood.xpm
+F 150,140,90
 C 150,40,90
 11111111111111111111111
  1000200E002000000000021

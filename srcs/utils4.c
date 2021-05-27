@@ -4,7 +4,7 @@
 #define BACK 1
 #define RIGHT 2
 #define LEFT 3
-#define MOVE_SPEED 0.09
+#define MOVE_SPEED 0.12
 
 static int	check_space_move(t_vars *cub, t_vector temp)
 {
@@ -15,6 +15,12 @@ static int	check_space_move(t_vars *cub, t_vector temp)
 		|| cub->parsing.world_map[(int)temp.y][(int)temp.x] == '1' \
 		|| cub->parsing.world_map[(int)temp.y][(int)temp.x] == ' ')
 		return (0);
+	else if (cub->parsing.world_map[(int)temp.y][(int)temp.x] == '2')
+ 	{
+ 		write(1, "\n\e[33m       ﾍ(￣▽￣*)ﾉ\n\n", 34);
+ 		write(1, "\033[31mYou're dead, try again !\033[0m\n", 35);
+ 		ft_exit(cub);
+ 	}
 	return (1);
 }
 

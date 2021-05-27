@@ -7,9 +7,7 @@
 # include <get_next_line.h>
 # include <unistd.h>
 # include <stdlib.h>
-# include <time.h>
 # include <pthread.h>
-# include <limits.h>
 
 # define BLACK	0x00000000
 # define TEAL	0x00008080

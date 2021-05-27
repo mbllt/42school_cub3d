@@ -10,7 +10,7 @@
 #define A			0
 #define O			31
 #define L			37
-#define MOVE_SPEED	0.09
+#define MOVE_SPEED	0.12
 
 int	key_press(int key, t_vars *cub)
 {

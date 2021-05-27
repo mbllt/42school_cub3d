@@ -6,7 +6,7 @@
 #    By: mballet <mballet@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/14 14:39:52 by mballet           #+#    #+#              #
-#    Updated: 2021/05/27 15:02:33 by mballet          ###   ########lyon.fr    #
+#    Updated: 2021/05/27 18:01:34 by mballet          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -104,7 +104,7 @@ $(OBJS_MAIN):
 
 $(EXE):		$(MLX) $(OBJS)
 				@$(CC) -o $@ $^
-				@echo "        $(green)Cub lancé !"
+				@echo "      $(green)Cub lancé !"
 
 $(MLX):
 				@$(MAKE) -C$(FILEMLX) -s
