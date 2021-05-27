@@ -21,7 +21,7 @@ static int	get_color(t_vars *cub, char **str)
 	int		size;
 	char	**str_color;
 
-	if(!(check_nbr_coma(str[1])))
+	if (!(check_nbr_coma(str[1])))
 		return (0);
 	str_color = NULL;
 	size = 0;
@@ -49,7 +49,7 @@ static int	check_size_colors(t_vars *cub)
 	if (!(size_colors(cub->parsing.f_c.x)) \
 		|| !(size_colors(cub->parsing.f_c.y)) \
 		|| !(size_colors(cub->parsing.f_c.z)) \
-		|| !(size_colors(cub->parsing.c_c.x))\
+		|| !(size_colors(cub->parsing.c_c.x)) \
 		|| !(size_colors(cub->parsing.c_c.y)) \
 		|| !(size_colors(cub->parsing.c_c.z)))
 	{
@@ -74,13 +74,13 @@ int	check_colors(t_vars *cub, char **str, int size)
 	}
 	if (str[0][0] == 'F')
 	{
-		cub->parsing.f_color_on	= 1;
+		cub->parsing.f_color_on = 1;
 		cub->parsing.ff = create_trgb(0, cub->parsing.f_c.x, \
 			cub->parsing.f_c.y, cub->parsing.f_c.z);
 	}
 	if (str[0][0] == 'C')
 	{
-		cub->parsing.c_color_on	= 1;
+		cub->parsing.c_color_on = 1;
 		cub->parsing.cc = create_trgb(0, cub->parsing.c_c.x, \
 			cub->parsing.c_c.y, cub->parsing.c_c.z);
 	}

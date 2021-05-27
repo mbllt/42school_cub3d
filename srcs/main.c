@@ -58,6 +58,7 @@ int	cub_loop(t_vars *cub, int argc, char **argv)
 						cub->parsing.old_ry, "cub3D");
 	cub->ray_c.img = mlx_new_image(cub->ray_c.mlx, cub->parsing.old_rx, \
 						cub->parsing.old_ry);
+	cub->ray_c.free_win = 1;
 	if (!cub->ray_c.img)
 		return (0);
 	cub->ray_c.addr = mlx_get_data_addr(cub->ray_c.img, \

@@ -50,8 +50,10 @@ int	check_one(char c, char d, char e, char f)
 	return (1);
 }
 
-int	is_param_text(char c)
+int	is_param_text(char c, char d, int ret)
 {
+	static int	all_param = 0;
+
 	if (c == 'N')
 		return (0);
 	if (c == 'S')

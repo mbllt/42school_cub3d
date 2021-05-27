@@ -18,6 +18,8 @@ static int	check_value_in_map(t_vars *cub, char **world_map)
 			{
 				return (0);
 			}
+			if (world_map[i][j] && world_map[i][j] == '2')
+				cub->ray_c.sprite_on = 1;
 			j++;
 		}
 		i++;

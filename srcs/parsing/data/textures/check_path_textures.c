@@ -57,7 +57,7 @@ static int	check_get_path(t_vars *cub, char *str, int cardinal)
 	return (1);
 }
 
-int	check_path_textures(t_vars *cub, char *line)
+int	check_path_textures(t_vars *cub, char *line, int ret)
 {
 	int	cardinal;
 	int	i;
@@ -65,7 +65,7 @@ int	check_path_textures(t_vars *cub, char *line)
 	i = 0;
 	while (line[i] && line[i] == ' ')
 		i++;
-	cardinal = is_param_text(line[i]);
+	cardinal = is_param_text(line[i], line[i + 1], ret);
 	if (cardinal == 4 && is_color_path(line) == 1)
 		return (1);
 	else if (cardinal == 4)

@@ -99,7 +99,10 @@ int	parsing(t_vars *cub, char **argv)
 	cub->parsing.file_y = 1;
 	cub->parsing.file = read_parsing(cub, fd, line, &cub->parsing.file_y);
 	if (!cub->parsing.file)
+	{
+		ft_exit(cub);
 		return (0);
+	}
 	close(fd);
 	if (!(ft_map(cub, cub->parsing.file, cub->parsing.file_y - 1)))
 		return (0);

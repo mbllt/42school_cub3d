@@ -56,6 +56,12 @@ int	get_textures(t_vars *cub, t_text *textures)
 		if (!(textures[i].img))
 		{
 			write(1, "\nError : textures\n", 19);
+			while (--i >= 0)
+			{
+				free(textures[i].img);
+				textures[i].img = NULL;
+			}
+			cub->ray_c.free_text = 0;
 			return (0);
 		}
 	}

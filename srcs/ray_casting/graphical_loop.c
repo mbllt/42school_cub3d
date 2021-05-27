@@ -67,9 +67,12 @@ static int	dir(t_vars *cub, t_dot_intersct intersct[], \
 	intersct[4] = check_wall_f(cub, ray, &intersct[4]);
 	intersct[5] = check_wall_c(cub, ray, &intersct[5]);
 	*r = 0;
-	intersct[6] = sprite(cub, ray, &intersct[6], r);
-	if (intersct[6].cardinal == -10)
-		return (0);
+	if (cub->ray_c.sprite_on == 1)
+	{
+		intersct[6] = sprite(cub, ray, &intersct[6], r);
+		if (intersct[6].cardinal == -10)
+			return (0);
+	}
 	return (1);
 }
 
