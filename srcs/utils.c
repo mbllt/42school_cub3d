@@ -9,6 +9,8 @@ t_vector	normalisation_v(t_vector v)
 {
 	float	norm;
 
+	if (v.x == 0 && v.y == 0 && v.z == 0)
+		return ((t_vector){0, 0, 0});
 	norm = 1 / norm_v(v);
 	v.x *= norm;
 	v.y *= norm;

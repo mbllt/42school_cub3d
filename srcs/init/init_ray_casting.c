@@ -91,5 +91,9 @@ int	init_ray_casting(t_vars *cub)
 	change_ray_dir(cub, cub->parsing.cardinal);
 	cub->ray_c.free_text = 1;
 	cub->ray_c.free_win = 0;
+	cub->ray_c.move.front = 0;
+	cub->ray_c.move.back = 1;
+	cub->ray_c.move.right = 2;
+	cub->ray_c.move.left = 3;
 	return (1);
 }

@@ -19,9 +19,7 @@ static int	fill_in_plans(t_vars *cub, t_plan **plans, int cardinal, int size)
 	while (i >= 0)
 	{
 		if (cardinal == NORTH)
-		{
 			plans[cardinal][i] = (t_plan){0, 1, 0, -i};
-		}
 		else if (cardinal == WEST)
 			plans[cardinal][i] = (t_plan){1, 0, 0, -i};
 		i--;

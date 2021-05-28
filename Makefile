@@ -6,7 +6,7 @@
 #    By: mballet <mballet@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/14 14:39:52 by mballet           #+#    #+#              #
-#    Updated: 2021/05/28 15:22:46 by mballet          ###   ########lyon.fr    #
+#    Updated: 2021/05/28 17:42:47 by mballet          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,12 +34,14 @@ SRCS_FILES			=	main.c \
 					ray_casting/check_ew.c \
 					ray_casting/check_fc.c \
 					ray_casting/keypress.c \
+					ray_casting/move.c \
 					ray_casting/sprite.c \
 					ray_casting/create_plans_sprite.c \
 					ray_casting/get_xy_dir_ns.c \
 					ray_casting/get_xy_dir_ew.c \
 					ray_casting/get_xy_dir_fc.c \
 					ray_casting/get_xy_sprite.c \
+					ray_casting/collision.c \
 					gnl/get_next_line.c \
 					gnl/get_next_line_utils.c \
 					parsing/parsing.c \

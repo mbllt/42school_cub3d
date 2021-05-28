@@ -13,8 +13,6 @@ static int	get_size_y_map(t_vars *cub, char **map, int file_y)
 		i = 0;
 		while (map[file_y][i] == ' ')
 			i++;
-		// if (map[file_y][i] == 0)
-		// 	map_y++;
 		if (map[file_y][i] && map[file_y][i] == '1')
 			map_y++;
 		else if (file_y == size_file && map[file_y][i] == 0)

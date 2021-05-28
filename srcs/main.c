@@ -50,10 +50,8 @@ static int	save(t_vars *cub)
 	return (1);
 }
 
-int	cub_loop(t_vars *cub, int argc, char **argv)
+int	cub_loop(t_vars *cub)
 {
-	(void)argc;
-	(void)argv;
 	cub->ray_c.mlx = mlx_init();
 	if (!cub->ray_c.mlx)
 		return (0);
@@ -99,12 +97,7 @@ int	main(int argc, char **argv)
 		return (-1);
 	}
 	init_rays(&cub, cub.parsing.rx, cub.parsing.ry, &cub.ray_c);
-	if (!(init_plans(&cub)))
-	{
-		ft_exit(&cub);
-		return (-1);
-	}
-	if (!(cub_loop(&cub, argc, argv)))
+	if (!(init_plans(&cub)) || !(cub_loop(&cub)))
 	{
 		ft_exit(&cub);
 		return (-1);

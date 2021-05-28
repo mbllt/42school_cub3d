@@ -105,8 +105,7 @@ int	ft_exit(t_vars *cub)
 			if (cub->pixel_data[i])
 				free(cub->pixel_data[i]);
 		}
-		if (cub->pixel_data)
-			free(cub->pixel_data);
+		free(cub->pixel_data);
 	}
 	if (cub->ray_c.sprite)
 		free(cub->ray_c.sprite);
@@ -114,7 +113,6 @@ int	ft_exit(t_vars *cub)
 		ft_destroy(cub);
 	if (cub->exit_good == 1)
 		exit(1);
-	else
-		exit(0);
+	exit(0);
 	return (1);
 }

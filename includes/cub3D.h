@@ -9,19 +9,20 @@
 # include <stdlib.h>
 # include <pthread.h>
 
-#define KEYUP		126
-#define KEYDOWN		125
-#define KEYRIGHT	124
-#define KEYLEFT		123
-#define W			13
-#define S			1
-#define D			2
-#define A			0
-#define O			31
-#define L			37
-#define JUMP		49
-#define SPEED		257
-#define MOVE_SPEED	0.04
+# define KEYUP		126
+# define KEYDOWN		125
+# define KEYRIGHT	124
+# define KEYLEFT		123
+# define W			13
+# define S			1
+# define D			2
+# define A			0
+# define O			31
+# define L			37
+# define EXIT		53
+# define JUMP		49
+# define SPEED		257
+# define MOVE_SPEED	0.04
 
 typedef enum e_dir
 {
@@ -41,7 +42,6 @@ typedef struct s_move
 	short int	right;
 	short int	left;
 }t_move;
-
 
 typedef struct s_direction
 {
@@ -148,6 +148,7 @@ typedef struct s_ray
 	int			free_matrixzon;
 	int			free_plans;
 	int			free_stock_rays;
+	t_move		move;
 }				t_ray;
 
 typedef struct s_parsing
@@ -217,7 +218,7 @@ typedef struct s_vars
 	t_header_file	save;
 	int				fd;
 	unsigned int	**pixel_data;
-	short int	exit_good;
+	short int		exit_good;
 }t_vars;
 
 typedef struct s_thread
@@ -244,7 +245,7 @@ t_vector		rotation_x(t_vars *cub, t_vector ray);
 t_vector		rotation_z(t_vars *cub, t_vector ray);
 void			display(t_vars *cub, t_index index, t_dot_intersct prio_wall, \
 				float r);
-int				cub_loop(t_vars *cub, int argc, char **argv);
+int				cub_loop(t_vars *cub);
 int				parsing(t_vars *cub, char **argv);
 int				check_data(t_vars *cub, char *line, int ret);
 int				ft_atoi(const char *str);
