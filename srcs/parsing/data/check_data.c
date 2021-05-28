@@ -4,6 +4,7 @@ static int	check_data_param_valid(char *line, int *part_map)
 {
 	int	i;
 
+	(void)part_map;
 	i = 0;
 	while (line[i] == ' ')
 		i++;

@@ -27,5 +27,6 @@ int	init_stock_rays(t_vars *cub, int width, int height)
 			return (0);
 		}
 	}
+	cub->ray_c.free_stock_rays = 1;
 	return (1);
 }

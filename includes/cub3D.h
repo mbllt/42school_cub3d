@@ -130,6 +130,10 @@ typedef struct s_ray
 	t_vector	ray_dir;
 	int			free_text;
 	int			free_win;
+	int			free_matrixxon;
+	int			free_matrixzon;
+	int			free_plans;
+	int			free_stock_rays;
 }				t_ray;
 
 typedef struct s_parsing

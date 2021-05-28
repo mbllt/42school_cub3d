@@ -26,4 +26,8 @@ void	init_parsing(t_vars *cub)
 	cub->parsing.f_color_on = -1;
 	cub->parsing.c_color_on = -1;
 	cub->ray_c.nbr_sprite = 0;
+	cub->ray_c.free_matrixxon = 0;
+	cub->ray_c.free_matrixzon = 0;
+	cub->ray_c.free_plans = 0;
+	cub->ray_c.free_stock_rays = 0;
 }

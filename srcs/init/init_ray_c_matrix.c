@@ -14,6 +14,7 @@ int	malloc_matrix_x(t_vars *cub)
 		if (!cub->ray_c.matrix_x[i])
 			return (0);
 	}
+	cub->ray_c.free_matrixxon = 1;
 	return (1);
 }
 
@@ -45,6 +46,7 @@ int	malloc_matrix_z(t_vars *cub)
 		if (!cub->ray_c.matrix_z[i])
 			return (0);
 	}
+	cub->ray_c.free_matrixzon = 1;
 	return (1);
 }
 

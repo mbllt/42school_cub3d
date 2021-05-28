@@ -95,21 +95,31 @@ void	rotate(t_vars *cub)
 {
 	if (cub->ray_c.key.rot_x_right == 1)
 	{
-		cub->ray_c.rota_x += MOVE_SPEED;
-		init_matrix_x(cub);
+		if (cub->ray_c.rota_x + MOVE_SPEED < 0.7)
+		{
+			cub->ray_c.rota_x += MOVE_SPEED;
+			init_matrix_x(cub);
+		}
 	}
 	if (cub->ray_c.key.rot_x_left == 1)
 	{
-		cub->ray_c.rota_x -= MOVE_SPEED;
-		init_matrix_x(cub);
+		if (cub->ray_c.rota_x - MOVE_SPEED > -0.7)
+		{
+			cub->ray_c.rota_x -= MOVE_SPEED;
+			init_matrix_x(cub);
+		}
 	}
 	if (cub->ray_c.key.rot_z_right == 1)
 	{
+		if (cub->ray_c.rota_z + MOVE_SPEED > 360 * (M_PI / 180))
+			cub->ray_c.rota_z -= 360 * (M_PI / 180);
 		cub->ray_c.rota_z += MOVE_SPEED;
 		init_matrix_z(cub);
 	}
 	if (cub->ray_c.key.rot_z_left == 1)
 	{
+		if (cub->ray_c.rota_z - MOVE_SPEED < - (360 * (M_PI / 180)))
+			cub->ray_c.rota_z += 360 * (M_PI / 180);
 		cub->ray_c.rota_z -= MOVE_SPEED;
 		init_matrix_z(cub);
 	}

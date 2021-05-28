@@ -4,49 +4,61 @@ static void	free_stock_rays(t_vars *cub)
 {
 	int	i;
 
-	i = -1;
-	while (++i < cub->parsing.rx)
+	if (cub->ray_c.free_stock_rays == 1)
 	{
-		if (cub->ray_c.stock_rays[i])
-			free(cub->ray_c.stock_rays[i]);
+		i = -1;
+		while (++i < cub->parsing.rx)
+		{
+			if (cub->ray_c.stock_rays[i])
+				free(cub->ray_c.stock_rays[i]);
+		}
+		if (cub->ray_c.stock_rays)
+			free(cub->ray_c.stock_rays);
 	}
-	if (cub->ray_c.stock_rays)
-		free(cub->ray_c.stock_rays);
 }
 
 static void	free_matrix(t_vars *cub)
 {
 	int	i;
 
-	i = -1;
-	while (++i < 3)
+	if (cub->ray_c.free_matrixzon == 1)
 	{
-		if (cub->ray_c.matrix_z[i])
-			free(cub->ray_c.matrix_z[i]);
+		i = -1;
+		while (++i < 3)
+		{
+			if (cub->ray_c.matrix_z[i])
+				free(cub->ray_c.matrix_z[i]);
+		}
+		free(cub->ray_c.matrix_z);
 	}
-	free(cub->ray_c.matrix_z);
-	i = -1;
-	while (++i < 3)
+	if (cub->ray_c.free_matrixxon == 1)
 	{
-		if (cub->ray_c.matrix_x[i])
-			free(cub->ray_c.matrix_x[i]);
+		i = -1;
+		while (++i < 3)
+		{
+			if (cub->ray_c.matrix_x[i])
+				free(cub->ray_c.matrix_x[i]);
+		}
+		free(cub->ray_c.matrix_x);
 	}
-	free(cub->ray_c.matrix_x);
 }
 
 static void	free_plans(t_vars *cub)
 {
 	int	i;
 
-	i = 0;
-	while (i < 6)
+	if (cub->ray_c.free_plans == 1)
 	{
-		if (cub->ray_c.plans[i])
-			free(cub->ray_c.plans[i]);
-		i++;
+		i = 0;
+		while (i < 6)
+		{
+			if (cub->ray_c.plans[i])
+				free(cub->ray_c.plans[i]);
+			i++;
+		}
+		if (cub->ray_c.plans)
+			free(cub->ray_c.plans);
 	}
-	if (cub->ray_c.plans)
-		free(cub->ray_c.plans);
 }
 
 static void	free_path(t_vars *cub)
@@ -83,7 +95,6 @@ int	ft_exit(t_vars *cub)
 	free_stock_rays(cub);
 	free_matrix(cub);
 	free_plans(cub);
-	ft_double_free(cub->parsing.file, cub->parsing.file_y - 1);
 	free_path(cub);
 	ft_double_free(cub->parsing.world_map, cub->parsing.map_y);
 	if (cub->save_on == 1)

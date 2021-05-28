@@ -13,7 +13,7 @@ void	init_rays(t_vars *cub, int width, int height, t_ray *ray_c)
 	if (ray_c->ratio_v < 0)
 		ray_c->ratio_v *= -1;
 	if (ray_c->ratio_v * height > 2.4)
-		write(1, "\nCarful, the view will not be realistuc!\n", 42);
+		write(1, "\nCarful, the view will not be realistic!\n", 42);
 	i = -1;
 	while (++i < width)
 	{

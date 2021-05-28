@@ -6,7 +6,7 @@
 #    By: mballet <mballet@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/14 14:39:52 by mballet           #+#    #+#              #
-#    Updated: 2021/05/27 18:01:34 by mballet          ###   ########lyon.fr    #
+#    Updated: 2021/05/28 14:33:06 by mballet          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,14 +61,14 @@ SRCS_FILES			=	main.c \
 
 OBJS_DIR		=	.objs
 
-PATHS_OBJS		=	.objs/init	\
-					.objs/ray_casting	\
-					.objs/gnl	\
-					.objs/parsing	\
-					.objs/parsing/data	\
-					.objs/parsing/data/textures	\
-					.objs/parsing/map	\
-					.objs/save_image	\
+PATHS_OBJS		=	init	\
+					ray_casting	\
+					gnl	\
+					parsing	\
+					parsing/data	\
+					parsing/data/textures	\
+					parsing/map	\
+					save_image	\
 
 OBJS_MAIN		=	$(OBJS_DIR) $(PATHS_OBJS)
 
@@ -98,19 +98,16 @@ green			= \033[32m
 
 all:		$(EXE)
 
-$(OBJS_MAIN):
-				@mkdir -p $(OBJS_DIR)
-				@mkdir -p $(PATHS_OBJS)
-
 $(EXE):		$(MLX) $(OBJS)
 				@$(CC) -o $@ $^
-				@echo "      $(green)Cub lancé !"
+				@echo "     $(green)Cub3D  ready !"
 
 $(MLX):
 				@$(MAKE) -C$(FILEMLX) -s
 				@mv $(FILEMLX)/$(MLX) .
 
 $(OBJS_DIR)/%.o :	$(SRCS_DIR)/%.c $(HEADERS)
+				@mkdir -p $(OBJS_DIR) $(addprefix $(OBJS_DIR)/,$(PATHS_OBJS))
 				@$(CC) $(CFLAGS) -o $@ -c $<
 
 clean:
@@ -119,10 +116,10 @@ clean:
 fclean:		clean
 				@$(RM) $(MLX)
 				@$(RM) $(EXE)
+				@$(RM) save.bmp
 
 re:			fclean all
 
 .PHONY:		clean fclean all re
 
 # $(MAKE) -Cmlx pour dire fait un make dans ce dossier
-# @ au debut pour le faire en silence (pas d'affichage sur fd 1)

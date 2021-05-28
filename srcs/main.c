@@ -84,9 +84,17 @@ int	main(int argc, char **argv)
 	t_vars	cub;
 
 	init_parsing(&cub);
-	if (!(parsing(&cub, argv)) || !(init_ray_casting(&cub)))
+	if (check_args(&cub, argc, argv) == 1)
 	{
-		ft_exit(&cub);
+		if (!(parsing(&cub, argv)) || !(init_ray_casting(&cub)))
+		{
+			ft_exit(&cub);
+			return (-1);
+		}
+	}
+	else
+	{
+		write(1, "\nError : invalid arguments\n", 27);
 		return (-1);
 	}
 	init_rays(&cub, cub.parsing.rx, cub.parsing.ry, &cub.ray_c);
@@ -95,15 +103,10 @@ int	main(int argc, char **argv)
 		ft_exit(&cub);
 		return (-1);
 	}
-	if (check_args(&cub, argc, argv) == 1)
+	if (!(cub_loop(&cub, argc, argv)))
 	{
-		if (!(cub_loop(&cub, argc, argv)))
-		{
-			ft_exit(&cub);
-			return (-1);
-		}
+		ft_exit(&cub);
+		return (-1);
 	}
-	else
-		write(1, "\nError : invalid arguments\n", 27);
 	return (0);
 }
