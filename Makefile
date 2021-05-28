@@ -6,7 +6,7 @@
 #    By: mballet <mballet@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/14 14:39:52 by mballet           #+#    #+#              #
-#    Updated: 2021/05/28 14:33:06 by mballet          ###   ########lyon.fr    #
+#    Updated: 2021/05/28 15:22:46 by mballet          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -84,7 +84,7 @@ HEADERS			=	includes/cub3D.h \
 
 CC				=	gcc
 
-CFLAGS			=	-g -Wall -Wextra -Werror -Iincludes/ -Imlx/
+CFLAGS			=	-g -Wall -Wextra -Werror -O3 -ffast-math -march=native -flto -Iincludes/ -Imlx/
 
 SANFLAGS		=	-g3 -fsanitize=address
 

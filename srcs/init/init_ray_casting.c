@@ -35,6 +35,8 @@ static void	init_key(t_vars *cub)
 	cub->ray_c.key.rot_z_right = 0;
 	cub->ray_c.key.rot_z_left = 0;
 	cub->ray_c.key.exit = 0;
+	cub->ray_c.key.jump = 0;
+	cub->ray_c.key.speed = 0;
 }
 
 static void	init_xyz(t_vars *cub)
@@ -82,8 +84,6 @@ int	init_ray_casting(t_vars *cub)
 	cub->ray_c.distance = 0;
 	cub->ray_c.rota_x = 0;
 	cub->ray_c.rota_z = 0;
-	cub->ray_c.fps = 0;
-	cub->ray_c.seconde = 0;
 	cub->ray_c.pixel_color = NULL;
 	if (!(init_ray_casting2(cub)))
 		return (0);

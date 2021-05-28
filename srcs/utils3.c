@@ -67,3 +67,10 @@ void	rot_if_spon_sew(t_vars *cub, t_vector *ray)
 	}
 	cub->ray_c.rota_z = temp;
 }
+
+int	exit_red_cross(t_vars *cub)
+{
+	cub->exit_good = 1;
+	ft_exit(cub);
+	return (1);
+}

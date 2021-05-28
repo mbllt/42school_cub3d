@@ -61,6 +61,8 @@ int	cub_loop(t_vars *cub, int argc, char **argv)
 		return (0);
 	cub->ray_c.win = mlx_new_window(cub->ray_c.mlx, cub->parsing.old_rx, \
 						cub->parsing.old_ry, "cub3D");
+	if (!cub->ray_c.win)
+		return (0);
 	cub->ray_c.img = mlx_new_image(cub->ray_c.mlx, cub->parsing.old_rx, \
 						cub->parsing.old_ry);
 	if (!cub->ray_c.img)
@@ -73,8 +75,7 @@ int	cub_loop(t_vars *cub, int argc, char **argv)
 	mlx_loop_hook(cub->ray_c.mlx, frame, cub);
 	mlx_hook(cub->ray_c.win, 2, 1L << 0, key_press, cub);
 	mlx_hook(cub->ray_c.win, 3, 1L << 1, key_release, cub);
-	mlx_hook(cub->ray_c.win, 17, 1L << 5, ft_exit, cub);
-	cub->ray_c.seconde = time(NULL);
+	mlx_hook(cub->ray_c.win, 17, 1L << 5, exit_red_cross, cub);
 	mlx_loop(cub->ray_c.mlx);
 	return (1);
 }

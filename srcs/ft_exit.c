@@ -112,6 +112,9 @@ int	ft_exit(t_vars *cub)
 		free(cub->ray_c.sprite);
 	if (cub->ray_c.free_win == 1)
 		ft_destroy(cub);
-	exit(0);
+	if (cub->exit_good == 1)
+		exit(1);
+	else
+		exit(0);
 	return (1);
 }

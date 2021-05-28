@@ -1,11 +1,5 @@
 #include "cub3D.h"
 
-#define FRONT 0
-#define BACK 1
-#define RIGHT 2
-#define LEFT 3
-#define MOVE_SPEED 0.12
-
 static int	check_space_move(t_vars *cub, t_vector temp)
 {
 	if ((int)temp.x >= cub->parsing.map_x || (int)temp.x < 0 \
@@ -27,25 +21,31 @@ static int	check_space_move(t_vars *cub, t_vector temp)
 int	check_collision(t_vars *cub, t_vector temp_dir_ray, int key)
 {
 	t_vector	temp;
+	t_move		dir;
+
+	dir.front = 0;
+	dir.back = 1;
+	dir.right = 2;
+	dir.left = 3;
 
 	temp.x = cub->parsing.px;
 	temp.y = cub->parsing.py;
-	if (key == FRONT)
+	if (key == dir.front)
 	{
 		temp.x += temp_dir_ray.x * MOVE_SPEED;
 		temp.y += temp_dir_ray.y * MOVE_SPEED;
 	}
-	else if (key == BACK)
+	else if (key == dir.back)
 	{
 		temp.x -= temp_dir_ray.x * MOVE_SPEED;
 		temp.y -= temp_dir_ray.y * MOVE_SPEED;
 	}
-	if (key == RIGHT)
+	if (key == dir.right)
 	{
 		temp.x -= temp_dir_ray.y * MOVE_SPEED;
 		temp.y += temp_dir_ray.x * MOVE_SPEED;
 	}
-	else if (key == LEFT)
+	else if (key == dir.left)
 	{
 		temp.x += temp_dir_ray.y * MOVE_SPEED;
 		temp.y -= temp_dir_ray.x * MOVE_SPEED;

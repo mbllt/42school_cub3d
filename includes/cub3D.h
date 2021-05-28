@@ -3,20 +3,25 @@
 
 # include <stdio.h>
 # include <math.h>
-# include <mlx.h>
-# include <get_next_line.h>
+# include "mlx.h"
+# include "get_next_line.h"
 # include <unistd.h>
 # include <stdlib.h>
 # include <pthread.h>
 
-# define BLACK	0x00000000
-# define TEAL	0x00008080
-# define BLUE	0x0000BFFF
-# define BROWN	0x00FFDEAD
-# define GREEN	0x0000FF00
-# define ORANGE	0x00FFA500
-# define PINK	0x00DB7093
-# define GREY	0x00808080
+#define KEYUP		126
+#define KEYDOWN		125
+#define KEYRIGHT	124
+#define KEYLEFT		123
+#define W			13
+#define S			1
+#define D			2
+#define A			0
+#define O			31
+#define L			37
+#define JUMP		49
+#define SPEED		257
+#define MOVE_SPEED	0.04
 
 typedef enum e_dir
 {
@@ -28,6 +33,15 @@ typedef enum e_dir
 	C,
 	SPRITE,
 }t_dir;
+
+typedef struct s_move
+{
+	short int	front;
+	short int	back;
+	short int	right;
+	short int	left;
+}t_move;
+
 
 typedef struct s_direction
 {
@@ -73,6 +87,8 @@ typedef struct s_key
 	int	rot_z_right;
 	int	rot_z_left;
 	int	exit;
+	int	jump;
+	int	speed;
 }t_key;
 
 typedef struct s_text
@@ -119,8 +135,6 @@ typedef struct s_ray
 	float		**matrix_x;
 	float		**matrix_z;
 	t_key		key;
-	int			fps;
-	int			seconde;
 	char		*cos;
 	char		*sin;
 	char		*pixel_color;
@@ -203,15 +217,13 @@ typedef struct s_vars
 	t_header_file	save;
 	int				fd;
 	unsigned int	**pixel_data;
-	unsigned long	temp;
-	int				i;
-	unsigned long	fps;
+	short int	exit_good;
 }t_vars;
 
 typedef struct s_thread
 {
-	t_vars	cub;
-	int		thread_num;
+	t_vars		cub;
+	int			thread_num;
 }t_thread;
 
 void			init_parsing(t_vars *cub);
@@ -332,5 +344,6 @@ void			my_mlx_pixel_put_bis(t_text text, int x, int y, \
 int				check_double_fc(char c);
 int				check_double_nsews(char c, char d);
 void			ft_destroy(t_vars *cub);
+int				exit_red_cross(t_vars *cub);
 
 #endif
