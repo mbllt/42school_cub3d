@@ -44,6 +44,8 @@ int	get_world_map(t_vars *cub, char **map, int map_y, int file_y)
 			return (0);
 		}
 		index_map = (file_y - (map_y - 1)) + i;
+		if (cub->parsing.zero != 0)
+			index_map -= cub->parsing.zero;
 		if (!(ft_cpymap(cub->parsing.world_map[i], map[index_map], \
 				cub->parsing.map_x)))
 			return (0);

@@ -1,5 +1,25 @@
 #include "cub3D.h"
 
+static void	fps(t_vars *cub)
+{
+	int	fps;
+
+	fps = time(NULL);
+	if (cub->temp != fps)
+	{
+		cub->temp = fps;
+		fps = cub->i;
+		if (cub->fps)
+			free(cub->fps);
+		cub->fps = ft_itoa(fps);
+		cub->i = 1;
+	}
+	else
+	{
+		cub->i++;
+	}
+}
+
 int	multithread(t_vars *cub)
 {
 	pthread_t	threads[4];
@@ -23,6 +43,7 @@ int	multithread(t_vars *cub)
 
 int	frame(t_vars *cub)
 {
+	fps(cub);
 	cub->ray_c.free_win = 1;
 	move(cub);
 	rotate(cub);
@@ -41,6 +62,7 @@ int	frame(t_vars *cub)
 		return (0);
 	mlx_put_image_to_window(cub->ray_c.mlx, cub->ray_c.win, \
 							cub->ray_c.img, 0, 0);
+	mlx_string_put(cub->ray_c.mlx, cub->ray_c.win, 30, 30, 13979169, cub->fps);
 	mlx_sync(MLX_SYNC_WIN_FLUSH_CMD, cub->ray_c.win);
 	return (1);
 }

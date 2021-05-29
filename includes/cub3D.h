@@ -115,8 +115,7 @@ typedef struct s_sprite
 typedef struct s_ray
 {
 	float		fov;
-	float		ratio_h;
-	float		ratio_v;
+	float		ratio;
 	void		*mlx;
 	void		*win;
 	void		*img;
@@ -183,6 +182,7 @@ typedef struct s_parsing
 	t_text			textures[7];
 	char			**file;
 	int				file_y;
+	int				zero;
 }t_parsing;
 
 typedef struct __attribute__((__packed__)) s_header_bitmap
@@ -219,6 +219,9 @@ typedef struct s_vars
 	int				fd;
 	unsigned int	**pixel_data;
 	short int		exit_good;
+	char			*fps;
+	int				temp;
+	int				i;
 }t_vars;
 
 typedef struct s_thread
@@ -346,5 +349,6 @@ int				check_double_fc(char c);
 int				check_double_nsews(char c, char d);
 void			ft_destroy(t_vars *cub);
 int				exit_red_cross(t_vars *cub);
+char			*ft_itoa(int n);
 
 #endif

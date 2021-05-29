@@ -23,9 +23,9 @@ static void	check_collision2(t_vars *cub, t_vector temp_dir_ray, int key, \
 {
 	float		speed;
 
-	speed = MOVE_SPEED;
+	speed = MOVE_SPEED * 2;
 	if (cub->ray_c.key.speed == 1)
-		speed *= 1.5;
+		speed *= 2;
 	if (key == cub->ray_c.move.right)
 	{
 		temp->x -= temp_dir_ray.y * speed;
@@ -45,9 +45,9 @@ int	check_collision(t_vars *cub, t_vector temp_dir_ray, int key)
 
 	temp.x = cub->parsing.px;
 	temp.y = cub->parsing.py;
-	speed = MOVE_SPEED;
+	speed = MOVE_SPEED * 2;
 	if (cub->ray_c.key.speed == 1)
-		speed *= 1.5;
+		speed *= 2;
 	if (key == cub->ray_c.move.front)
 	{
 		temp.x += temp_dir_ray.x * speed;

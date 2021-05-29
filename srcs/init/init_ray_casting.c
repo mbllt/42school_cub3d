@@ -72,8 +72,7 @@ static int	init_ray_casting2(t_vars *cub)
 int	init_ray_casting(t_vars *cub)
 {
 	cub->ray_c.fov = 0;
-	cub->ray_c.ratio_h = 0;
-	cub->ray_c.ratio_v = 0;
+	cub->ray_c.ratio = 0;
 	cub->ray_c.mlx = NULL;
 	cub->ray_c.win = NULL;
 	cub->ray_c.img = 0;

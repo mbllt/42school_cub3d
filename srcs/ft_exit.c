@@ -1,6 +1,6 @@
 #include "cub3D.h"
 
-static void	free_stock_rays(t_vars *cub)
+static void	free_stock_rays_and_save_on(t_vars *cub)
 {
 	int	i;
 
@@ -14,6 +14,16 @@ static void	free_stock_rays(t_vars *cub)
 		}
 		if (cub->ray_c.stock_rays)
 			free(cub->ray_c.stock_rays);
+	}
+	if (cub->save_on == 1)
+	{
+		i = -1;
+		while (++i < cub->parsing.rx)
+		{
+			if (cub->pixel_data[i])
+				free(cub->pixel_data[i]);
+		}
+		free(cub->pixel_data);
 	}
 }
 
@@ -90,23 +100,13 @@ static void	free_path(t_vars *cub)
 
 int	ft_exit(t_vars *cub)
 {
-	int	i;
-
-	free_stock_rays(cub);
+	free_stock_rays_and_save_on(cub);
 	free_matrix(cub);
 	free_plans(cub);
 	free_path(cub);
 	ft_double_free(cub->parsing.world_map, cub->parsing.map_y);
-	if (cub->save_on == 1)
-	{
-		i = -1;
-		while (++i < cub->parsing.rx)
-		{
-			if (cub->pixel_data[i])
-				free(cub->pixel_data[i]);
-		}
-		free(cub->pixel_data);
-	}
+	if (cub->fps)
+		free(cub->fps);
 	if (cub->ray_c.sprite)
 		free(cub->ray_c.sprite);
 	if (cub->ray_c.free_win == 1)

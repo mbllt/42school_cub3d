@@ -6,7 +6,7 @@
 #    By: mballet <mballet@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/14 14:39:52 by mballet           #+#    #+#              #
-#    Updated: 2021/05/28 17:42:47 by mballet          ###   ########lyon.fr    #
+#    Updated: 2021/05/29 15:34:02 by mballet          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,7 @@ SRCS_FILES			=	main.c \
 					utils2.c \
 					utils3.c \
 					utils4.c \
+					utils5.c \
 					ft_exit.c \
 					init/init_parsing.c \
 					init/init_ray_casting.c \

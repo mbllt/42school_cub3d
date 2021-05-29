@@ -35,5 +35,9 @@ void	init_parsing(t_vars *cub)
 	cub->parsing.c = NULL;
 	cub->parsing.nbr_param = 0;
 	cub->parsing.map_x = 0;
+	cub->parsing.zero = 0;
 	init_parsing2(cub);
+	cub->temp = -1;
+	cub->i = 0;
+	cub->fps = NULL;
 }

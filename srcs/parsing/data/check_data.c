@@ -1,10 +1,9 @@
 #include "cub3D.h"
 
-static int	check_data_param_valid(char *line, int *part_map)
+static int	check_data_param_valid(char *line)
 {
 	int	i;
 
-	(void)part_map;
 	i = 0;
 	while (line[i] == ' ')
 		i++;
@@ -14,7 +13,6 @@ static int	check_data_param_valid(char *line, int *part_map)
 		return (1);
 	else if (line[i] && line[i] == '1')
 	{
-		(*part_map)++;
 		return (1);
 	}
 	else if (line[i])
@@ -25,7 +23,7 @@ static int	check_data_param_valid(char *line, int *part_map)
 	return (1);
 }
 
-static int	check_nbr_param_and_order(char *line, int ret)
+static int	check_nbr_param_and_order(t_vars *cub, char *line, int ret)
 {
 	static int	nbr_param = 0;
 	static int	order = 0;
@@ -38,8 +36,8 @@ static int	check_nbr_param_and_order(char *line, int ret)
 		nbr_param++;
 	else if (ret > 0 && (is_param(line[i]) == 1) && order != 0)
 		return (-1);
-	else if (ret == 0 && order && !line[0])
-		return (-1);
+	else if (order && !line[0])
+		cub->parsing.zero++;
 	if (ret > 0 && line[i] == '1')
 		order++;
 	if (ret == 0 && (nbr_param != 8 || !order))
@@ -50,9 +48,8 @@ static int	check_nbr_param_and_order(char *line, int ret)
 int	check_data(t_vars *cub, char *line, int ret)
 {
 	static int	nbr = 0;
-	static int	part_map = 0;
 
-	if (ret > 0 && part_map == 0 && (!check_data_param_valid(line, &part_map)))
+	if (ret > 0 && (!check_data_param_valid(line)))
 		return (0);
 	else
 	{
@@ -61,15 +58,10 @@ int	check_data(t_vars *cub, char *line, int ret)
 		if (is_path_textures(line) && !(check_path_textures(cub, line)))
 			return (0);
 	}
-	nbr = check_nbr_param_and_order(line, ret);
+	nbr = check_nbr_param_and_order(cub, line, ret);
 	if (nbr == -1)
 	{
 		write(1, "\nError : parsing\n", 17);
-		return (0);
-	}
-	if (part_map == 1 && line[0] == 0)
-	{
-		write(1, "\nWrong map\n", 11);
 		return (0);
 	}
 	return (1);

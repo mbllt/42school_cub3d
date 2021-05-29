@@ -8,6 +8,8 @@ static int	get_size_y_map(t_vars *cub, char **map, int file_y)
 
 	size_file = file_y - 1;
 	map_y = 0;
+	if (cub->parsing.zero != 0)
+		file_y -= cub->parsing.zero;
 	while (--file_y)
 	{
 		i = 0;
@@ -15,8 +17,6 @@ static int	get_size_y_map(t_vars *cub, char **map, int file_y)
 			i++;
 		if (map[file_y][i] && map[file_y][i] == '1')
 			map_y++;
-		else if (file_y == size_file && map[file_y][i] == 0)
-			return (0);
 		else
 			break ;
 	}
@@ -30,6 +30,8 @@ static void	get_size_x_map(t_vars *cub, char **map, int file_y)
 	int	map_x;
 
 	map_x = 0;
+	if (cub->parsing.zero != 0)
+		file_y -= cub->parsing.zero;
 	while (--file_y)
 	{
 		i = 0;
@@ -96,6 +98,7 @@ int	ft_map(t_vars *cub, char **map, int file_y)
 	}
 	if (!(get_cardinal(cub)))
 	{
+		printf("here\n");
 		write(1, "\nError : map\n", 13);
 		return (0);
 	}
